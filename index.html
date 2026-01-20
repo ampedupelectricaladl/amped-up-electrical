@@ -35,6 +35,35 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:22px}
 
+    /* MOBILE STICKY CALL BAR */
+    .callbar{
+      display:none;
+      position:fixed;
+      left:12px; right:12px; bottom:12px;
+      z-index:9999;
+      gap:10px;
+      padding:10px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background: rgba(20,20,26,.85);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .callbar-btn{
+      flex:1;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      font-weight:1000;
+      background: rgba(255,255,255,.02);
+    }
+    .callbar-btn.primary{
+      border:none;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#111;
+    }
+
     /* TOPBAR */
     .topbar{
       display:flex;align-items:center;justify-content:space-between;gap:14px;
@@ -70,6 +99,10 @@
       border:none;
       background: linear-gradient(135deg,var(--accent),var(--accent2));
       color:#111;
+    }
+    .btn.call{
+      border:none;
+      background: rgba(255,255,255,.06);
     }
 
     /* HERO */
@@ -190,6 +223,18 @@
     .formActions{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
     .note{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px}
 
+    /* Success state */
+    .successBox{
+      display:none;
+      margin-top:14px;
+      border:1px solid rgba(255,176,0,.35);
+      background: rgba(255,176,0,.08);
+      border-radius:18px;
+      padding:14px;
+    }
+    .successBox strong{display:block;margin-bottom:6px}
+    .successActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+
     /* SECTIONS */
     .section{margin-top:18px}
     h2{margin:0 0 10px;font-size:28px}
@@ -217,9 +262,7 @@
       flex-direction:column;
       gap:6px;
     }
-    .stat strong{
-      font-size:22px;
-    }
+    .stat strong{font-size:22px;}
     .stat span{
       color:var(--muted);
       font-size:13px;
@@ -242,9 +285,7 @@
       color:var(--muted);
       line-height:1.6;
     }
-    .serviceArea .mini{
-      flex:1 1 240px;
-    }
+    .serviceArea .mini{flex:1 1 240px;}
     .callout{
       display:flex;
       align-items:center;
@@ -348,16 +389,26 @@
       .topbar{position:relative;top:0}
       .progress{width:120px}
       .brandSpotlight{grid-template-columns:1fr}
+      .callbar{display:flex;}
+      body{padding-bottom:84px;}
     }
   </style>
 </head>
 
 <body>
+
+  <!-- Mobile sticky call bar -->
+  <div class="callbar">
+    <a href="tel:0410414969" class="callbar-btn primary">Call Now</a>
+    <a href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20need%20help%20with%20%5Bjob%5D%20in%20%5Bsuburb%5D.%20When%20can%20you%20come%20out%3F" class="callbar-btn">Text</a>
+    <a href="#quote" class="callbar-btn">Get Quote</a>
+  </div>
+
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
         <img src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide" />
-      </div>vg
+      </div>
 
       <div class="nav">
         <a href="#trust">Why us</a>
@@ -369,7 +420,7 @@
       </div>
 
       <div class="cta">
-        <a class="btn" href="tel:0410414969">Call</a>
+        <a class="btn call" href="tel:0410414969">Call 0410 414 969</a>
         <a class="btn primary" href="#quote">Get a quote</a>
       </div>
     </div>
@@ -501,7 +552,18 @@
             </div>
 
             <div class="note">
-              Submitting opens your email app (no database needed). Or call <b>0410 414 969</b>.
+              Submitting opens your email app. Or call <b>0410 414 969</b>.
+            </div>
+
+            <div class="successBox" id="successBox">
+              <strong>✅ Request ready to send</strong>
+              <div style="color:var(--muted);line-height:1.6;font-size:13px">
+                If your email doesn’t open, tap call/text below and we’ll book you in fast.
+              </div>
+              <div class="successActions">
+                <a class="btn primary" href="tel:0410414969">Call now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request%20on%20your%20website.%20My%20job%20is%20%5Bservice%5D%20in%20%5Bsuburb%5D.%20When%20can%20you%20come%20out%3F">Text instead</a>
+              </div>
             </div>
           </div>
 
@@ -670,7 +732,8 @@
           </div>
         </div>
         <div class="brandLogoCard">
-          <img src="logo.svg" alt="Amped Up Electrical Adelaide logo" />
+          <!-- Keep consistent: using same PNG -->
+          <img src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide logo" />
         </div>
       </div>
     </div>
@@ -747,6 +810,7 @@
     const steps = [...form.querySelectorAll(".step")];
     const bar = document.getElementById("bar");
     const pct = document.getElementById("pct");
+    const successBox = document.getElementById("successBox");
     let stepIndex = 0;
 
     const updateProgress = () => {
@@ -788,7 +852,7 @@
       });
     });
 
-    // submit -> mailto
+    // submit -> mailto + show success box + fallback call/text
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -808,6 +872,10 @@
         `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n`
       );
 
+      // Show success/fallback UI immediately
+      if (successBox) successBox.style.display = "block";
+
+      // Try open email client
       window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
     });
 
@@ -819,5 +887,9 @@
 
     updateProgress();
   </script>
+
+  <!-- Tidio AI Chat (replace YOUR_TIDIO_PUBLIC_KEY) -->
+  <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js" async></script>
+
 </body>
 </html>
