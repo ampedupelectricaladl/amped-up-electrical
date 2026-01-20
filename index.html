@@ -7,7 +7,7 @@
   <meta name="description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
 
   <!-- Favicon (uses your logo) -->
-  <link rel="icon" type="image/svg+xml" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
+  <link rel="icon" type="image/png" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
 
   <style>
     :root{
@@ -21,8 +21,11 @@
       --accent2:#ff7a00;  /* orange */
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:22px;
+      --topbarH: 78px;
     }
+
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -35,7 +38,25 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:22px}
 
-    /* MOBILE STICKY CALL BAR (ADDED) */
+    /* Better anchor positioning under sticky topbar */
+    section, .card.section { scroll-margin-top: calc(var(--topbarH) + 18px); }
+    #quote { scroll-margin-top: calc(var(--topbarH) + 10px); }
+
+    /* Skip link (accessibility + fast to quote) */
+    .skip{
+      position:absolute;
+      left:-999px;
+      top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#111;
+      font-weight:1000;
+      z-index:99999;
+    }
+    .skip:focus{left:12px}
+
+    /* MOBILE STICKY CALL BAR */
     .callbar{
       display:none;
       position:fixed;
@@ -57,6 +78,8 @@
       border:1px solid var(--border);
       font-weight:1000;
       background: rgba(255,255,255,.02);
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
     .callbar-btn.primary{
       border:none;
@@ -77,23 +100,29 @@
     }
     .brand{display:flex;align-items:center;gap:12px}
     .brand img{height:42px;width:auto;display:block}
+
     .nav{display:flex;gap:10px;flex-wrap:wrap}
     .nav a{
       padding:10px 12px;border-radius:14px;
       border:1px solid transparent;
       color:var(--muted);
-      font-weight:800;
+      font-weight:900;
     }
     .nav a:hover{border-color:var(--border);color:var(--text)}
-    .cta{display:flex;gap:10px;flex-wrap:wrap}
+
+    .cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .btn{
       padding:10px 14px;border-radius:16px;
       border:1px solid var(--border);
       background: rgba(255,255,255,.02);
       color: var(--text);
-      font-weight:900;
+      font-weight:1000;
       cursor:pointer;
-      display:inline-block;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn.primary{
       border:none;
@@ -101,13 +130,23 @@
       color:#111;
     }
 
-    /* Instagram button styling (ADDED) */
-    .btn.ig{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-    }
+    /* Instagram button */
     .btn.ig svg{width:18px;height:18px}
+
+    /* Mobile menu button */
+    .menuBtn{
+      display:none;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      font-weight:1000;
+      cursor:pointer;
+      line-height:1;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     /* HERO */
     .hero{
@@ -127,7 +166,7 @@
     }
     .kicker{
       color:var(--muted);
-      font-weight:900;
+      font-weight:1000;
       letter-spacing:.7px;
       text-transform:uppercase;
       font-size:12px;
@@ -167,7 +206,7 @@
       border:1px solid var(--border);
       background: rgba(255,255,255,.02);
       font-size:13px;
-      font-weight:800;
+      font-weight:900;
       color:var(--muted);
     }
     .trustBadge span{
@@ -178,7 +217,7 @@
       border-radius:10px;
       background: rgba(255,176,0,.18);
       color:#111;
-      font-weight:900;
+      font-weight:1000;
     }
     .divider{height:1px;background:var(--border);margin:16px 0}
 
@@ -191,10 +230,10 @@
       overflow:hidden;border:1px solid var(--border);
     }
     .bar{height:100%;width:0%;background: linear-gradient(135deg,var(--accent),var(--accent2));}
-    .pct{color:var(--muted);font-size:12px;font-weight:900;min-width:42px;text-align:right}
+    .pct{color:var(--muted);font-size:12px;font-weight:1000;min-width:42px;text-align:right}
     .step{display:none;margin-top:14px}
     .step.active{display:block}
-    .q{font-weight:900;margin-bottom:10px}
+    .q{font-weight:1000;margin-bottom:10px}
     .options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
     .opt{
       border:1px solid var(--border);
@@ -203,15 +242,17 @@
       padding:12px 12px;
       border-radius:16px;
       cursor:pointer;
-      font-weight:900;
+      font-weight:1000;
       text-align:left;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .opt small{display:block;color:var(--muted);font-weight:700;margin-top:4px}
+    .opt small{display:block;color:var(--muted);font-weight:800;margin-top:4px}
     .opt.selected{
       border-color: rgba(255,176,0,.55);
       box-shadow: 0 0 0 3px rgba(255,176,0,.12);
     }
-    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:900}
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:1000}
     input,textarea{
       width:100%;
       padding:12px 12px;
@@ -254,9 +295,7 @@
       flex-direction:column;
       gap:6px;
     }
-    .stat strong{
-      font-size:22px;
-    }
+    .stat strong{font-size:22px}
     .stat span{
       color:var(--muted);
       font-size:13px;
@@ -279,9 +318,8 @@
       color:var(--muted);
       line-height:1.6;
     }
-    .serviceArea .mini{
-      flex:1 1 240px;
-    }
+    .serviceArea .mini{flex:1 1 240px}
+
     .callout{
       display:flex;
       align-items:center;
@@ -368,7 +406,7 @@
     }
     .faqItem.open .faqA{display:block}
 
-    /* REVIEWS (ADDED) */
+    /* REVIEWS */
     .reviewGrid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -403,29 +441,78 @@
       padding:18px 0 8px;
     }
 
+    /* MOBILE IMPROVEMENTS */
     @media (max-width: 960px){
+      :root{ --topbarH: 64px; }
+
+      .topbar{
+        top:0;
+        border-radius:0;
+        padding:12px;
+      }
+
       .hero{grid-template-columns:1fr}
-      h1{font-size:38px}
+
+      /* put quote form first on mobile (higher conversions) */
+      #quote .card:nth-child(2){order:1;}
+      #quote .card:nth-child(1){order:2;}
+
+      h1{font-size:34px}
       .grid3{grid-template-columns:1fr}
       .stats{grid-template-columns:1fr}
       .options{grid-template-columns:1fr}
       .row2{grid-template-columns:1fr}
-      .topbar{position:relative;top:0}
       .progress{width:120px}
       .brandSpotlight{grid-template-columns:1fr}
       .reviewGrid{grid-template-columns:1fr}
 
+      /* bigger tap targets */
+      .opt{
+        padding:14px 14px;
+        font-size:16px;
+        border-radius:18px;
+      }
+      input, textarea{
+        padding:14px 14px;
+        font-size:16px; /* stops iOS zoom */
+        border-radius:18px;
+      }
+      .btn{
+        padding:12px 14px;
+        font-size:16px;
+      }
+
       /* show sticky call bar */
       .callbar{display:flex;}
       body{padding-bottom:84px;}
+
+      /* Mobile nav: hamburger */
+      .menuBtn{display:inline-flex; align-items:center; gap:8px;}
+      .nav{
+        display:none;
+        width:100%;
+        gap:8px;
+        padding-top:10px;
+      }
+      .topbar.open .nav{display:flex;}
+      .nav a{
+        flex:1 1 auto;
+        text-align:center;
+        padding:12px 10px;
+        background: rgba(255,255,255,.02);
+        border:1px solid var(--border);
+      }
+      .cta{gap:8px}
+      .btn.ig span{display:none;} /* optional if you want smaller buttons */
     }
   </style>
 </head>
 
 <body>
+  <a class="skip" href="#quote">Skip to quote</a>
 
-  <!-- Mobile sticky call bar (ADDED) -->
-  <div class="callbar">
+  <!-- Mobile sticky call bar -->
+  <div class="callbar" aria-label="Quick actions">
     <a href="tel:0410414969" class="callbar-btn primary">Call</a>
     <a href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20need%20help%20with%20%5Bjob%5D%20in%20%5Bsuburb%5D.%20When%20can%20you%20come%20out%3F" class="callbar-btn">Text</a>
     <a href="#quote" class="callbar-btn">Quote</a>
@@ -433,33 +520,39 @@
   </div>
 
   <div class="wrap">
-    <div class="topbar">
+
+    <!-- TOPBAR -->
+    <div class="topbar" id="topbar">
       <div class="brand">
         <img src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide" />
       </div>
 
-      <div class="nav">
-        <a href="#trust">Why us</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#services">Services</a>
-        <a href="#areas">Service areas</a>
-        <a href="#how">How We Work</a>
-        <a href="#faq">FAQ</a>
-        <a href="#about">About</a>
-      </div>
+      <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav">
+        ☰ Menu
+      </button>
 
       <div class="cta">
         <a class="btn" href="tel:0410414969">Call</a>
 
-        <!-- Instagram button (ADDED) -->
-        <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">
+        <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" aria-label="Open Instagram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/>
           </svg>
-          Instagram
+          <span>Instagram</span>
         </a>
 
         <a class="btn primary" href="#quote">Get a quote</a>
+      </div>
+
+      <div class="nav" id="nav">
+        <a href="#quote">Quote</a>
+        <a href="#trust">Why us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#services">Services</a>
+        <a href="#areas">Areas</a>
+        <a href="#how">How we work</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
       </div>
     </div>
 
@@ -634,7 +727,7 @@
       </div>
     </div>
 
-    <!-- REVIEWS (ADDED) -->
+    <!-- REVIEWS -->
     <div class="card section" id="reviews">
       <div class="kicker">Real reviews</div>
       <h2>What Adelaide customers say</h2>
@@ -666,6 +759,9 @@
           <div><span>Check recent installs on Instagram.</span></div>
         </div>
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/>
+          </svg>
           Instagram
         </a>
       </div>
@@ -773,9 +869,10 @@
       <div class="cta">
         <a class="btn primary" href="tel:0410414969">Call 0410 414 969</a>
         <a class="btn" href="mailto:ampedupelectricaladl@gmail.com">Email</a>
-
-        <!-- Instagram button (ADDED) -->
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/>
+          </svg>
           Instagram
         </a>
       </div>
@@ -801,8 +898,7 @@
           </div>
         </div>
         <div class="brandLogoCard">
-          <!-- Changed to your real PNG to avoid broken logo.svg (FIX) -->
-          <img src="IMG_8657.jpg" alt="Amped Up Electrical Adelaide logo" />
+          <img src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide logo" />
         </div>
       </div>
     </div>
@@ -861,14 +957,19 @@
       <div class="cta">
         <a class="btn primary" href="tel:0410414969">Call now</a>
         <a class="btn" href="mailto:ampedupelectricaladl@gmail.com">Email</a>
-        <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/>
+          </svg>
+          Instagram
+        </a>
       </div>
     </div>
 
     <footer>
       © <span id="y"></span> Amped Up Electrical Adelaide
       <div style="margin-top:8px">
-        <a href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" style="color:var(--muted);font-weight:900">
+        <a href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" style="color:var(--muted);font-weight:1000">
           Instagram
         </a>
       </div>
@@ -915,6 +1016,8 @@
         if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
         stepIndex = Math.min(stepIndex + 1, steps.length - 1);
         updateProgress();
+        // ensure form stays visible when progressing on mobile
+        document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
 
@@ -922,6 +1025,7 @@
       btn.addEventListener("click", () => {
         stepIndex = Math.max(stepIndex - 1, 0);
         updateProgress();
+        document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
 
@@ -954,10 +1058,38 @@
       q.addEventListener("click", () => item.classList.toggle("open"));
     });
 
+    // Mobile menu toggle (easy navigation)
+    const topbar = document.getElementById("topbar");
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.getElementById("nav");
+
+    if (menuBtn && topbar && nav) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = topbar.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      // Close menu after tapping a link
+      nav.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          topbar.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      // Close if user taps outside nav on mobile
+      document.addEventListener("click", (e) => {
+        if (!topbar.contains(e.target) && topbar.classList.contains("open")) {
+          topbar.classList.remove("open");
+          menuBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
     updateProgress();
   </script>
 
-  <!-- Tidio AI Chat (ADDED) - replace YOUR_TIDIO_PUBLIC_KEY with your real key -->
+  <!-- Tidio AI Chat - replace YOUR_TIDIO_PUBLIC_KEY with your real key -->
   <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js" async></script>
 
 </body>
