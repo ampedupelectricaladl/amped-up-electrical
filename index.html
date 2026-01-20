@@ -115,6 +115,34 @@
       font-size:13px;
       background: rgba(255,255,255,.02);
     }
+    .trust{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .trustBadge{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      font-size:13px;
+      font-weight:800;
+      color:var(--muted);
+    }
+    .trustBadge span{
+      display:grid;
+      place-items:center;
+      width:28px;
+      height:28px;
+      border-radius:10px;
+      background: rgba(255,176,0,.18);
+      color:#111;
+      font-weight:900;
+    }
     .divider{height:1px;background:var(--border);margin:16px 0}
 
     /* Multi-step form */
@@ -174,6 +202,62 @@
     }
     .mini h3{margin:0 0 6px;font-size:16px}
     .mini p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      background: rgba(16,16,21,.65);
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .stat strong{
+      font-size:22px;
+    }
+    .stat span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.5;
+    }
+    .highlight{
+      border:1px solid rgba(255,176,0,.35);
+      background: rgba(255,176,0,.08);
+      color:var(--text);
+    }
+    .serviceArea{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .serviceArea ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .serviceArea .mini{
+      flex:1 1 240px;
+    }
+    .callout{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--border);
+      background: linear-gradient(135deg, rgba(255,176,0,.16), rgba(255,122,0,.12));
+    }
+    .callout strong{font-size:18px}
+    .callout span{color:var(--muted);font-size:13px}
 
     /* HOW WE WORK */
     .howSteps{display:grid;gap:14px;margin-top:14px}
@@ -224,6 +308,7 @@
       .hero{grid-template-columns:1fr}
       h1{font-size:38px}
       .grid3{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr}
       .options{grid-template-columns:1fr}
       .row2{grid-template-columns:1fr}
       .topbar{position:relative;top:0}
@@ -241,7 +326,9 @@
       </div>
 
       <div class="nav">
+        <a href="#trust">Why us</a>
         <a href="#services">Services</a>
+        <a href="#areas">Service areas</a>
         <a href="#how">How We Work</a>
         <a href="#faq">FAQ</a>
         <a href="#about">About</a>
@@ -267,6 +354,12 @@
           <div class="chip">Upfront pricing</div>
           <div class="chip">Safety-first</div>
           <div class="chip">Spotless cleanup</div>
+        </div>
+
+        <div class="trust">
+          <div class="trustBadge"><span>24/7</span> Emergency-ready response</div>
+          <div class="trustBadge"><span>✓</span> AS/NZS compliant workmanship</div>
+          <div class="trustBadge"><span>★</span> 5-star local reputation</div>
         </div>
 
         <div class="divider"></div>
@@ -386,6 +479,38 @@
       </div>
     </div>
 
+    <!-- TRUST -->
+    <div class="card section" id="trust">
+      <div class="kicker">Why choose us</div>
+      <h2>Local electricians you can rely on</h2>
+      <p class="sub">
+        We show up on time, explain the work, and leave your space cleaner than we found it. Every job is quoted clearly and completed to Australian standards.
+      </p>
+
+      <div class="stats">
+        <div class="stat highlight">
+          <strong>Same-week bookings</strong>
+          <span>Fast scheduling for most metro suburbs, including after-hours emergencies.</span>
+        </div>
+        <div class="stat">
+          <strong>Transparent quotes</strong>
+          <span>Fixed-price pricing before we start, so there are no surprises.</span>
+        </div>
+        <div class="stat">
+          <strong>Respectful & tidy</strong>
+          <span>Boot covers, drop sheets, and a full clean-up after every visit.</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div>
+          <strong>Need help today?</strong>
+          <div><span>Call for urgent electrical faults, safety checks, or power outages.</span></div>
+        </div>
+        <a class="btn primary" href="tel:0410414969">Call 0410 414 969</a>
+      </div>
+    </div>
+
     <!-- SERVICES -->
     <div class="card section" id="services">
       <div class="kicker">Our Services</div>
@@ -415,6 +540,31 @@
         <div class="mini">
           <h3>EV charger installation</h3>
           <p>Supply/install EV chargers for safe, convenient home or workplace charging.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE AREAS -->
+    <div class="card section" id="areas">
+      <div class="kicker">Service areas</div>
+      <h2>Adelaide metro coverage</h2>
+      <div class="serviceArea">
+        <div class="mini">
+          <h3>North, south, east & west</h3>
+          <p>From CBD to surrounding suburbs, we cover the greater Adelaide metro area.</p>
+        </div>
+        <div class="mini">
+          <h3>Popular suburbs we service</h3>
+          <ul>
+            <li>Adelaide CBD, North Adelaide, Prospect</li>
+            <li>Unley, Glenelg, Brighton</li>
+            <li>Norwood, Burnside, Magill</li>
+            <li>Edwardstown, Marion, Plympton</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h3>Not sure if you’re in range?</h3>
+          <p>Call or send a quick message and we’ll confirm availability right away.</p>
         </div>
       </div>
     </div>
@@ -615,6 +765,4 @@
   </script>
 </body>
 </html>
-
-
 
