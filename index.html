@@ -4,7 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Amped Up Electrical Adelaide</title>
-  <meta name="description" content="Electrical work done right in Adelaide. Clear pricing, clean finish, on-time service. Get a fast quote." />
+  <meta name="description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
+
+  <!-- Favicon (uses your logo) -->
+  <link rel="icon" type="image/png" href="logo.png" />
 
   <style>
     :root{
@@ -16,7 +19,6 @@
       --border:rgba(255,255,255,.10);
       --accent:#ffb000;   /* yellow/orange */
       --accent2:#ff7a00;  /* orange */
-      --good:#19c37d;
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:22px;
     }
@@ -32,6 +34,8 @@
     }
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:22px}
+
+    /* TOPBAR */
     .topbar{
       display:flex;align-items:center;justify-content:space-between;gap:14px;
       padding:14px 16px;
@@ -43,20 +47,13 @@
       position: sticky; top: 14px; z-index: 50;
     }
     .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:40px;height:40px;border-radius:14px;
-      background: linear-gradient(135deg,var(--accent),var(--accent2));
-      display:grid;place-items:center;
-      color:#111;font-weight:900;
-      box-shadow:0 12px 30px rgba(255,176,0,.18);
-    }
-    .brand b{letter-spacing:.6px}
-    .brand small{display:block;color:var(--muted);font-weight:600;margin-top:2px}
+    .brand img{height:42px;width:auto;display:block}
     .nav{display:flex;gap:10px;flex-wrap:wrap}
     .nav a{
       padding:10px 12px;border-radius:14px;
       border:1px solid transparent;
       color:var(--muted);
+      font-weight:800;
     }
     .nav a:hover{border-color:var(--border);color:var(--text)}
     .cta{display:flex;gap:10px;flex-wrap:wrap}
@@ -65,14 +62,17 @@
       border:1px solid var(--border);
       background: rgba(255,255,255,.02);
       color: var(--text);
-      font-weight:800;
+      font-weight:900;
       cursor:pointer;
+      display:inline-block;
     }
     .btn.primary{
       border:none;
       background: linear-gradient(135deg,var(--accent),var(--accent2));
       color:#111;
     }
+
+    /* HERO */
     .hero{
       display:grid;
       grid-template-columns: 1.25fr .9fr;
@@ -90,8 +90,8 @@
     }
     .kicker{
       color:var(--muted);
-      font-weight:800;
-      letter-spacing:.6px;
+      font-weight:900;
+      letter-spacing:.7px;
       text-transform:uppercase;
       font-size:12px;
       margin-bottom:10px;
@@ -116,6 +116,8 @@
       background: rgba(255,255,255,.02);
     }
     .divider{height:1px;background:var(--border);margin:16px 0}
+
+    /* Multi-step form */
     .formTitle{display:flex;align-items:center;justify-content:space-between;gap:10px}
     .progressWrap{display:flex;align-items:center;gap:10px}
     .progress{
@@ -124,7 +126,7 @@
       overflow:hidden;border:1px solid var(--border);
     }
     .bar{height:100%;width:0%;background: linear-gradient(135deg,var(--accent),var(--accent2));}
-    .pct{color:var(--muted);font-size:12px;font-weight:800;min-width:42px;text-align:right}
+    .pct{color:var(--muted);font-size:12px;font-weight:900;min-width:42px;text-align:right}
     .step{display:none;margin-top:14px}
     .step.active{display:block}
     .q{font-weight:900;margin-bottom:10px}
@@ -136,7 +138,7 @@
       padding:12px 12px;
       border-radius:16px;
       cursor:pointer;
-      font-weight:800;
+      font-weight:900;
       text-align:left;
     }
     .opt small{display:block;color:var(--muted);font-weight:700;margin-top:4px}
@@ -144,8 +146,8 @@
       border-color: rgba(255,176,0,.55);
       box-shadow: 0 0 0 3px rgba(255,176,0,.12);
     }
-    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:800}
-    input,select,textarea{
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:900}
+    input,textarea{
       width:100%;
       padding:12px 12px;
       border-radius:16px;
@@ -159,6 +161,8 @@
     .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .formActions{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
     .note{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px}
+
+    /* SECTIONS */
     .section{margin-top:18px}
     h2{margin:0 0 10px;font-size:28px}
     .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -170,16 +174,21 @@
     }
     .mini h3{margin:0 0 6px;font-size:16px}
     .mini p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-    .familiar{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    ul{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.7}
-    .stars{color:var(--accent);font-weight:900}
-    .testimonial{display:grid;grid-template-columns:1fr;gap:10px}
-    .quote{
-      border-left:4px solid rgba(255,176,0,.55);
-      padding-left:12px;
-      color:var(--muted);
-      line-height:1.6;
+
+    /* HOW WE WORK */
+    .howSteps{display:grid;gap:14px;margin-top:14px}
+    .howRow{display:flex;gap:16px;align-items:flex-start}
+    .howNum{
+      min-width:56px;height:56px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#111;font-weight:1000;
+      display:grid;place-items:center;font-size:18px;
+      box-shadow:0 10px 26px rgba(255,176,0,.18);
     }
+    .howRow h3{margin:0 0 6px}
+    .howRow p{margin:0;color:var(--muted);line-height:1.6}
+
+    /* FAQ */
     .faqItem{
       border:1px solid var(--border);
       border-radius:18px;
@@ -192,7 +201,7 @@
       color:var(--text);
       padding:14px 14px;
       text-align:left;
-      font-weight:900;
+      font-weight:1000;
       cursor:pointer;
       display:flex;justify-content:space-between;gap:10px;
     }
@@ -203,17 +212,18 @@
       line-height:1.6;
     }
     .faqItem.open .faqA{display:block}
+
     footer{
       text-align:center;
       color:var(--muted);
       font-size:13px;
       padding:18px 0 8px;
     }
+
     @media (max-width: 960px){
       .hero{grid-template-columns:1fr}
       h1{font-size:38px}
       .grid3{grid-template-columns:1fr}
-      .familiar{grid-template-columns:1fr}
       .options{grid-template-columns:1fr}
       .row2{grid-template-columns:1fr}
       .topbar{position:relative;top:0}
@@ -226,23 +236,19 @@
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
-        <div class="logo">⚡</div>
-        <div>
-          <b>AMPED UP ELECTRICAL</b>
-          <small>Adelaide • Licensed & insured</small>
-        </div>
+        <!-- Upload your logo into the repo as logo.png -->
+        <img src="logo.png" alt="Amped Up Electrical Adelaide" />
       </div>
 
       <div class="nav">
-        <a href="#testimonials">Reviews</a>
         <a href="#services">Services</a>
+        <a href="#how">How We Work</a>
         <a href="#faq">FAQ</a>
         <a href="#about">About</a>
       </div>
 
       <div class="cta">
-        <!-- TODO: replace phone -->
-        <a class="btn" href="tel:04XXXXXXXX">Call</a>
+        <a class="btn" href="tel:0410414969">Call</a>
         <a class="btn primary" href="#quote">Get a quote</a>
       </div>
     </div>
@@ -257,7 +263,7 @@
         </p>
 
         <div class="chips">
-          <div class="chip">On-time tradie</div>
+          <div class="chip">Licensed & insured</div>
           <div class="chip">Upfront pricing</div>
           <div class="chip">Safety-first</div>
           <div class="chip">Spotless cleanup</div>
@@ -266,11 +272,11 @@
         <div class="divider"></div>
 
         <div class="mini" style="display:flex;gap:12px;align-items:flex-start">
-          <div style="min-width:36px;height:36px;border-radius:14px;background:rgba(25,195,125,.14);border:1px solid rgba(25,195,125,.35);display:grid;place-items:center">✓</div>
+          <div style="min-width:36px;height:36px;border-radius:14px;background:rgba(255,176,0,.14);border:1px solid rgba(255,176,0,.35);display:grid;place-items:center">⚡</div>
           <div>
-            <div style="font-weight:900;margin-bottom:4px">Quick quote process</div>
+            <div style="font-weight:1000;margin-bottom:4px">Fast response</div>
             <div style="color:var(--muted);line-height:1.5;font-size:14px">
-              Answer a few questions and we’ll get back to you ASAP with pricing and availability.
+              Call <b>0410 414 969</b> or request a quote below — we’ll get back to you ASAP.
             </div>
           </div>
         </div>
@@ -279,7 +285,7 @@
       <!-- Multi-step quote form -->
       <div class="card">
         <div class="formTitle">
-          <div style="font-weight:900;font-size:18px">Get your quote</div>
+          <div style="font-weight:1000;font-size:18px">Get your quote</div>
           <div class="progressWrap">
             <div class="progress"><div class="bar" id="bar"></div></div>
             <div class="pct" id="pct">0%</div>
@@ -368,7 +374,7 @@
             </div>
 
             <div class="note">
-              This form opens your email app (no database needed). If you prefer, call or text us instead.
+              Submitting opens your email app (no database needed). Or call <b>0410 414 969</b>.
             </div>
           </div>
 
@@ -377,50 +383,6 @@
           <input type="hidden" name="site" />
           <input type="hidden" name="urgency" />
         </form>
-      </div>
-    </div>
-
-    <!-- TESTIMONIALS -->
-    <div class="card section" id="testimonials">
-      <div class="kicker">Testimonials</div>
-      <h2>What others are saying</h2>
-
-      <div class="grid3">
-        <div class="mini testimonial">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Showed up on time, explained everything clearly and the finish was spot on.”</div>
-          <div style="font-weight:800">— Adelaide customer</div>
-        </div>
-        <div class="mini testimonial">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Pricing was upfront and fair. No mess left behind. Would use again.”</div>
-          <div style="font-weight:800">— Local business owner</div>
-        </div>
-        <div class="mini testimonial">
-          <div class="stars">★★★★★</div>
-          <div class="quote">“Fault was fixed quickly and properly. Great communication.”</div>
-          <div style="font-weight:800">— Homeowner</div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="familiar">
-        <div class="mini">
-          <h3>Does this sound familiar?</h3>
-          <ul>
-            <li>You waited all day and the tradie never showed.</li>
-            <li>The quote was confusing and unclear.</li>
-            <li>The job’s done… but you’re left with a mess.</li>
-          </ul>
-        </div>
-        <div class="mini">
-          <h3>Our promise</h3>
-          <p style="margin:0;color:var(--muted);line-height:1.7">
-            We turn up when we say we will, fix it right the first time, and keep you updated.
-            Clear pricing, safety-first service, and a spotless finish.
-          </p>
-        </div>
       </div>
     </div>
 
@@ -457,6 +419,53 @@
       </div>
     </div>
 
+    <!-- HOW WE WORK -->
+    <div class="card section" id="how">
+      <div class="kicker">How We Work</div>
+      <h2>Simple. Clear. No surprises.</h2>
+
+      <div class="howSteps">
+        <div class="howRow">
+          <div class="howNum">1</div>
+          <div>
+            <h3>Get in Touch</h3>
+            <p>Call us on <b>0410 414 969</b> to speak with our team and schedule a visit.</p>
+          </div>
+        </div>
+
+        <div class="howRow">
+          <div class="howNum">2</div>
+          <div>
+            <h3>Get a Quote</h3>
+            <p>We’ll visit your site, assess the problem, and provide a clear, fixed-price quote.</p>
+          </div>
+        </div>
+
+        <div class="howRow">
+          <div class="howNum">3</div>
+          <div>
+            <h3>We Get to Work</h3>
+            <p>Our licensed electricians will carry out the job as agreed, following all safety and quality standards.</p>
+          </div>
+        </div>
+
+        <div class="howRow">
+          <div class="howNum">4</div>
+          <div>
+            <h3>Job Completion</h3>
+            <p>After finishing the job, we ensure everything is working perfectly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="cta">
+        <a class="btn primary" href="tel:0410414969">Call 0410 414 969</a>
+        <a class="btn" href="mailto:ampedupelectricaladl@gmail.com">Email</a>
+      </div>
+    </div>
+
     <!-- FAQ -->
     <div class="card section" id="faq">
       <div class="kicker">Still not sure?</div>
@@ -489,46 +498,37 @@
 
         <div class="faqItem">
           <button class="faqQ" type="button">
-            Do you keep customers updated?
+            How fast can you get out?
             <span>+</span>
           </button>
-          <div class="faqA">Yes — confirmed booking times, updates if running late, and clear communication start to finish.</div>
+          <div class="faqA">Depends on the job and location — call <b>0410 414 969</b> and we’ll tell you the soonest slot.</div>
         </div>
       </div>
     </div>
 
-    <!-- ABOUT -->
+    <!-- ABOUT / CONTACT -->
     <div class="card section" id="about">
-      <div class="kicker">About us</div>
-      <h2>Hey, I’m Marcus</h2>
+      <div class="kicker">About</div>
+      <h2>Amped Up Electrical Adelaide</h2>
       <p class="sub" style="margin-bottom:0">
-        I built Amped Up Electrical to deliver the kind of service I’d want at my own place —
-        reliable, honest, and done right the first time. Residential and small commercial across Adelaide metro.
+        Reliable, tidy and compliant electrical work across Adelaide metro.
+        Call <b>0410 414 969</b> or email <b>ampedupelectricaladl@gmail.com</b> for a quote.
       </p>
 
       <div class="divider"></div>
 
-      <div class="grid3">
-        <div class="mini"><h3>Licensed & insured</h3><p>Safety-first and compliant installs.</p></div>
-        <div class="mini"><h3>Clear communication</h3><p>No guessing — you’ll know what’s happening.</p></div>
-        <div class="mini"><h3>Quality finish</h3><p>Neat work, tidy site, solid results.</p></div>
-      </div>
-
-      <div class="divider"></div>
-
       <div class="cta">
-        <!-- TODO: replace phone + email -->
-        <a class="btn primary" href="tel:04XXXXXXXX">Call now</a>
-        <a class="btn" href="mailto:YOUREMAIL@example.com">Email</a>
+        <a class="btn primary" href="tel:0410414969">Call now</a>
+        <a class="btn" href="mailto:ampedupelectricaladl@gmail.com">Email</a>
       </div>
 
       <div class="note">
-        Service area: Adelaide metro (add your suburbs here). ABN: (add yours).
+        Tip: upload your logo as <b>logo.png</b> in the repo root (same folder as index.html).
       </div>
     </div>
 
     <footer>
-      © <span id="y"></span> Amped Up Electrical Adelaide • Built on GitHub Pages
+      © <span id="y"></span> Amped Up Electrical Adelaide
     </footer>
   </div>
 
@@ -548,7 +548,6 @@
       bar.style.width = percent + "%";
       pct.textContent = percent + "%";
       steps.forEach((s, i) => s.classList.toggle("active", i === stepIndex));
-      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     // option selection
@@ -568,7 +567,6 @@
     // next/back
     form.querySelectorAll("[data-next]").forEach(btn => {
       btn.addEventListener("click", () => {
-        // basic validation per step
         if (stepIndex === 0 && !form.service.value) return alert("Select what you need help with.");
         if (stepIndex === 1 && !form.site.value) return alert("Select where the work will be conducted.");
         if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
@@ -593,9 +591,8 @@
       const email = form.email.value.trim();
       if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
 
-      // TODO: replace with your email
-      const to = "YOUREMAIL@example.com";
-      const subject = encodeURIComponent("New Quote Request - Amped Up Electrical");
+      const to = "ampedupelectricaladl@gmail.com";
+      const subject = encodeURIComponent("New Quote Request - Amped Up Electrical Adelaide");
       const body = encodeURIComponent(
         `Service: ${form.service.value}\n` +
         `Site: ${form.site.value}\n` +
@@ -618,5 +615,6 @@
   </script>
 </body>
 </html>
+
 
 
