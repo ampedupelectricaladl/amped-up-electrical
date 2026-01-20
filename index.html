@@ -1,98 +1,622 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Amped Up Electrical Adelaide</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Electrical work done right in Adelaide. Clear pricing, clean finish, on-time service. Get a fast quote." />
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0e;
-      color: white;
+    :root{
+      --bg:#0b0b0e;
+      --panel:#14141a;
+      --panel2:#101015;
+      --text:#ffffff;
+      --muted:#c9c9d6;
+      --border:rgba(255,255,255,.10);
+      --accent:#ffb000;   /* yellow/orange */
+      --accent2:#ff7a00;  /* orange */
+      --good:#19c37d;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius:22px;
     }
-    header {
-      background: black;
-      padding: 20px;
-      text-align: center;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 500px at 15% 0%, rgba(255,176,0,.20), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(255,122,0,.16), transparent 60%),
+        var(--bg);
+      color:var(--text);
     }
-    h1 {
-      color: #ffb000;
-      margin: 0;
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:22px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background: rgba(20,20,26,.75);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: sticky; top: 14px; z-index: 50;
     }
-    .hero {
-      padding: 60px 20px;
-      text-align: center;
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:40px;height:40px;border-radius:14px;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      display:grid;place-items:center;
+      color:#111;font-weight:900;
+      box-shadow:0 12px 30px rgba(255,176,0,.18);
     }
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 10px;
+    .brand b{letter-spacing:.6px}
+    .brand small{display:block;color:var(--muted);font-weight:600;margin-top:2px}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
+    .nav a{
+      padding:10px 12px;border-radius:14px;
+      border:1px solid transparent;
+      color:var(--muted);
     }
-    .hero p {
-      color: #ccc;
-      font-size: 18px;
+    .nav a:hover{border-color:var(--border);color:var(--text)}
+    .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      padding:10px 14px;border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      font-weight:800;
+      cursor:pointer;
     }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 24px;
-      background: linear-gradient(135deg, #ffb000, #ff7a00);
-      color: black;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#111;
     }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+    .hero{
+      display:grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap:16px;
+      margin-top:18px;
+      align-items:stretch;
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #777;
-      font-size: 14px;
+    .card{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(20,20,26,.72);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding:22px;
+    }
+    .kicker{
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:46px;
+      line-height:1.05;
+    }
+    .sub{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.55;
+    }
+    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .chip{
+      border:1px solid var(--border);
+      color:var(--muted);
+      padding:8px 10px;border-radius:999px;
+      font-size:13px;
+      background: rgba(255,255,255,.02);
+    }
+    .divider{height:1px;background:var(--border);margin:16px 0}
+    .formTitle{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .progressWrap{display:flex;align-items:center;gap:10px}
+    .progress{
+      width:140px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.08);
+      overflow:hidden;border:1px solid var(--border);
+    }
+    .bar{height:100%;width:0%;background: linear-gradient(135deg,var(--accent),var(--accent2));}
+    .pct{color:var(--muted);font-size:12px;font-weight:800;min-width:42px;text-align:right}
+    .step{display:none;margin-top:14px}
+    .step.active{display:block}
+    .q{font-weight:900;margin-bottom:10px}
+    .options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .opt{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      padding:12px 12px;
+      border-radius:16px;
+      cursor:pointer;
+      font-weight:800;
+      text-align:left;
+    }
+    .opt small{display:block;color:var(--muted);font-weight:700;margin-top:4px}
+    .opt.selected{
+      border-color: rgba(255,176,0,.55);
+      box-shadow: 0 0 0 3px rgba(255,176,0,.12);
+    }
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:800}
+    input,select,textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      outline:none;
+      font-size:14px;
+    }
+    textarea{min-height:90px;resize:vertical}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .formActions{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .note{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px}
+    .section{margin-top:18px}
+    h2{margin:0 0 10px;font-size:28px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .mini{
+      border:1px solid var(--border);
+      background: rgba(16,16,21,.65);
+      border-radius:18px;
+      padding:16px;
+    }
+    .mini h3{margin:0 0 6px;font-size:16px}
+    .mini p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .familiar{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    ul{margin:10px 0 0;padding-left:18px;color:var(--muted);line-height:1.7}
+    .stars{color:var(--accent);font-weight:900}
+    .testimonial{display:grid;grid-template-columns:1fr;gap:10px}
+    .quote{
+      border-left:4px solid rgba(255,176,0,.55);
+      padding-left:12px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .faqItem{
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      background: rgba(16,16,21,.65);
+    }
+    .faqQ{
+      width:100%;
+      background:transparent;border:none;
+      color:var(--text);
+      padding:14px 14px;
+      text-align:left;
+      font-weight:900;
+      cursor:pointer;
+      display:flex;justify-content:space-between;gap:10px;
+    }
+    .faqA{
+      display:none;
+      padding:0 14px 14px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .faqItem.open .faqA{display:block}
+    footer{
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      padding:18px 0 8px;
+    }
+    @media (max-width: 960px){
+      .hero{grid-template-columns:1fr}
+      h1{font-size:38px}
+      .grid3{grid-template-columns:1fr}
+      .familiar{grid-template-columns:1fr}
+      .options{grid-template-columns:1fr}
+      .row2{grid-template-columns:1fr}
+      .topbar{position:relative;top:0}
+      .progress{width:120px}
     }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">⚡</div>
+        <div>
+          <b>AMPED UP ELECTRICAL</b>
+          <small>Adelaide • Licensed & insured</small>
+        </div>
+      </div>
 
-<header>
-  <h1>⚡ Amped Up Electrical</h1>
-  <p>Adelaide Electrician</p>
-</header>
+      <div class="nav">
+        <a href="#testimonials">Reviews</a>
+        <a href="#services">Services</a>
+        <a href="#faq">FAQ</a>
+        <a href="#about">About</a>
+      </div>
 
-<div class="hero">
-  <h2>Reliable, clean & compliant electrical work</h2>
-  <p>Residential & small commercial • Adelaide metro</p>
-  <a class="btn" href="tel:0410414969">Call for a quote</a>
-</div>
+      <div class="cta">
+        <!-- TODO: replace phone -->
+        <a class="btn" href="tel:04XXXXXXXX">Call</a>
+        <a class="btn primary" href="#quote">Get a quote</a>
+      </div>
+    </div>
 
-<section>
-  <h2>Services</h2>
-  <ul>
-    <li>Switchboard upgrades & safety checks</li>
-    <li>Power points & dedicated circuits</li>
-    <li>Downlights & LED lighting</li>
-    <li>Fault finding</li>
-    <li>Renovations & fit-outs</li>
-  </ul>
-</section>
+    <!-- HERO -->
+    <div class="hero" id="quote">
+      <div class="card">
+        <div class="kicker">Attention: Home & business owners</div>
+        <h1>Electrical Work Done Right</h1>
+        <p class="sub">
+          Avoid hidden costs and messy workmanship. Get a clear quote, fast booking times, and a clean finish — Adelaide metro.
+        </p>
 
-<section>
-  <h2>Why choose us</h2>
-  <ul>
-    <li>Licensed & insured</li>
-    <li>Upfront pricing</li>
-    <li>Clean, professional finish</li>
-    <li>Adelaide local</li>
-  </ul>
-</section>
+        <div class="chips">
+          <div class="chip">On-time tradie</div>
+          <div class="chip">Upfront pricing</div>
+          <div class="chip">Safety-first</div>
+          <div class="chip">Spotless cleanup</div>
+        </div>
 
-<footer>
-  © 2026 Amped Up Electrical Adelaide
-</footer>
+        <div class="divider"></div>
 
+        <div class="mini" style="display:flex;gap:12px;align-items:flex-start">
+          <div style="min-width:36px;height:36px;border-radius:14px;background:rgba(25,195,125,.14);border:1px solid rgba(25,195,125,.35);display:grid;place-items:center">✓</div>
+          <div>
+            <div style="font-weight:900;margin-bottom:4px">Quick quote process</div>
+            <div style="color:var(--muted);line-height:1.5;font-size:14px">
+              Answer a few questions and we’ll get back to you ASAP with pricing and availability.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-step quote form -->
+      <div class="card">
+        <div class="formTitle">
+          <div style="font-weight:900;font-size:18px">Get your quote</div>
+          <div class="progressWrap">
+            <div class="progress"><div class="bar" id="bar"></div></div>
+            <div class="pct" id="pct">0%</div>
+          </div>
+        </div>
+
+        <form id="quoteForm">
+          <!-- Step 1 -->
+          <div class="step active" data-step="1">
+            <div class="q">What do you need help with?</div>
+            <div class="options" data-name="service">
+              <button type="button" class="opt" data-value="Lighting">Lighting <small>Downlights, LEDs, sensors</small></button>
+              <button type="button" class="opt" data-value="Power Points">Power points <small>New GPOs, upgrades</small></button>
+              <button type="button" class="opt" data-value="Switchboard">Switchboard <small>RCD/RCBO, upgrades</small></button>
+              <button type="button" class="opt" data-value="Fault Finding">Fault finding <small>Trips, dead circuits</small></button>
+              <button type="button" class="opt" data-value="Safety Inspection">Safety inspection <small>Compliance & testing</small></button>
+              <button type="button" class="opt" data-value="EV Charging">EV charging <small>Home charger install</small></button>
+              <button type="button" class="opt" data-value="Renovation / Fit-out">Renovation / fit-out <small>Kitchens, bathrooms, shops</small></button>
+              <button type="button" class="opt" data-value="Other">Other <small>Tell us what you need</small></button>
+            </div>
+            <div class="formActions">
+              <span></span>
+              <button type="button" class="btn primary" data-next>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step" data-step="2">
+            <div class="q">Where will the work be conducted?</div>
+            <div class="options" data-name="site">
+              <button type="button" class="opt" data-value="Home">Home</button>
+              <button type="button" class="opt" data-value="Business">Business</button>
+              <button type="button" class="opt" data-value="Other">Other</button>
+              <button type="button" class="opt" data-value="Strata / Rental">Strata / rental</button>
+            </div>
+
+            <label>Suburb</label>
+            <input name="suburb" placeholder="e.g. Westbourne Park" />
+
+            <div class="formActions">
+              <button type="button" class="btn" data-back>Back</button>
+              <button type="button" class="btn primary" data-next>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step" data-step="3">
+            <div class="q">How urgent is it?</div>
+            <div class="options" data-name="urgency">
+              <button type="button" class="opt" data-value="Emergency - Today">Emergency — today</button>
+              <button type="button" class="opt" data-value="Within a week">Within a week</button>
+              <button type="button" class="opt" data-value="Flexible">Flexible</button>
+              <button type="button" class="opt" data-value="Just after a quote">Just after a quote</button>
+            </div>
+
+            <label>Extra details (optional)</label>
+            <textarea name="details" placeholder="Briefly describe the issue / job."></textarea>
+
+            <div class="formActions">
+              <button type="button" class="btn" data-back>Back</button>
+              <button type="button" class="btn primary" data-next>Next</button>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step" data-step="4">
+            <div class="q">How can we reach you?</div>
+
+            <div class="row2">
+              <div>
+                <label>Phone *</label>
+                <input name="phone" required placeholder="04xx xxx xxx" />
+              </div>
+              <div>
+                <label>Your name *</label>
+                <input name="name" required placeholder="Your name" />
+              </div>
+            </div>
+
+            <label>Email *</label>
+            <input name="email" required type="email" placeholder="you@email.com" />
+
+            <div class="formActions">
+              <button type="button" class="btn" data-back>Back</button>
+              <button type="submit" class="btn primary">Send request</button>
+            </div>
+
+            <div class="note">
+              This form opens your email app (no database needed). If you prefer, call or text us instead.
+            </div>
+          </div>
+
+          <!-- Hidden fields -->
+          <input type="hidden" name="service" />
+          <input type="hidden" name="site" />
+          <input type="hidden" name="urgency" />
+        </form>
+      </div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="card section" id="testimonials">
+      <div class="kicker">Testimonials</div>
+      <h2>What others are saying</h2>
+
+      <div class="grid3">
+        <div class="mini testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="quote">“Showed up on time, explained everything clearly and the finish was spot on.”</div>
+          <div style="font-weight:800">— Adelaide customer</div>
+        </div>
+        <div class="mini testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="quote">“Pricing was upfront and fair. No mess left behind. Would use again.”</div>
+          <div style="font-weight:800">— Local business owner</div>
+        </div>
+        <div class="mini testimonial">
+          <div class="stars">★★★★★</div>
+          <div class="quote">“Fault was fixed quickly and properly. Great communication.”</div>
+          <div style="font-weight:800">— Homeowner</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="familiar">
+        <div class="mini">
+          <h3>Does this sound familiar?</h3>
+          <ul>
+            <li>You waited all day and the tradie never showed.</li>
+            <li>The quote was confusing and unclear.</li>
+            <li>The job’s done… but you’re left with a mess.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h3>Our promise</h3>
+          <p style="margin:0;color:var(--muted);line-height:1.7">
+            We turn up when we say we will, fix it right the first time, and keep you updated.
+            Clear pricing, safety-first service, and a spotless finish.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="card section" id="services">
+      <div class="kicker">Our Services</div>
+      <h2>Electrical help for homes & small businesses</h2>
+
+      <div class="grid3">
+        <div class="mini">
+          <h3>Switchboard upgrades</h3>
+          <p>Modernise old boards, add RCD/RCBO protection, improve safety and compliance.</p>
+        </div>
+        <div class="mini">
+          <h3>Lighting install & upgrades</h3>
+          <p>Downlights, LED upgrades, sensors, outdoor lighting and feature lighting.</p>
+        </div>
+        <div class="mini">
+          <h3>Power point installation</h3>
+          <p>Add or replace power points, dedicated circuits for appliances and equipment.</p>
+        </div>
+        <div class="mini">
+          <h3>Fault finding & repairs</h3>
+          <p>Fast diagnosis of trips, dead circuits, flickering lights and unsafe faults.</p>
+        </div>
+        <div class="mini">
+          <h3>Renovations & fit-outs</h3>
+          <p>Full electrical for kitchens, bathrooms, extensions and small commercial fit-outs.</p>
+        </div>
+        <div class="mini">
+          <h3>EV charger installation</h3>
+          <p>Supply/install EV chargers for safe, convenient home or workplace charging.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card section" id="faq">
+      <div class="kicker">Still not sure?</div>
+      <h2>Frequently Asked Questions</h2>
+
+      <div style="display:grid;gap:10px">
+        <div class="faqItem">
+          <button class="faqQ" type="button">
+            Do you provide up-front quotes?
+            <span>+</span>
+          </button>
+          <div class="faqA">Yes — we provide clear pricing before we start. No hidden costs.</div>
+        </div>
+
+        <div class="faqItem">
+          <button class="faqQ" type="button">
+            Will you clean up after the job?
+            <span>+</span>
+          </button>
+          <div class="faqA">Always. We treat your property with respect and leave it clean.</div>
+        </div>
+
+        <div class="faqItem">
+          <button class="faqQ" type="button">
+            Do you warranty your work?
+            <span>+</span>
+          </button>
+          <div class="faqA">Yes — workmanship guarantee plus manufacturer warranties on supplied products.</div>
+        </div>
+
+        <div class="faqItem">
+          <button class="faqQ" type="button">
+            Do you keep customers updated?
+            <span>+</span>
+          </button>
+          <div class="faqA">Yes — confirmed booking times, updates if running late, and clear communication start to finish.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="card section" id="about">
+      <div class="kicker">About us</div>
+      <h2>Hey, I’m Marcus</h2>
+      <p class="sub" style="margin-bottom:0">
+        I built Amped Up Electrical to deliver the kind of service I’d want at my own place —
+        reliable, honest, and done right the first time. Residential and small commercial across Adelaide metro.
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="grid3">
+        <div class="mini"><h3>Licensed & insured</h3><p>Safety-first and compliant installs.</p></div>
+        <div class="mini"><h3>Clear communication</h3><p>No guessing — you’ll know what’s happening.</p></div>
+        <div class="mini"><h3>Quality finish</h3><p>Neat work, tidy site, solid results.</p></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="cta">
+        <!-- TODO: replace phone + email -->
+        <a class="btn primary" href="tel:04XXXXXXXX">Call now</a>
+        <a class="btn" href="mailto:YOUREMAIL@example.com">Email</a>
+      </div>
+
+      <div class="note">
+        Service area: Adelaide metro (add your suburbs here). ABN: (add yours).
+      </div>
+    </div>
+
+    <footer>
+      © <span id="y"></span> Amped Up Electrical Adelaide • Built on GitHub Pages
+    </footer>
+  </div>
+
+  <script>
+    // footer year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // multi-step form logic
+    const form = document.getElementById("quoteForm");
+    const steps = [...form.querySelectorAll(".step")];
+    const bar = document.getElementById("bar");
+    const pct = document.getElementById("pct");
+    let stepIndex = 0;
+
+    const updateProgress = () => {
+      const percent = Math.round((stepIndex / (steps.length - 1)) * 100);
+      bar.style.width = percent + "%";
+      pct.textContent = percent + "%";
+      steps.forEach((s, i) => s.classList.toggle("active", i === stepIndex));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // option selection
+    form.querySelectorAll(".options").forEach(group => {
+      const name = group.getAttribute("data-name");
+      const hidden = form.querySelector(`input[name="${name}"]`);
+
+      group.querySelectorAll(".opt").forEach(btn => {
+        btn.addEventListener("click", () => {
+          group.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          hidden.value = btn.getAttribute("data-value");
+        });
+      });
+    });
+
+    // next/back
+    form.querySelectorAll("[data-next]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        // basic validation per step
+        if (stepIndex === 0 && !form.service.value) return alert("Select what you need help with.");
+        if (stepIndex === 1 && !form.site.value) return alert("Select where the work will be conducted.");
+        if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
+        stepIndex = Math.min(stepIndex + 1, steps.length - 1);
+        updateProgress();
+      });
+    });
+
+    form.querySelectorAll("[data-back]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        stepIndex = Math.max(stepIndex - 1, 0);
+        updateProgress();
+      });
+    });
+
+    // submit -> mailto
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const phone = form.phone.value.trim();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
+
+      // TODO: replace with your email
+      const to = "YOUREMAIL@example.com";
+      const subject = encodeURIComponent("New Quote Request - Amped Up Electrical");
+      const body = encodeURIComponent(
+        `Service: ${form.service.value}\n` +
+        `Site: ${form.site.value}\n` +
+        `Urgency: ${form.urgency.value}\n` +
+        `Suburb: ${form.suburb.value || "-"}\n` +
+        `Details: ${form.details.value || "-"}\n\n` +
+        `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n`
+      );
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    });
+
+    // FAQ accordion
+    document.querySelectorAll(".faqItem").forEach(item => {
+      const q = item.querySelector(".faqQ");
+      q.addEventListener("click", () => item.classList.toggle("open"));
+    });
+
+    updateProgress();
+  </script>
 </body>
 </html>
+
 
