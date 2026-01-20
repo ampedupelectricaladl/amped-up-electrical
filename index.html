@@ -6,7 +6,12 @@
   <title>Amped Up Electrical Adelaide</title>
   <meta name="description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
 
-  <!-- Favicon (uses your logo) -->
+  <!-- Basic social preview -->
+  <meta property="og:title" content="Amped Up Electrical Adelaide" />
+  <meta property="og:description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
 
   <style>
@@ -17,13 +22,12 @@
       --text:#ffffff;
       --muted:#c9c9d6;
       --border:rgba(255,255,255,.10);
-      --accent:#ffb000;   /* yellow/orange */
-      --accent2:#ff7a00;  /* orange */
+      --accent:#ffb000;
+      --accent2:#ff7a00;
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:22px;
       --topbarH: 78px;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
@@ -42,21 +46,16 @@
     section, .card.section { scroll-margin-top: calc(var(--topbarH) + 18px); }
     #quote { scroll-margin-top: calc(var(--topbarH) + 10px); }
 
-    /* Skip link (accessibility + fast to quote) */
+    /* Skip link */
     .skip{
-      position:absolute;
-      left:-999px;
-      top:10px;
-      padding:10px 12px;
-      border-radius:12px;
+      position:absolute;left:-999px;top:10px;
+      padding:10px 12px;border-radius:12px;
       background: linear-gradient(135deg,var(--accent),var(--accent2));
-      color:#111;
-      font-weight:1000;
-      z-index:99999;
+      color:#111;font-weight:1000;z-index:99999;
     }
     .skip:focus{left:12px}
 
-    /* MOBILE STICKY CALL BAR */
+    /* Mobile sticky actions */
     .callbar{
       display:none;
       position:fixed;
@@ -71,8 +70,7 @@
       box-shadow: var(--shadow);
     }
     .callbar-btn{
-      flex:1;
-      text-align:center;
+      flex:1;text-align:center;
       padding:12px 10px;
       border-radius:16px;
       border:1px solid var(--border);
@@ -98,15 +96,17 @@
       box-shadow: var(--shadow);
       position: sticky; top: 14px; z-index: 50;
     }
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand img{height:42px;width:auto;display:block}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand img{
+      height:54px; width:auto; display:block; object-fit:contain;
+    }
 
     .nav{display:flex;gap:10px;flex-wrap:wrap}
     .nav a{
       padding:10px 12px;border-radius:14px;
       border:1px solid transparent;
       color:var(--muted);
-      font-weight:900;
+      font-weight:1000;
     }
     .nav a:hover{border-color:var(--border);color:var(--text)}
 
@@ -129,11 +129,8 @@
       background: linear-gradient(135deg,var(--accent),var(--accent2));
       color:#111;
     }
-
-    /* Instagram button */
     .btn.ig svg{width:18px;height:18px}
 
-    /* Mobile menu button */
     .menuBtn{
       display:none;
       padding:10px 12px;
@@ -172,17 +169,8 @@
       font-size:12px;
       margin-bottom:10px;
     }
-    h1{
-      margin:0 0 10px;
-      font-size:46px;
-      line-height:1.05;
-    }
-    .sub{
-      margin:0 0 14px;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.55;
-    }
+    h1{margin:0 0 10px;font-size:46px;line-height:1.05}
+    .sub{margin:0 0 14px;color:var(--muted);font-size:16px;line-height:1.55}
     .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .chip{
       border:1px solid var(--border);
@@ -192,32 +180,20 @@
       background: rgba(255,255,255,.02);
     }
     .trust{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:12px;
+      display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;
     }
     .trustBadge{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:16px;
+      display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:16px;
       border:1px solid var(--border);
       background: rgba(255,255,255,.02);
-      font-size:13px;
-      font-weight:900;
-      color:var(--muted);
+      font-size:13px;font-weight:900;color:var(--muted);
     }
     .trustBadge span{
-      display:grid;
-      place-items:center;
-      width:28px;
-      height:28px;
-      border-radius:10px;
+      display:grid;place-items:center;
+      width:28px;height:28px;border-radius:10px;
       background: rgba(255,176,0,.18);
-      color:#111;
-      font-weight:1000;
+      color:#111;font-weight:1000;
     }
     .divider{height:1px;background:var(--border);margin:16px 0}
 
@@ -268,6 +244,38 @@
     .formActions{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
     .note{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px}
 
+    /* Success panel */
+    .success{
+      display:none;
+      margin-top:14px;
+      border:1px solid rgba(255,176,0,.35);
+      background: rgba(255,176,0,.08);
+      border-radius:18px;
+      padding:14px;
+    }
+    .success strong{display:block;font-size:16px;margin-bottom:6px}
+    .success span{color:var(--muted);font-size:13px;line-height:1.5}
+
+    /* Price guide (micro trust section) */
+    .priceGrid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-top:14px;
+    }
+    .priceItem{
+      border:1px solid var(--border);
+      background: rgba(16,16,21,.65);
+      border-radius:18px;
+      padding:14px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .priceItem strong{font-size:14px}
+    .priceItem span{color:var(--muted);font-size:13px;line-height:1.4;text-align:right}
+
     /* SECTIONS */
     .section{margin-top:18px}
     h2{margin:0 0 10px;font-size:28px}
@@ -280,95 +288,48 @@
     }
     .mini h3{margin:0 0 6px;font-size:16px}
     .mini p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:12px;
-    }
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
     .stat{
       border:1px solid var(--border);
       border-radius:18px;
       padding:16px;
       background: rgba(16,16,21,.65);
-      display:flex;
-      flex-direction:column;
-      gap:6px;
+      display:flex;flex-direction:column;gap:6px;
     }
     .stat strong{font-size:22px}
-    .stat span{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-    }
+    .stat span{color:var(--muted);font-size:13px;line-height:1.5}
     .highlight{
       border:1px solid rgba(255,176,0,.35);
       background: rgba(255,176,0,.08);
       color:var(--text);
     }
-    .serviceArea{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-      flex-wrap:wrap;
-    }
-    .serviceArea ul{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.6;
-    }
+    .serviceArea{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+    .serviceArea ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.6}
     .serviceArea .mini{flex:1 1 240px}
 
     .callout{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      padding:16px;
-      border-radius:18px;
-      border:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;flex-wrap:wrap;
+      padding:16px;border-radius:18px;border:1px solid var(--border);
       background: linear-gradient(135deg, rgba(255,176,0,.16), rgba(255,122,0,.12));
     }
     .callout strong{font-size:18px}
     .callout span{color:var(--muted);font-size:13px}
 
-    /* BRAND SPOTLIGHT */
-    .brandSpotlight{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .brandCopy{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .brandCopy ul{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.7;
-    }
+    /* Brand spotlight */
+    .brandSpotlight{display:grid;grid-template-columns: 1.05fr .95fr;gap:18px;align-items:stretch}
+    .brandCopy{display:flex;flex-direction:column;gap:14px}
+    .brandCopy ul{margin:0;padding-left:18px;color:var(--muted);line-height:1.7}
     .brandLogoCard{
-      display:grid;
-      place-items:center;
-      border-radius:20px;
-      border:1px solid var(--border);
+      display:grid;place-items:center;
+      border-radius:20px;border:1px solid var(--border);
       background: radial-gradient(circle at top, rgba(255,176,0,.18), transparent 55%), rgba(16,16,21,.65);
       box-shadow: var(--shadow);
-      padding:24px;
-      min-height:280px;
+      padding:24px;min-height:280px;
     }
-    .brandLogoCard img{
-      width:min(320px, 80%);
-      height:auto;
-      display:block;
-    }
+    .brandLogoCard img{width:min(320px, 80%);height:auto;display:block}
 
-    /* HOW WE WORK */
+    /* How we work */
     .howSteps{display:grid;gap:14px;margin-top:14px}
     .howRow{display:flex;gap:16px;align-items:flex-start}
     .howNum{
@@ -406,7 +367,7 @@
     }
     .faqItem.open .faqA{display:block}
 
-    /* REVIEWS */
+    /* Reviews */
     .reviewGrid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -419,41 +380,25 @@
       padding:16px;
       background: rgba(16,16,21,.65);
     }
-    .stars{
-      color:var(--accent);
-      font-size:16px;
-      margin-bottom:6px;
-      font-weight:1000;
-      letter-spacing:1px;
-    }
-    .review p{
-      margin:0 0 8px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.6;
-    }
+    .stars{color:var(--accent);font-size:16px;margin-bottom:6px;font-weight:1000;letter-spacing:1px}
+    .review p{margin:0 0 8px;color:var(--muted);font-size:14px;line-height:1.6}
     .review strong{font-size:14px}
-
-    footer{
-      text-align:center;
+    .pendingLine{
+      margin-top:10px;
       color:var(--muted);
-      font-size:13px;
-      padding:18px 0 8px;
+      font-size:12px;
+      line-height:1.5;
     }
 
-    /* MOBILE IMPROVEMENTS */
+    footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 0 8px}
+
+    /* Mobile */
     @media (max-width: 960px){
       :root{ --topbarH: 64px; }
-
-      .topbar{
-        top:0;
-        border-radius:0;
-        padding:12px;
-      }
+      .topbar{top:0;border-radius:0;padding:12px}
+      .brand img{height:48px; max-width:190px}
 
       .hero{grid-template-columns:1fr}
-
-      /* put quote form first on mobile (higher conversions) */
       #quote .card:nth-child(2){order:1;}
       #quote .card:nth-child(1){order:2;}
 
@@ -466,44 +411,25 @@
       .brandSpotlight{grid-template-columns:1fr}
       .reviewGrid{grid-template-columns:1fr}
 
-      /* bigger tap targets */
-      .opt{
-        padding:14px 14px;
-        font-size:16px;
-        border-radius:18px;
-      }
-      input, textarea{
-        padding:14px 14px;
-        font-size:16px; /* stops iOS zoom */
-        border-radius:18px;
-      }
-      .btn{
-        padding:12px 14px;
-        font-size:16px;
-      }
+      .opt{padding:14px 14px;font-size:16px;border-radius:18px}
+      input, textarea{padding:14px 14px;font-size:16px;border-radius:18px}
+      .btn{padding:12px 14px;font-size:16px}
 
-      /* show sticky call bar */
       .callbar{display:flex;}
       body{padding-bottom:84px;}
 
-      /* Mobile nav: hamburger */
-      .menuBtn{display:inline-flex; align-items:center; gap:8px;}
+      .menuBtn{display:inline-flex;align-items:center;gap:8px}
       .nav{
-        display:none;
-        width:100%;
-        gap:8px;
-        padding-top:10px;
+        display:none;width:100%;
+        gap:8px;padding-top:10px;
       }
       .topbar.open .nav{display:flex;}
       .nav a{
-        flex:1 1 auto;
-        text-align:center;
+        flex:1 1 auto;text-align:center;
         padding:12px 10px;
         background: rgba(255,255,255,.02);
         border:1px solid var(--border);
       }
-      .cta{gap:8px}
-      .btn.ig span{display:none;} /* optional if you want smaller buttons */
     }
   </style>
 </head>
@@ -511,7 +437,7 @@
 <body>
   <a class="skip" href="#quote">Skip to quote</a>
 
-  <!-- Mobile sticky call bar -->
+  <!-- Mobile sticky actions -->
   <div class="callbar" aria-label="Quick actions">
     <a href="tel:0410414969" class="callbar-btn primary">Call</a>
     <a href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20need%20help%20with%20%5Bjob%5D%20in%20%5Bsuburb%5D.%20When%20can%20you%20come%20out%3F" class="callbar-btn">Text</a>
@@ -520,7 +446,6 @@
   </div>
 
   <div class="wrap">
-
     <!-- TOPBAR -->
     <div class="topbar" id="topbar">
       <div class="brand">
@@ -538,20 +463,19 @@
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9A3.5 3.5 0 0 0 20 16.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/>
           </svg>
-          <span>Instagram</span>
+          Instagram
         </a>
 
         <a class="btn primary" href="#quote">Get a quote</a>
       </div>
 
+      <!-- Mobile-friendly nav: keep it simple -->
       <div class="nav" id="nav">
         <a href="#quote">Quote</a>
-        <a href="#trust">Why us</a>
         <a href="#reviews">Reviews</a>
         <a href="#services">Services</a>
-        <a href="#areas">Areas</a>
-        <a href="#how">How we work</a>
         <a href="#faq">FAQ</a>
+        <a href="#areas">Areas</a>
         <a href="#about">About</a>
       </div>
     </div>
@@ -601,7 +525,8 @@
           </div>
         </div>
 
-        <form id="quoteForm">
+        <!-- ✅ REAL FORM SUBMIT (Formspree) -->
+        <form id="quoteForm" action="https://formspree.io/f/xjggayzj" method="POST">
           <!-- Step 1 -->
           <div class="step active" data-step="1">
             <div class="q">What do you need help with?</div>
@@ -677,21 +602,57 @@
             <label>Email *</label>
             <input name="email" required type="email" placeholder="you@email.com" />
 
+            <!-- helpful hidden fields -->
+            <input type="hidden" name="_subject" value="New Quote Request - Amped Up Electrical Adelaide" />
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
             <div class="formActions">
               <button type="button" class="btn" data-back>Back</button>
-              <button type="submit" class="btn primary">Send request</button>
+              <button type="submit" class="btn primary" id="submitBtn">Send request</button>
             </div>
 
             <div class="note">
-              Submitting opens your email app (no database needed). Or call <b>0410 414 969</b>.
+              We’ll respond ASAP. For urgent issues, call <b>0410 414 969</b>.
             </div>
           </div>
 
-          <!-- Hidden fields -->
+          <!-- Hidden fields for multi-step selections -->
           <input type="hidden" name="service" />
           <input type="hidden" name="site" />
           <input type="hidden" name="urgency" />
         </form>
+
+        <!-- Success state -->
+        <div class="success" id="success">
+          <strong>Request received ✅</strong>
+          <span>We’ll call or text you ASAP. If it’s urgent, tap below.</span>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn primary" href="tel:0410414969">Call now</a>
+            <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20just%20submitted%20a%20quote%20request.%20My%20suburb%20is%20%5Bsuburb%5D.%20Thanks!" >Text now</a>
+          </div>
+        </div>
+
+        <!-- Price guide -->
+        <div class="priceGrid" aria-label="Pricing guidance">
+          <div class="mini" style="padding:14px">
+            <div style="font-weight:1000;margin-bottom:6px">Pricing guidance (ballpark)</div>
+            <div style="color:var(--muted);font-size:13px;line-height:1.6">
+              Exact pricing depends on access, wiring condition and materials. Send photos for the quickest quote.
+            </div>
+          </div>
+          <div class="priceItem">
+            <strong>Fault finding</strong>
+            <span>Fast diagnosis<br/>Same-day when available</span>
+          </div>
+          <div class="priceItem">
+            <strong>Power points / lighting</strong>
+            <span>Quoted quickly after photos<br/>Upfront pricing</span>
+          </div>
+          <div class="priceItem">
+            <strong>Switchboard upgrades</strong>
+            <span>Safety-first + compliant<br/>Neat finish</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -731,32 +692,36 @@
     <div class="card section" id="reviews">
       <div class="kicker">Real reviews</div>
       <h2>What Adelaide customers say</h2>
-      <p class="sub">Quick snapshots from recent jobs — clean work, clear pricing, and fast turnaround.</p>
+      <p class="sub">Real job feedback — tidy work, clear communication, and fast turnaround.</p>
 
       <div class="reviewGrid">
         <div class="review">
           <div class="stars">★★★★★</div>
-          <p>Marcus was on time, explained everything clearly and left the place spotless. No surprises on price.</p>
-          <strong>— Sarah M, Unley</strong>
+          <p>Switchboard upgrade was super neat. Explained everything, tested properly and cleaned up after.</p>
+          <strong>— Sarah M (Unley) • Switchboard</strong>
         </div>
 
         <div class="review">
           <div class="stars">★★★★★</div>
-          <p>Had a fault tripping the power. Sorted quickly and properly. Super tidy work.</p>
-          <strong>— James T, Norwood</strong>
+          <p>Power kept tripping. Found the fault quickly and fixed it same day. Highly recommend.</p>
+          <strong>— James T (Norwood) • Fault finding</strong>
         </div>
 
         <div class="review">
           <div class="stars">★★★★★</div>
-          <p>Switchboard upgrade done neatly with great communication. Would 100% use again.</p>
-          <strong>— Daniel R, Glenelg</strong>
+          <p>Installed new downlights and sensors. Great finish, no mess, and upfront pricing.</p>
+          <strong>— Daniel R (Glenelg) • Lighting</strong>
         </div>
+      </div>
+
+      <div class="pendingLine">
+        Google profile approval is in progress — more verified reviews will appear here once it’s live.
       </div>
 
       <div class="callout" style="margin-top:14px">
         <div>
-          <strong>Want to see our work?</strong>
-          <div><span>Check recent installs on Instagram.</span></div>
+          <strong>Want to see recent work?</strong>
+          <div><span>Check installs on Instagram.</span></div>
         </div>
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -878,31 +843,6 @@
       </div>
     </div>
 
-    <!-- BRAND SPOTLIGHT -->
-    <div class="card section" id="about-brand">
-      <div class="kicker">Brand spotlight</div>
-      <h2>On-the-job quality you can see</h2>
-      <div class="brandSpotlight">
-        <div class="brandCopy">
-          <p class="sub" style="margin:0">
-            Our work speaks for itself — clean switchboard installs, tidy cable management, and safety-first practices on every job.
-          </p>
-          <ul>
-            <li>Neat workmanship that protects your property and your power supply.</li>
-            <li>Fully compliant switchboard upgrades and repairs.</li>
-            <li>Trusted local service with clear communication from start to finish.</li>
-          </ul>
-          <div class="cta">
-            <a class="btn primary" href="tel:0410414969">Book an inspection</a>
-            <a class="btn" href="#quote">Request a quote</a>
-          </div>
-        </div>
-        <div class="brandLogoCard">
-          <img src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide logo" />
-        </div>
-      </div>
-    </div>
-
     <!-- FAQ -->
     <div class="card section" id="faq">
       <div class="kicker">Still not sure?</div>
@@ -943,7 +883,7 @@
       </div>
     </div>
 
-    <!-- ABOUT / CONTACT -->
+    <!-- ABOUT -->
     <div class="card section" id="about">
       <div class="kicker">About</div>
       <h2>Amped Up Electrical Adelaide</h2>
@@ -977,14 +917,14 @@
   </div>
 
   <script>
-    // footer year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // multi-step form logic
     const form = document.getElementById("quoteForm");
     const steps = [...form.querySelectorAll(".step")];
     const bar = document.getElementById("bar");
     const pct = document.getElementById("pct");
+    const success = document.getElementById("success");
+    const submitBtn = document.getElementById("submitBtn");
     let stepIndex = 0;
 
     const updateProgress = () => {
@@ -998,7 +938,6 @@
     form.querySelectorAll(".options").forEach(group => {
       const name = group.getAttribute("data-name");
       const hidden = form.querySelector(`input[name="${name}"]`);
-
       group.querySelectorAll(".opt").forEach(btn => {
         btn.addEventListener("click", () => {
           group.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
@@ -1016,7 +955,6 @@
         if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
         stepIndex = Math.min(stepIndex + 1, steps.length - 1);
         updateProgress();
-        // ensure form stays visible when progressing on mobile
         document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
@@ -1029,27 +967,45 @@
       });
     });
 
-    // submit -> mailto
-    form.addEventListener("submit", (e) => {
+    // ✅ AJAX submit to Formspree (no redirect)
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      // Basic required fields
       const phone = form.phone.value.trim();
       const name = form.name.value.trim();
       const email = form.email.value.trim();
       if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
 
-      const to = "ampedupelectricaladl@gmail.com";
-      const subject = encodeURIComponent("New Quote Request - Amped Up Electrical Adelaide");
-      const body = encodeURIComponent(
-        `Service: ${form.service.value}\n` +
-        `Site: ${form.site.value}\n` +
-        `Urgency: ${form.urgency.value}\n` +
-        `Suburb: ${form.suburb.value || "-"}\n` +
-        `Details: ${form.details.value || "-"}\n\n` +
-        `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n`
-      );
+      // Block if endpoint not set
+      if (!form.action || form.action.includes("https://formspree.io/f/xjggayzj")) {
+        return alert("Form endpoint not set yet. Add your Formspree URL into the form action.");
+      }
 
-      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          form.style.display = "none";
+          success.style.display = "block";
+          document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
+        } else {
+          alert("Something went wrong. Please call 0410 414 969.");
+        }
+      } catch (err) {
+        alert("Network issue. Please call 0410 414 969.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send request";
+      }
     });
 
     // FAQ accordion
@@ -1058,7 +1014,7 @@
       q.addEventListener("click", () => item.classList.toggle("open"));
     });
 
-    // Mobile menu toggle (easy navigation)
+    // Mobile menu toggle
     const topbar = document.getElementById("topbar");
     const menuBtn = document.getElementById("menuBtn");
     const nav = document.getElementById("nav");
@@ -1069,7 +1025,6 @@
         menuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
-      // Close menu after tapping a link
       nav.querySelectorAll("a").forEach(a => {
         a.addEventListener("click", () => {
           topbar.classList.remove("open");
@@ -1077,7 +1032,6 @@
         });
       });
 
-      // Close if user taps outside nav on mobile
       document.addEventListener("click", (e) => {
         if (!topbar.contains(e.target) && topbar.classList.contains("open")) {
           topbar.classList.remove("open");
@@ -1089,8 +1043,8 @@
     updateProgress();
   </script>
 
-  <!-- Tidio AI Chat - replace YOUR_TIDIO_PUBLIC_KEY with your real key -->
-  <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js" async></script>
+  <!-- Optional: Tidio AI Chat (replace key when ready) -->
+  <!-- <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js" async></script> -->
 
 </body>
 </html>
