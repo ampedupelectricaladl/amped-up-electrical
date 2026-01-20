@@ -7,7 +7,7 @@
   <meta name="description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
 
   <!-- Favicon (uses your logo) -->
-  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
 
   <style>
     :root{
@@ -259,6 +259,40 @@
     .callout strong{font-size:18px}
     .callout span{color:var(--muted);font-size:13px}
 
+    /* BRAND SPOTLIGHT */
+    .brandSpotlight{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .brandCopy{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .brandCopy ul{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+    .brandLogoCard{
+      display:grid;
+      place-items:center;
+      border-radius:20px;
+      border:1px solid var(--border);
+      background: radial-gradient(circle at top, rgba(255,176,0,.18), transparent 55%), rgba(16,16,21,.65);
+      box-shadow: var(--shadow);
+      padding:24px;
+      min-height:280px;
+    }
+    .brandLogoCard img{
+      width:min(320px, 80%);
+      height:auto;
+      display:block;
+    }
+
     /* HOW WE WORK */
     .howSteps{display:grid;gap:14px;margin-top:14px}
     .howRow{display:flex;gap:16px;align-items:flex-start}
@@ -313,6 +347,7 @@
       .row2{grid-template-columns:1fr}
       .topbar{position:relative;top:0}
       .progress{width:120px}
+      .brandSpotlight{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -321,8 +356,7 @@
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
-        <!-- Upload your logo into the repo as logo.png -->
-        <img src="logo.png" alt="Amped Up Electrical Adelaide" />
+        <img src="logo.svg" alt="Amped Up Electrical Adelaide" />
       </div>
 
       <div class="nav">
@@ -616,6 +650,31 @@
       </div>
     </div>
 
+    <!-- BRAND SPOTLIGHT -->
+    <div class="card section" id="about-brand">
+      <div class="kicker">Brand spotlight</div>
+      <h2>On-the-job quality you can see</h2>
+      <div class="brandSpotlight">
+        <div class="brandCopy">
+          <p class="sub" style="margin:0">
+            Our work speaks for itself — clean switchboard installs, tidy cable management, and safety-first practices on every job.
+          </p>
+          <ul>
+            <li>Neat workmanship that protects your property and your power supply.</li>
+            <li>Fully compliant switchboard upgrades and repairs.</li>
+            <li>Trusted local service with clear communication from start to finish.</li>
+          </ul>
+          <div class="cta">
+            <a class="btn primary" href="tel:0410414969">Book an inspection</a>
+            <a class="btn" href="#quote">Request a quote</a>
+          </div>
+        </div>
+        <div class="brandLogoCard">
+          <img src="logo.svg" alt="Amped Up Electrical Adelaide logo" />
+        </div>
+      </div>
+    </div>
+
     <!-- FAQ -->
     <div class="card section" id="faq">
       <div class="kicker">Still not sure?</div>
@@ -672,9 +731,6 @@
         <a class="btn" href="mailto:ampedupelectricaladl@gmail.com">Email</a>
       </div>
 
-      <div class="note">
-        Tip: upload your logo as <b>logo.png</b> in the repo root (same folder as index.html).
-      </div>
     </div>
 
     <footer>
@@ -765,28 +821,3 @@
   </script>
 </body>
 </html>
-diff --git a/logo.svg b/logo.svg
-new file mode 100644
-index 0000000000000000000000000000000000000000..f7662f2c2fccce43bf3cdb20ae8dc211ac4743fb
---- /dev/null
-+++ b/logo.svg
-@@ -0,0 +1,18 @@
-+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Amped Up Electrical Adelaide logo">
-+  <defs>
-+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-+      <stop offset="0" stop-color="#ffbf1b" />
-+      <stop offset="1" stop-color="#f08a00" />
-+    </linearGradient>
-+  </defs>
-+  <rect width="512" height="512" fill="#0b0b0e" />
-+  <g font-family="'Segoe UI', Arial, sans-serif" font-weight="800" text-anchor="middle">
-+    <text x="256" y="190" font-size="110" fill="url(#gold)">AMPED</text>
-+    <g fill="url(#gold)">
-+      <polygon points="238,220 292,220 266,320 308,320 222,430 252,338 214,338" />
-+      <text x="308" y="330" font-size="90">UP</text>
-+    </g>
-+    <text x="256" y="410" font-size="46" fill="#f2f2f2" letter-spacing="6">ELECTRICAL</text>
-+    <text x="256" y="460" font-size="46" fill="#f2f2f2" letter-spacing="6">ADELAIDE</text>
-+  </g>
-+</svg>
-
