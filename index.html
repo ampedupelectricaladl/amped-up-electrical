@@ -365,12 +365,38 @@
     }
     .faqItem.open .faqA{display:block}
 
+    /* ✅ About photo styles */
+    .aboutGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+      margin-top:14px;
+    }
+    .profileCard{
+      border:1px solid var(--border);
+      background: rgba(16,16,21,.65);
+      border-radius:18px;
+      padding:16px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .profilePhoto{
+      width:86px;height:86px;border-radius:999px;
+      object-fit:cover;
+      border:2px solid rgba(255,176,0,.45);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      flex:0 0 auto;
+    }
+    .profileCard strong{display:block;font-size:15px;margin-bottom:4px}
+    .profileCard span{display:block;color:var(--muted);font-size:13px;line-height:1.45}
+
     footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 0 8px}
 
     @media (max-width: 960px){
       :root{ --topbarH: 64px; }
       .topbar{top:0;border-radius:0;padding:12px}
-
       .brand img{height:56px;max-width:220px}
 
       .hero{grid-template-columns:1fr}
@@ -402,6 +428,9 @@
         border:1px solid var(--border);
       }
       .cta .ig{display:none;}
+
+      .aboutGrid{grid-template-columns:1fr}
+      .profilePhoto{width:76px;height:76px}
     }
   </style>
 </head>
@@ -493,7 +522,8 @@
           </div>
         </div>
 
-        <form id="quoteForm">
+        <!-- ✅ Now uses Formspree (works with or without JS) -->
+        <form id="quoteForm" action="https://formspree.io/f/xjggayzj" method="POST">
           <div class="step active" data-step="1">
             <div class="q">What do you need help with?</div>
             <div class="options" data-name="service">
@@ -565,6 +595,10 @@
             <label>Email *</label>
             <input name="email" required type="email" placeholder="you@email.com" />
 
+            <!-- Helpful hidden fields -->
+            <input type="hidden" name="source" value="Website Quote Form" />
+            <input type="hidden" name="_subject" value="New Quote Request - Amped Up Electrical Adelaide" />
+
             <div class="formActions">
               <button type="button" class="btn" data-back>Back</button>
               <button type="submit" class="btn primary" id="submitBtn">Send request</button>
@@ -578,7 +612,6 @@
           <input type="hidden" name="service" />
           <input type="hidden" name="site" />
           <input type="hidden" name="urgency" />
-          <input type="hidden" name="source" value="Website Quote Form" />
         </form>
 
         <div class="success" id="success">
@@ -750,6 +783,22 @@
         Reliable, tidy and compliant electrical work across Adelaide metro.
         Call <b>0410 414 969</b> or email <b>ampedupelectricaladl@gmail.com</b> for a quote.
       </p>
+
+      <!-- ✅ Your photo added here -->
+      <div class="aboutGrid">
+        <div class="profileCard">
+          <img class="profilePhoto" src="IMG_8657.jpg" alt="Marcus - Amped Up Electrical Adelaide" />
+          <div>
+            <strong>Marcus — Amped Up Electrical</strong>
+            <span>Licensed & insured • Adelaide metro • Clean workmanship • Upfront pricing</span>
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>Fast quoting</h3>
+          <p>Send photos + suburb and we’ll quote quickly. For urgent faults, call and we’ll tell you the soonest slot.</p>
+        </div>
+      </div>
     </div>
 
     <footer>
@@ -851,6 +900,7 @@
       window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
     };
 
+    // AJAX submit -> show success panel (and fallback to mailto if blocked)
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
