@@ -7,10 +7,19 @@
   <link rel="canonical" href="https://ampedupelectricaladelaide.com.au/" />
   <meta name="description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
 
+  <!-- SEO -->
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0b0e" />
+  <meta name="geo.region" content="AU-SA" />
+  <meta name="geo.placename" content="Adelaide" />
+
   <!-- Social preview -->
   <meta property="og:title" content="Amped Up Electrical Adelaide" />
   <meta property="og:description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ampedupelectricaladelaide.com.au/" />
+  <meta property="og:image" content="https://ampedupelectricaladelaide.com.au/5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="logo.svg" />
@@ -20,14 +29,22 @@
   <!-- LocalBusiness schema -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"Electrician",
-    "name":"Amped Up Electrical Adelaide",
-    "areaServed":"Adelaide, SA",
-    "telephone":"+61410414969",
-    "email":"ampedupelectricaladl@gmail.com",
-    "url":"https://ampedupelectricaladelaide.com.au/",
-    "sameAs":["https://www.instagram.com/ampedupelectricaladelaide/"]
+    "@context": "https://schema.org",
+    "@type": "ElectricalContractor",
+    "name": "Amped Up Electrical Adelaide",
+    "url": "https://ampedupelectricaladelaide.com.au/",
+    "telephone": "+61410414969",
+    "email": "ampedupelectricaladl@gmail.com",
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Adelaide, SA"
+    },
+    "sameAs": [
+      "https://www.instagram.com/ampedupelectricaladelaide/"
+    ],
+    "image": "https://ampedupelectricaladelaide.com.au/5B7A145D-2F0E-475A-A662-B21DD54F930B.png",
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 00:00-23:59"
   }
   </script>
 
@@ -213,7 +230,7 @@
     }
     .divider{height:1px;background:var(--border);margin:16px 0}
 
-    /* HERO PROFILE (bigger + higher up) */
+    /* HERO PROFILE */
     .heroProfile{
       display:flex;
       align-items:center;
@@ -498,7 +515,6 @@
       }
       .cta .ig{display:none;}
 
-      /* Bigger on mobile too */
       .heroPhotoWrap{width:96px;height:96px}
       .heroPhoto{width:96px;height:96px}
       .heroLogo{width:30px;height:30px}
@@ -556,8 +572,12 @@
     <div class="hero" id="quote">
       <div class="card">
         <div class="kicker">Attention: Home & business owners</div>
+
         <h1>Amped Up Electrical Adelaide</h1>
-        <h2 style="margin:0 0 10px;font-size:34px;line-height:1.12">Electrical Work Done Right</h2>
+        <h2 style="margin:0 0 10px;font-size:34px;line-height:1.12">
+          Electrician in Adelaide — Fast, Tidy & Upfront Pricing
+        </h2>
+
         <p class="sub">
           Amped Up Electrical Adelaide provides reliable residential and commercial electrical services across Adelaide metro.
           We handle emergency electrical faults, switchboard upgrades, lighting, power points, and fault finding — with clean workmanship and upfront pricing.
@@ -576,7 +596,6 @@
           <div class="trustBadge"><span>★</span> Local 5-star service</div>
         </div>
 
-        <!-- ✅ Bigger photo, higher up (in hero) -->
         <div class="heroProfile">
           <div class="heroPhotoWrap">
             <img class="heroPhoto" src="IMG_8657.jpg" alt="Marcus - Amped Up Electrical Adelaide" />
@@ -601,7 +620,7 @@
         </div>
       </div>
 
-      <!-- Quote card (will be moved into modal when opened) -->
+      <!-- Quote card -->
       <div class="card" id="quoteCard">
         <div class="formTitle">
           <div style="font-weight:1000;font-size:18px">Get your quote</div>
@@ -612,6 +631,9 @@
         </div>
 
         <form id="quoteForm" action="https://formspree.io/f/xjggayzj" method="POST">
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
           <div class="step active" data-step="1">
             <div class="q">What do you need help with?</div>
             <div class="options" data-name="service">
@@ -639,8 +661,8 @@
               <button type="button" class="opt" data-value="Other">Other</button>
             </div>
 
-            <label>Suburb</label>
-            <input name="suburb" placeholder="e.g. Westbourne Park" />
+            <label>Suburb *</label>
+            <input name="suburb" required autocomplete="address-level2" placeholder="e.g. Westbourne Park" />
 
             <div class="formActions">
               <button type="button" class="btn" data-back>Back</button>
@@ -672,16 +694,18 @@
             <div class="row2">
               <div>
                 <label>Phone *</label>
-                <input name="phone" required placeholder="04xx xxx xxx" />
+                <input name="phone" required inputmode="tel" autocomplete="tel"
+                       pattern="^(\+?61|0)4\d{8}$|^(\+?61|0)[2378]\d{8}$"
+                       placeholder="04xx xxx xxx" />
               </div>
               <div>
                 <label>Your name *</label>
-                <input name="name" required placeholder="Your name" />
+                <input name="name" required autocomplete="name" placeholder="Your name" />
               </div>
             </div>
 
             <label>Email *</label>
-            <input name="email" required type="email" placeholder="you@email.com" />
+            <input name="email" required type="email" autocomplete="email" placeholder="you@email.com" />
 
             <input type="hidden" name="source" value="Website Quote Form" />
             <input type="hidden" name="_subject" value="New Quote Request - Amped Up Electrical Adelaide" />
@@ -899,7 +923,8 @@
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjggayzj";
     const BUSINESS_EMAIL = "ampedupelectricaladl@gmail.com";
 
-    document.getElementById("y").textContent = new Date().getFullYear();
+    const yearEl = document.getElementById("y");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Mobile menu
     const topbar = document.getElementById("topbar");
@@ -926,7 +951,8 @@
 
     // Multi-step form logic
     const form = document.getElementById("quoteForm");
-    const steps = [...form.querySelectorAll(".step")];
+    const quoteCard = document.getElementById("quoteCard");
+    const steps = form ? [...form.querySelectorAll(".step")] : [];
     const bar = document.getElementById("bar");
     const pct = document.getElementById("pct");
     const success = document.getElementById("success");
@@ -935,6 +961,7 @@
     let stepIndex = 0;
 
     const updateProgress = () => {
+      if (!steps.length || !bar || !pct) return;
       const percent = Math.round((stepIndex / (steps.length - 1)) * 100);
       bar.style.width = percent + "%";
       pct.textContent = percent + "%";
@@ -942,51 +969,53 @@
     };
 
     // option selection
-    form.querySelectorAll(".options").forEach(group => {
-      const name = group.getAttribute("data-name");
-      const hidden = form.querySelector(`input[name="${name}"]`);
-      group.querySelectorAll(".opt").forEach(btn => {
-        btn.addEventListener("click", () => {
-          group.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
-          btn.classList.add("selected");
-          hidden.value = btn.getAttribute("data-value");
+    if (form) {
+      form.querySelectorAll(".options").forEach(group => {
+        const name = group.getAttribute("data-name");
+        const hidden = form.querySelector(`input[name="${name}"]`);
+        group.querySelectorAll(".opt").forEach(btn => {
+          btn.addEventListener("click", () => {
+            group.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            if (hidden) hidden.value = btn.getAttribute("data-value");
+          });
         });
       });
-    });
 
-    // next/back
-    form.querySelectorAll("[data-next]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (stepIndex === 0 && !form.service.value) return alert("Select what you need help with.");
-        if (stepIndex === 1 && !form.site.value) return alert("Select where the work will be conducted.");
-        if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
-        stepIndex = Math.min(stepIndex + 1, steps.length - 1);
-        updateProgress();
-
-        // Keep the form visible in modal if it's open
-        if (document.getElementById("quoteModal")?.classList.contains("open")) {
-          document.getElementById("quoteCard").scrollIntoView({behavior:"smooth", block:"start"});
-        }
+      // next/back
+      form.querySelectorAll("[data-next]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if (stepIndex === 0 && !form.service.value) return alert("Select what you need help with.");
+          if (stepIndex === 1 && !form.site.value) return alert("Select where the work will be conducted.");
+          if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
+          stepIndex = Math.min(stepIndex + 1, steps.length - 1);
+          updateProgress();
+          if (document.getElementById("quoteModal")?.classList.contains("open")) {
+            quoteCard?.scrollIntoView({behavior:"smooth", block:"start"});
+          }
+        });
       });
-    });
 
-    form.querySelectorAll("[data-back]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        stepIndex = Math.max(stepIndex - 1, 0);
-        updateProgress();
-        if (document.getElementById("quoteModal")?.classList.contains("open")) {
-          document.getElementById("quoteCard").scrollIntoView({behavior:"smooth", block:"start"});
-        }
+      form.querySelectorAll("[data-back]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          stepIndex = Math.max(stepIndex - 1, 0);
+          updateProgress();
+          if (document.getElementById("quoteModal")?.classList.contains("open")) {
+            quoteCard?.scrollIntoView({behavior:"smooth", block:"start"});
+          }
+        });
       });
-    });
+    }
 
     // FAQ accordion
     document.querySelectorAll(".faqItem").forEach(item => {
       const q = item.querySelector(".faqQ");
+      if (!q) return;
       q.addEventListener("click", () => item.classList.toggle("open"));
     });
 
     const mailtoFallback = () => {
+      if (!form) return;
       const subject = encodeURIComponent("New Quote Request - Amped Up Electrical Adelaide");
       const body = encodeURIComponent(
         `Service: ${form.service.value}\n` +
@@ -1001,65 +1030,95 @@
     };
 
     // Submit via Formspree fetch -> show success panel
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      const phone = form.phone.value.trim();
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
+        const phone = form.phone.value.trim();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending...";
+        submitBtn && (submitBtn.disabled = true);
+        submitBtn && (submitBtn.textContent = "Sending...");
 
-      try {
-        const formData = new FormData(form);
-        formData.append("_subject", "New Quote Request - Amped Up Electrical Adelaide");
-        formData.append("_replyto", email);
+        try {
+          const formData = new FormData(form);
+          formData.append("_subject", "New Quote Request - Amped Up Electrical Adelaide");
+          formData.append("_replyto", email);
 
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: "POST",
-          body: formData,
-          headers: { "Accept": "application/json" }
-        });
+          const res = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formData,
+            headers: { "Accept": "application/json" }
+          });
 
-        if (res.ok) {
-          form.style.display = "none";
-          success.style.display = "block";
-          document.getElementById("quoteCard").scrollIntoView({behavior:"smooth", block:"start"});
-        } else {
+          if (res.ok) {
+            form.style.display = "none";
+            if (success) success.style.display = "block";
+            quoteCard?.scrollIntoView({behavior:"smooth", block:"start"});
+          } else {
+            mailtoFallback();
+          }
+        } catch (err) {
           mailtoFallback();
+        } finally {
+          submitBtn && (submitBtn.disabled = false);
+          submitBtn && (submitBtn.textContent = "Send request");
         }
-      } catch (err) {
-        mailtoFallback();
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send request";
-      }
-    });
+      });
+    }
 
-    /* ===== Quote Modal logic ===== */
+    /* ===== Quote Modal logic + Focus Trap ===== */
     const quoteModal = document.getElementById("quoteModal");
     const quoteModalClose = document.getElementById("quoteModalClose");
     const quoteModalBody = document.getElementById("quoteModalBody");
-    const quoteCard = document.getElementById("quoteCard");
     const originalQuoteParent = quoteCard?.parentElement;
 
+    let lastFocused = null;
+    let untrap = null;
+
+    function trapFocus(modalEl){
+      const focusables = modalEl.querySelectorAll('a,button,input,textarea,select,[tabindex]:not([tabindex="-1"])');
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      function handle(e){
+        if (e.key !== "Tab") return;
+        if (!first || !last) return;
+
+        if (e.shiftKey && document.activeElement === first){
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last){
+          e.preventDefault(); first.focus();
+        }
+      }
+
+      modalEl.addEventListener("keydown", handle);
+      return () => modalEl.removeEventListener("keydown", handle);
+    }
+
     function openQuoteModal(){
-      if (!quoteModal || !quoteModalBody || !quoteCard) return;
+      if (!quoteModal || !quoteModalBody || !quoteCard || !form) return;
+
+      lastFocused = document.activeElement;
 
       // Move the quote card into the modal
       quoteModalBody.appendChild(quoteCard);
 
-      // Reset form view (always obvious)
+      // Reset view
       stepIndex = 0;
       updateProgress();
-      success.style.display = "none";
+      if (success) success.style.display = "none";
       form.style.display = "";
 
       quoteModal.classList.add("open");
       quoteModal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+
+      untrap?.();
+      const modalInner = document.querySelector("#quoteModal .modal");
+      if (modalInner) untrap = trapFocus(modalInner);
 
       // Focus first option
       const firstOpt = form.querySelector('.step.active .opt');
@@ -1075,6 +1134,11 @@
       quoteModal.classList.remove("open");
       quoteModal.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
+
+      untrap?.();
+      untrap = null;
+
+      if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
     }
 
     // Open buttons
@@ -1099,3 +1163,4 @@
   </script>
 </body>
 </html>
+
