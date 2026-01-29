@@ -642,6 +642,7 @@
         <form id="quoteForm" action="https://formspree.io/f/xjggayzj" method="POST">
           <!-- Honeypot anti-spam -->
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_replyto" />
 
           <div class="step active" data-step="1">
             <div class="q">What do you need help with?</div>
@@ -1053,12 +1054,36 @@
 
     // ✅ FIXED Submit handler (uses form.action + shows Formspree errors)
     if (form) {
+      form.setAttribute("action", FORMSPREE_ENDPOINT);
+      form.setAttribute("method", "POST");
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const name = (form.name?.value || "").trim();
         const email = (form.email?.value || "").trim();
         const phoneRaw = (form.phone?.value || "").trim();
+        const suburb = (form.suburb?.value || "").trim();
+
+        if (!form.service?.value) {
+          alert("Select what you need help with.");
+          stepIndex = 0;
+          updateProgress();
+          return;
+        }
+
+        if (!form.site?.value || !suburb) {
+          alert("Select where the work will be conducted and add your suburb.");
+          stepIndex = 1;
+          updateProgress();
+          return;
+        }
+
+        if (!form.urgency?.value) {
+          alert("Select how urgent it is.");
+          stepIndex = 2;
+          updateProgress();
+          return;
+        }
 
         if (!name || !email || !phoneRaw) {
           alert("Please fill out phone, name and email.");
@@ -1073,6 +1098,7 @@
         // Normalise phone (keeps your email tidy)
         const phoneNorm = normalisePhoneAU(phoneRaw);
         form.phone.value = phoneNorm;
+        if (form._replyto) form._replyto.value = email;
 
         submitBtn && (submitBtn.disabled = true);
         submitBtn && (submitBtn.textContent = "Sending...");
@@ -1080,8 +1106,9 @@
         try {
           const formData = new FormData(form);
           formData.set("_replyto", email);
+          formData.set("phone", phoneNorm);
 
-          const res = await fetch(form.action, {
+          const res = await fetch(FORMSPREE_ENDPOINT, {
             method: "POST",
             body: formData,
             headers: { "Accept": "application/json" }
