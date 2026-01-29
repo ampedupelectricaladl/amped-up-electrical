@@ -22,9 +22,10 @@
   <meta property="og:image" content="https://ampedupelectricaladelaide.com.au/5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
+  <!-- Favicon (PNG) -->
+  <link rel="icon" type="image/png" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
 
   <!-- LocalBusiness schema -->
@@ -45,7 +46,14 @@
     ],
     "image": "https://ampedupelectricaladelaide.com.au/5B7A145D-2F0E-475A-A662-B21DD54F930B.png",
     "priceRange": "$$",
-    "openingHours": "Mo-Su 00:00-23:59"
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ]
   }
   </script>
 
@@ -530,8 +538,8 @@
   <a class="skip" href="#quote">Skip to quote</a>
 
   <div class="callbar" aria-label="Quick actions">
-    <a href="tel:0410414969" class="callbar-btn primary">Call</a>
-    <a href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20need%20help%20with%20%5Bjob%5D%20in%20%5Bsuburb%5D.%20When%20can%20you%20come%20out%3F" class="callbar-btn">Text</a>
+    <a href="tel:+61410414969" class="callbar-btn primary">Call</a>
+    <a href="sms:+61410414969?&body=Hi%20Marcus%20-%20I%20need%20help%20with%20%5Bjob%5D%20in%20%5Bsuburb%5D.%20When%20can%20you%20come%20out%3F" class="callbar-btn">Text</a>
     <button type="button" class="callbar-btn" data-open-quote>Quote</button>
     <a href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" class="callbar-btn">IG</a>
   </div>
@@ -547,7 +555,7 @@
       </button>
 
       <div class="cta">
-        <a class="btn" href="tel:0410414969">Call</a>
+        <a class="btn" href="tel:+61410414969">Call</a>
 
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" aria-label="Open Instagram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -695,9 +703,7 @@
             <div class="row2">
               <div>
                 <label>Phone *</label>
-                <input name="phone" required inputmode="tel" autocomplete="tel"
-                       pattern="^(\+?61|0)4\d{8}$|^(\+?61|0)[2378]\d{8}$"
-                       placeholder="04xx xxx xxx" />
+                <input name="phone" required inputmode="tel" autocomplete="tel" placeholder="04xx xxx xxx" />
               </div>
               <div>
                 <label>Your name *</label>
@@ -730,8 +736,8 @@
           <strong>Request received ✅</strong>
           <span>We’ll call or text you ASAP. If it’s urgent, tap below.</span>
           <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn primary" href="tel:0410414969">Call now</a>
-            <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20My%20suburb%20is%20%5Bsuburb%5D.%20Thanks!">Text now</a>
+            <a class="btn primary" href="tel:+61410414969">Call now</a>
+            <a class="btn" href="sms:+61410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20My%20suburb%20is%20%5Bsuburb%5D.%20Thanks!">Text now</a>
           </div>
         </div>
 
@@ -786,7 +792,7 @@
           <strong>Need help today?</strong>
           <div><span>Call for urgent faults, safety checks, or power outages.</span></div>
         </div>
-        <a class="btn primary" href="tel:0410414969">Call 0410 414 969</a>
+        <a class="btn primary" href="tel:+61410414969">Call 0410 414 969</a>
       </div>
     </div>
 
@@ -1015,6 +1021,21 @@
       q.addEventListener("click", () => item.classList.toggle("open"));
     });
 
+    // Normalise + validate AU phone (allows spaces, dashes, brackets)
+    const normalisePhoneAU = (raw) => {
+      let s = (raw || "").trim();
+      s = s.replace(/[()\-\s.]/g, "");
+      if (s.startsWith("+61")) s = "0" + s.slice(3);
+      return s;
+    };
+
+    const isValidAuPhone = (raw) => {
+      const s = normalisePhoneAU(raw);
+      if (/^04\d{8}$/.test(s)) return true;
+      if (/^0[2378]\d{8}$/.test(s)) return true;
+      return false;
+    };
+
     const mailtoFallback = () => {
       if (!form) return;
       const subject = encodeURIComponent("New Quote Request - Amped Up Electrical Adelaide");
@@ -1030,25 +1051,37 @@
       window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
     };
 
-    // Submit via Formspree fetch -> show success panel
+    // ✅ FIXED Submit handler (uses form.action + shows Formspree errors)
     if (form) {
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const phone = form.phone.value.trim();
-        const name = form.name.value.trim();
-        const email = form.email.value.trim();
-        if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
+        const name = (form.name?.value || "").trim();
+        const email = (form.email?.value || "").trim();
+        const phoneRaw = (form.phone?.value || "").trim();
+
+        if (!name || !email || !phoneRaw) {
+          alert("Please fill out phone, name and email.");
+          return;
+        }
+
+        if (!isValidAuPhone(phoneRaw)) {
+          alert("Please enter a valid Australian phone number (e.g. 0410 414 969).");
+          return;
+        }
+
+        // Normalise phone (keeps your email tidy)
+        const phoneNorm = normalisePhoneAU(phoneRaw);
+        form.phone.value = phoneNorm;
 
         submitBtn && (submitBtn.disabled = true);
         submitBtn && (submitBtn.textContent = "Sending...");
 
         try {
           const formData = new FormData(form);
-          formData.append("_subject", "New Quote Request - Amped Up Electrical Adelaide");
-          formData.append("_replyto", email);
+          formData.set("_replyto", email);
 
-          const res = await fetch(FORMSPREE_ENDPOINT, {
+          const res = await fetch(form.action, {
             method: "POST",
             body: formData,
             headers: { "Accept": "application/json" }
@@ -1057,11 +1090,23 @@
           if (res.ok) {
             form.style.display = "none";
             if (success) success.style.display = "block";
-            quoteCard?.scrollIntoView({behavior:"smooth", block:"start"});
-          } else {
-            mailtoFallback();
+            quoteCard?.scrollIntoView({ behavior: "smooth", block: "start" });
+            return;
           }
+
+          // Show Formspree error message if available
+          let msg = "Something went wrong sending the request. Please try again or call Marcus.";
+          try {
+            const data = await res.json();
+            if (data?.errors?.length) msg = data.errors.map(e => e.message).join("\n");
+          } catch (_) {}
+          alert(msg);
+
+          // fallback
+          mailtoFallback();
+
         } catch (err) {
+          // Network/CORS/etc fallback
           mailtoFallback();
         } finally {
           submitBtn && (submitBtn.disabled = false);
@@ -1161,6 +1206,9 @@
     });
 
     updateProgress();
+
+    // Debug: confirm script loads
+    console.log("Script loaded ✅");
   </script>
 </body>
 </html>
