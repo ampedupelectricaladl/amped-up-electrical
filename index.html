@@ -430,6 +430,11 @@
 
     footer{text-align:center;color:var(--muted);font-size:13px;padding:18px 0 8px}
 
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.05)}
+    }
+
     @media (max-width: 960px){
       :root{ --topbarH: 64px; }
       .topbar{top:0;border-radius:0;padding:12px}
@@ -492,6 +497,7 @@
       </button>
 
       <div class="cta">
+        <a class="btn emergency" href="tel:0410414969" style="background:linear-gradient(135deg,#ff3333,#cc0000);animation:pulse 2s infinite">🚨 Emergency</a>
         <a class="btn" href="tel:0410414969">Call</a>
 
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" aria-label="Open Instagram">
@@ -684,13 +690,28 @@
 
     <div class="card section" id="trust">
       <div class="kicker">Why choose us</div>
-      <h2>Local electricians you can rely on</h2>
+      <h2>Licensed, Insured, Owner-Operated</h2>
       <p class="sub">
         We show up on time, explain the work, and leave your space cleaner than we found it. Every job is quoted clearly and completed to Australian standards.
       </p>
 
       <div class="stats">
         <div class="stat highlight">
+          <strong>✅ Fully Licensed</strong>
+          <span>SA licensed electrician. All work compliant with AS/NZS standards. Safety-first approach on every job.</span>
+        </div>
+        <div class="stat">
+          <strong>👤 Owner on Every Job</strong>
+          <span>Marcus personally handles your electrical work. No random techs, no subcontractors.</span>
+        </div>
+        <div class="stat">
+          <strong>🛡️ Insured & Guaranteed</strong>
+          <span>Fully insured for your peace of mind. Workmanship guaranteed, clean finish every time.</span>
+        </div>
+      </div>
+
+      <div class="stats" style="margin-top:12px">
+        <div class="stat">
           <strong>Same-week bookings</strong>
           <span>Fast scheduling for most metro suburbs, including after-hours emergencies.</span>
         </div>
@@ -981,6 +1002,19 @@
     });
 
     updateProgress();
+  </script>
+
+  <!-- Tawk.to Live Chat -->
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/67a08b3aaf5bfec1dbe49a1c/1iibu85h4';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
   </script>
 </body>
 </html>
