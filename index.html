@@ -508,6 +508,80 @@
       background:rgba(0,0,0,.5);
     }
 
+    /* Call Modal (same structure, different colors) */
+    .call-modal{
+      display:none;
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,.85);
+      z-index:9999;
+      align-items:center;
+      justify-content:center;
+    }
+    .call-modal.show{display:flex}
+    .call-content{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border-radius:var(--radius);
+      padding:40px;
+      max-width:500px;
+      width:90%;
+      text-align:center;
+      position:relative;
+    }
+    .call-close{
+      position:absolute;
+      top:10px;right:10px;
+      background:rgba(0,0,0,.3);
+      border:none;
+      color:#fff;
+      width:32px;height:32px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+    }
+    .call-content h2{
+      margin:0 0 10px;
+      font-size:32px;
+      color:#111;
+    }
+    .call-content p{
+      margin:0 0 20px;
+      color:#111;
+      font-size:16px;
+      opacity:0.9;
+    }
+    .call-phone{
+      display:block;
+      font-size:36px;
+      font-weight:1000;
+      color:#111;
+      margin:20px 0;
+      letter-spacing:2px;
+      background:rgba(0,0,0,.1);
+      padding:20px;
+      border-radius:16px;
+    }
+    .call-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .call-actions a{
+      flex:1;
+      min-width:140px;
+      padding:16px 20px;
+      border-radius:16px;
+      background:rgba(0,0,0,.2);
+      color:#111;
+      font-weight:1000;
+      font-size:16px;
+    }
+    .call-actions a:hover{
+      background:rgba(0,0,0,.3);
+    }
+
     @media (max-width: 960px){
       :root{ --topbarH: 64px; }
       .topbar{top:0;border-radius:0;padding:12px}
@@ -565,6 +639,21 @@
     </div>
   </div>
 
+  <!-- Call Modal (Desktop) -->
+  <div class="call-modal" id="callModal">
+    <div class="call-content">
+      <button class="call-close" onclick="closeCallModal()">&times;</button>
+      <h2>📞 Call Marcus</h2>
+      <p>Fast quotes, same-week availability</p>
+      <div class="call-phone">0410 414 969</div>
+      <div class="call-actions">
+        <a href="tel:0410414969">Call Now</a>
+        <a href="sms:0410414969?&body=Hi%20Marcus,%20I%20need%20">Text Instead</a>
+      </div>
+      <p style="margin-top:20px;font-size:14px;opacity:0.9">Or scroll down for a quote form</p>
+    </div>
+  </div>
+
   <a class="skip" href="#quote">Skip to quote</a>
 
   <div class="callbar" aria-label="Quick actions">
@@ -586,7 +675,7 @@
 
       <div class="cta">
         <a class="btn emergency" href="tel:0410414969" id="emergencyBtn" style="background:linear-gradient(135deg,#ff3333,#cc0000);animation:pulse 2s infinite">🚨 Emergency</a>
-        <a class="btn" href="tel:0410414969">Call</a>
+        <a class="btn" href="tel:0410414969" id="callBtn">Call</a>
 
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" aria-label="Open Instagram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1099,26 +1188,45 @@
     const emergencyBtn = document.getElementById('emergencyBtn');
     if (emergencyBtn) {
       emergencyBtn.addEventListener('click', (e) => {
-        // Only show modal on desktop (screen width > 768px)
         if (window.innerWidth > 768) {
-          e.preventDefault(); // Don't trigger tel: link
+          e.preventDefault();
           document.getElementById('emergencyModal').classList.add('show');
         }
-        // On mobile, let the tel: link work normally
       });
     }
 
-    // Close modal on outside click
     document.getElementById('emergencyModal')?.addEventListener('click', (e) => {
       if (e.target.id === 'emergencyModal') {
         closeEmergencyModal();
       }
     });
 
-    // Close modal on ESC key
+    // Call modal (desktop only)
+    function closeCallModal() {
+      document.getElementById('callModal').classList.remove('show');
+    }
+
+    const callBtn = document.getElementById('callBtn');
+    if (callBtn) {
+      callBtn.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) {
+          e.preventDefault();
+          document.getElementById('callModal').classList.add('show');
+        }
+      });
+    }
+
+    document.getElementById('callModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'callModal') {
+        closeCallModal();
+      }
+    });
+
+    // Close modals on ESC key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeEmergencyModal();
+        closeCallModal();
       }
     });
   </script>
