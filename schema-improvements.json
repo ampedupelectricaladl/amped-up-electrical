@@ -1,0 +1,472 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Electrician",
+      "@id": "https://ampedupelectricaladelaide.com.au/#organization",
+      "name": "Amped Up Electrical Adelaide",
+      "alternateName": "Amped Up Electrical",
+      "description": "Fast, reliable electrical service & maintenance for Adelaide metro. Switchboard upgrades, emergency callouts, EV chargers, shop fit-outs. Owner-operated.",
+      "priceRange": "$$",
+      "telephone": "+61410414969",
+      "email": "ampedupelectricaladl@gmail.com",
+      "url": "https://ampedupelectricaladelaide.com.au/",
+      "logo": "https://ampedupelectricaladelaide.com.au/brand-logo-full.jpg",
+      "image": [
+        "https://ampedupelectricaladelaide.com.au/avatar-crossed-arms.jpg",
+        "https://ampedupelectricaladelaide.com.au/hero-thumbs-up.jpg",
+        "https://ampedupelectricaladelaide.com.au/service-switchboard.jpg"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vale Park",
+        "addressRegion": "SA",
+        "postalCode": "5081",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -34.8819,
+        "longitude": 138.6222
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Adelaide"
+        },
+        {
+          "@type": "City",
+          "name": "Vale Park"
+        },
+        {
+          "@type": "City",
+          "name": "Burnside"
+        },
+        {
+          "@type": "City",
+          "name": "Magill"
+        },
+        {
+          "@type": "City",
+          "name": "Norwood"
+        },
+        {
+          "@type": "City",
+          "name": "Unley"
+        },
+        {
+          "@type": "City",
+          "name": "Glenelg"
+        },
+        {
+          "@type": "City",
+          "name": "Edwardstown"
+        },
+        {
+          "@type": "City",
+          "name": "Marion"
+        },
+        {
+          "@type": "City",
+          "name": "Prospect"
+        },
+        {
+          "@type": "City",
+          "name": "Kensington"
+        },
+        {
+          "@type": "City",
+          "name": "Kent Town"
+        },
+        {
+          "@type": "City",
+          "name": "Stepney"
+        },
+        {
+          "@type": "City",
+          "name": "St Peters"
+        },
+        {
+          "@type": "City",
+          "name": "Hyde Park"
+        },
+        {
+          "@type": "City",
+          "name": "Dulwich"
+        },
+        {
+          "@type": "City",
+          "name": "Parkside"
+        },
+        {
+          "@type": "City",
+          "name": "Brighton"
+        },
+        {
+          "@type": "City",
+          "name": "Marino"
+        },
+        {
+          "@type": "City",
+          "name": "Plympton"
+        },
+        {
+          "@type": "City",
+          "name": "Nailsworth"
+        },
+        {
+          "@type": "City",
+          "name": "Medindie"
+        },
+        {
+          "@type": "City",
+          "name": "Thebarton"
+        },
+        {
+          "@type": "City",
+          "name": "Hindmarsh"
+        },
+        {
+          "@type": "City",
+          "name": "Goodwood"
+        },
+        {
+          "@type": "City",
+          "name": "Malvern"
+        },
+        {
+          "@type": "City",
+          "name": "Fullarton"
+        },
+        {
+          "@type": "City",
+          "name": "Mitcham"
+        },
+        {
+          "@type": "City",
+          "name": "Walkerville"
+        },
+        {
+          "@type": "City",
+          "name": "North Adelaide"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59",
+          "description": "Emergency callouts available 24/7"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/ampedupelectricaladelaide/"
+      ],
+      "paymentAccepted": "Cash, Bank Transfer, Credit Card",
+      "currenciesAccepted": "AUD",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3",
+        "bestRating": "5",
+        "worstRating": "5"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Electrical Services",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Emergency Electrical Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "24/7 Emergency Service",
+                  "description": "Power outages, sparking outlets, electrical faults. Fast response day or night."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Electrical Upgrades",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Switchboard Upgrades",
+                  "description": "Modern safety switches, RCD protection, compliant installations."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "EV Charger Installation",
+                  "description": "Supply and install EV chargers for home or workplace. Future-proof your property."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Electrical Maintenance",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Safety Inspections",
+                  "description": "Full testing, certification, compliance checks. Quality guaranteed."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Fault Finding & Repairs",
+                  "description": "Fast diagnosis of trips, dead circuits, flickering lights."
+                }
+              }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Commercial Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Shop Fit-outs",
+                  "description": "Commercial electrical for retail, cafes, offices."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Test & Tag",
+                  "description": "Workplace electrical safety testing and compliance."
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Marcus Debarley",
+        "jobTitle": "Licensed Electrician",
+        "description": "Licensed electrician with 6 years trade experience"
+      },
+      "slogan": "Owner on every job. Clean work, upfront pricing.",
+      "knowsAbout": [
+        "Electrical Installation",
+        "Switchboard Upgrades",
+        "Emergency Electrical Service",
+        "EV Charger Installation",
+        "Commercial Electrical",
+        "Residential Electrical",
+        "Safety Inspections",
+        "Fault Finding"
+      ]
+    },
+    {
+      "@type": "Review",
+      "@id": "https://ampedupelectricaladelaide.com.au/#review1",
+      "author": {
+        "@type": "Person",
+        "name": "Sarah M"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "On time, explained the options and got it sorted without upselling. Super neat finish and cleaned up properly.",
+      "itemReviewed": {
+        "@type": "Service",
+        "name": "Switchboard Safety Upgrade"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Amped Up Electrical Adelaide"
+      },
+      "datePublished": "2026-01-15",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Unley"
+      }
+    },
+    {
+      "@type": "Review",
+      "@id": "https://ampedupelectricaladelaide.com.au/#review2",
+      "author": {
+        "@type": "Person",
+        "name": "James T"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Power kept tripping. Found the fault fast, fixed it the same visit and tested everything before leaving.",
+      "itemReviewed": {
+        "@type": "Service",
+        "name": "Fault Finding"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Amped Up Electrical Adelaide"
+      },
+      "datePublished": "2026-01-20",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Norwood"
+      }
+    },
+    {
+      "@type": "Review",
+      "@id": "https://ampedupelectricaladelaide.com.au/#review3",
+      "author": {
+        "@type": "Person",
+        "name": "Daniel R"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Downlights and sensors came up unreal. No dust left behind, and the price was exactly what we agreed.",
+      "itemReviewed": {
+        "@type": "Service",
+        "name": "Lighting Upgrade"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Amped Up Electrical Adelaide"
+      },
+      "datePublished": "2026-01-25",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Glenelg"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ampedupelectricaladelaide.com.au/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you provide up-front quotes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes - we provide clear pricing before we start. No hidden costs. Send photos + suburb for the quickest quote, or call for an immediate assessment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will you clean up after the job?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Always. We treat your property with respect and leave it clean. We use drop sheets, drill carefully, and do a full clean-up after every visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you warranty your work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes - workmanship guarantee plus manufacturer warranties on supplied products. All work is completed to Australian AS/NZS standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast can you get out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depends on the job and location - call 0410 414 969 and we'll tell you the soonest slot. Most jobs can be booked within the same week."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you available for emergencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes - 24/7 emergency service available for urgent electrical faults, power outages, and safety issues. Call 0410 414 969 anytime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you service commercial properties?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes - we service both commercial and domestic properties across Adelaide metro. Shop fit-outs, maintenance, compliance testing, and more."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://ampedupelectricaladelaide.com.au/#webpage",
+      "url": "https://ampedupelectricaladelaide.com.au/",
+      "name": "Amped Up Electrical Adelaide - Licensed Electrician | 24/7 Service",
+      "description": "Adelaide's trusted electrical service & maintenance specialist. Switchboard upgrades, emergency callouts, EV chargers. Owner-operated. 30km radius. Call 0410 414 969.",
+      "inLanguage": "en-AU",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://ampedupelectricaladelaide.com.au/#website"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "@id": "https://ampedupelectricaladelaide.com.au/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://ampedupelectricaladelaide.com.au/"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ampedupelectricaladelaide.com.au/#website",
+      "url": "https://ampedupelectricaladelaide.com.au/",
+      "name": "Amped Up Electrical Adelaide",
+      "description": "Adelaide electrician - fast, reliable service",
+      "publisher": {
+        "@id": "https://ampedupelectricaladelaide.com.au/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://ampedupelectricaladelaide.com.au/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
