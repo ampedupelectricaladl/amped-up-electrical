@@ -674,8 +674,8 @@
       </button>
 
       <div class="cta">
-        <a class="btn emergency" href="tel:0410414969" id="emergencyBtn" style="background:linear-gradient(135deg,#ff3333,#cc0000);animation:pulse 2s infinite">🚨 Emergency</a>
-        <a class="btn" href="tel:0410414969" id="callBtn">Call</a>
+        <a class="btn emergency" href="tel:0410414969" id="emergencyBtn" onclick="return handleEmergencyClick(event)" style="background:linear-gradient(135deg,#ff3333,#cc0000);animation:pulse 2s infinite">🚨 Emergency</a>
+        <a class="btn" href="tel:0410414969" id="callBtn" onclick="return handleCallClick(event)">Call</a>
 
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" aria-label="Open Instagram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1139,6 +1139,33 @@
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjggayzj";
     const BUSINESS_EMAIL = "ampedupelectricaladl@gmail.com";
 
+    // Simple modal handler functions (globally available)
+    function handleEmergencyClick(event) {
+      if (window.innerWidth >= 769) {
+        event.preventDefault();
+        document.getElementById('emergencyModal').classList.add('show');
+        return false;
+      }
+      return true; // Allow tel: link on mobile
+    }
+
+    function handleCallClick(event) {
+      if (window.innerWidth >= 769) {
+        event.preventDefault();
+        document.getElementById('callModal').classList.add('show');
+        return false;
+      }
+      return true; // Allow tel: link on mobile
+    }
+
+    function closeEmergencyModal() {
+      document.getElementById('emergencyModal').classList.remove('show');
+    }
+
+    function closeCallModal() {
+      document.getElementById('callModal').classList.remove('show');
+    }
+
     document.getElementById("y").textContent = new Date().getFullYear();
 
     // Form tab switching
@@ -1345,64 +1372,25 @@
     updateProgress();
 
     // Emergency modal (desktop only)
-    function closeEmergencyModal() {
-      document.getElementById('emergencyModal').classList.remove('show');
-    }
-
-    // Wait for DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      const emergencyBtn = document.getElementById('emergencyBtn');
-      if (emergencyBtn) {
-        emergencyBtn.addEventListener('click', (e) => {
-          // Always show popup on desktop (not mobile)
-          if (window.innerWidth >= 769) {
-            e.preventDefault();
-            const modal = document.getElementById('emergencyModal');
-            if (modal) modal.classList.add('show');
-          }
-          // On mobile, let the tel: link work naturally
-        });
+    // Click outside modal to close
+    document.getElementById('emergencyModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'emergencyModal') {
+        closeEmergencyModal();
       }
+    });
 
-      const emergencyModal = document.getElementById('emergencyModal');
-      if (emergencyModal) {
-        emergencyModal.addEventListener('click', (e) => {
-          if (e.target.id === 'emergencyModal') {
-            closeEmergencyModal();
-          }
-        });
+    document.getElementById('callModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'callModal') {
+        closeCallModal();
       }
+    });
 
-      // Call modal (desktop only)
-      const callBtn = document.getElementById('callBtn');
-      if (callBtn) {
-        callBtn.addEventListener('click', (e) => {
-          // Always show popup on desktop (not mobile)
-          if (window.innerWidth >= 769) {
-            e.preventDefault();
-            const modal = document.getElementById('callModal');
-            if (modal) modal.classList.add('show');
-          }
-          // On mobile, let the tel: link work naturally
-        });
+    // Close modals on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeEmergencyModal();
+        closeCallModal();
       }
-
-      const callModal = document.getElementById('callModal');
-      if (callModal) {
-        callModal.addEventListener('click', (e) => {
-          if (e.target.id === 'callModal') {
-            closeCallModal();
-          }
-        });
-      }
-
-      // Close modals on ESC key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeEmergencyModal();
-          closeCallModal();
-        }
-      });
     });
   </script>
 
