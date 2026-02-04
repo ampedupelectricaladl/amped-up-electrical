@@ -698,10 +698,23 @@
       </div>
     </div>
 
+    <!-- Urgency Banner -->
+    <div style="margin-top:18px;padding:14px 20px;border-radius:18px;background:linear-gradient(135deg,rgba(255,176,0,.20),rgba(255,122,0,.16));border:2px solid rgba(255,176,0,.40);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:28px">⏰</span>
+        <div>
+          <strong style="font-size:16px;display:block;margin-bottom:2px">This Week: Limited Availability</strong>
+          <span style="font-size:14px;color:var(--muted)">Book now for same-week service • Avoid 2-week wait</span>
+        </div>
+      </div>
+      <a href="tel:0410414969" class="btn primary" style="white-space:nowrap">Call 0410 414 969</a>
+    </div>
+
     <div class="hero" id="quote">
       <div class="card">
-        <div class="kicker">Service & Maintenance Specialists</div>
-        <h1>Fast, Reliable Electrical Service</h1>
+        <div class="kicker">Owner-Operated • Licensed • 5-Star Rated</div>
+        <h1>Same-Week Electrical Service Adelaide</h1>
+        <p style="font-size:18px;font-weight:1000;margin:8px 0 12px;color:var(--accent)">Marcus on Every Job • No Subcontractors • Upfront Pricing</p>
         <div style="margin:12px 0;padding:12px 16px;border-radius:14px;background:rgba(255,176,0,.10);border:1px solid rgba(255,176,0,.30);display:inline-flex;align-items:center;gap:10px">
           <span style="font-size:20px;line-height:1">⭐⭐⭐⭐⭐</span>
           <div>
@@ -742,14 +755,39 @@
       <div class="card">
         <div class="formTitle">
           <div style="font-weight:1000;font-size:18px">Get your quote</div>
-          <div class="progressWrap">
+          <div class="progressWrap" id="progressWrap">
             <div class="progress"><div class="bar" id="bar"></div></div>
             <div class="pct" id="pct">0%</div>
           </div>
         </div>
 
-        <!-- ✅ Now uses Formspree (works with or without JS) -->
-        <form id="quoteForm" action="https://formspree.io/f/xjggayzj" method="POST">
+        <!-- Form Tabs -->
+        <div style="display:flex;gap:8px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:0">
+          <button type="button" class="formTab active" data-tab="quick" style="flex:1;padding:12px;border:none;background:none;color:var(--text);font-weight:1000;cursor:pointer;border-bottom:3px solid var(--accent);font-size:15px">⚡ Quick Quote</button>
+          <button type="button" class="formTab" data-tab="detailed" style="flex:1;padding:12px;border:none;background:none;color:var(--muted);font-weight:1000;cursor:pointer;border-bottom:3px solid transparent;font-size:15px">📋 Detailed Quote</button>
+        </div>
+
+        <!-- Quick Quote Form -->
+        <form id="quickQuoteForm" class="quoteFormVariant active" action="https://formspree.io/f/xjggayzj" method="POST" style="display:block">
+          <input type="hidden" name="source" value="Website Quick Quote" />
+          <input type="hidden" name="_subject" value="Quick Quote Request - Amped Up Electrical Adelaide" />
+          
+          <label style="display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:1000">Your Name *</label>
+          <input name="name" required placeholder="Your name" style="width:100%;padding:12px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:14px" />
+          
+          <label style="display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:1000">Phone *</label>
+          <input name="phone" required placeholder="04xx xxx xxx" style="width:100%;padding:12px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:14px" />
+          
+          <label style="display:block;margin:10px 0 6px;color:var(--muted);font-size:13px;font-weight:1000">What do you need? *</label>
+          <input name="job" required placeholder="e.g. switchboard upgrade in Unley" style="width:100%;padding:12px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:14px" />
+          
+          <button type="submit" class="btn primary" style="width:100%;margin-top:14px;padding:14px;font-size:16px;justify-content:center">Get Free Quote →</button>
+          
+          <p style="color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px;text-align:center">We'll call or text you within 2 hours (7am-6pm weekdays)</p>
+        </form>
+
+        <!-- Detailed Quote Form (existing 4-step form) -->
+        <form id="detailedQuoteForm" class="quoteFormVariant" action="https://formspree.io/f/xjggayzj" method="POST" style="display:none">
           <div class="step active" data-step="1">
             <div class="q">What do you need help with?</div>
             <div class="options" data-name="service">
@@ -873,10 +911,10 @@
     </div>
 
     <div class="card section" id="trust">
-      <div class="kicker">Why choose us</div>
-      <h2>Licensed, Insured, Owner-Operated</h2>
+      <div class="kicker">Why choose Amped Up</div>
+      <h2>You're Trusting Me With Your Home's Safety</h2>
       <p class="sub">
-        We show up on time, explain the work, and leave your space cleaner than we found it. Every job is quoted clearly and completed to Australian standards.
+        Here's why 17 Adelaide families chose Amped Up Electrical — and why I personally handle every single job:
       </p>
 
       <div class="stats">
@@ -1046,10 +1084,18 @@
       <h2>Frequently Asked Questions</h2>
 
       <div style="display:grid;gap:10px">
-        <div class="faqItem"><button class="faqQ" type="button">Do you provide up-front quotes?<span>+</span></button><div class="faqA">Yes - we provide clear pricing before we start. No hidden costs.</div></div>
-        <div class="faqItem"><button class="faqQ" type="button">Will you clean up after the job?<span>+</span></button><div class="faqA">Always. We treat your property with respect and leave it clean.</div></div>
-        <div class="faqItem"><button class="faqQ" type="button">Do you warranty your work?<span>+</span></button><div class="faqA">Yes - workmanship guarantee plus manufacturer warranties on supplied products.</div></div>
-        <div class="faqItem"><button class="faqQ" type="button">How fast can you get out?<span>+</span></button><div class="faqA">Depends on the job and location - call <b>0410 414 969</b> and we'll tell you the soonest slot.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Do you provide free quotes?<span>+</span></button><div class="faqA">Yes - call <b>0410 414 969</b> or submit the quote form. Send photos + suburb for fastest turnaround. No obligation.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Are you licensed and insured?<span>+</span></button><div class="faqA">Fully licensed SA electrician with public liability insurance. All work compliant with AS/NZS 3000 standards.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">How fast can you get out?<span>+</span></button><div class="faqA">Most jobs scheduled same-week. Emergency callouts available 24/7. Call <b>0410 414 969</b> and we'll tell you the soonest slot.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Do you warranty your work?<span>+</span></button><div class="faqA">Yes - workmanship guarantee on all electrical work, plus manufacturer warranties on supplied products and equipment.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">What areas do you service?<span>+</span></button><div class="faqA">Adelaide metro within 30km of CBD. Includes Vale Park, Burnside, Norwood, Unley, Glenelg, North Adelaide, Prospect, and all eastern suburbs. Call to confirm your suburb.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Do you do commercial electrical work?<span>+</span></button><div class="faqA">Yes - shop fit-outs, office electrical, retail and hospitality work across Adelaide. Owner-operated means I personally handle your commercial project.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Will you clean up after the job?<span>+</span></button><div class="faqA">Always. Drop sheets, careful drilling, full clean-up including vacuuming. You won't know I was there (except for the working electrical!).</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Can you work on weekends?<span>+</span></button><div class="faqA">Yes, weekend and after-hours work available. Call <b>0410 414 969</b> to discuss timing and availability.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Do you subcontract work?<span>+</span></button><div class="faqA">No. You get Marcus on every job. No apprentices, no random techs, no subcontractors. Owner-operated means I'm accountable for quality.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">How long does a switchboard upgrade take?<span>+</span></button><div class="faqA">Most residential switchboard upgrades completed in 4-6 hours (same day). Complex jobs may require a second visit. Power restored same day.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">Do you offer payment plans?<span>+</span></button><div class="faqA">Payment due on completion. We accept cash, bank transfer, and card payments. For larger jobs, discuss payment options when booking.</div></div>
+        <div class="faqItem"><button class="faqQ" type="button">What's included in your callout fee?<span>+</span></button><div class="faqA">Callout covers travel and initial diagnosis. If you proceed with the repair, callout fee is included in the total job cost. No double-charging.</div></div>
       </div>
     </div>
 
@@ -1088,6 +1134,38 @@
     const BUSINESS_EMAIL = "ampedupelectricaladl@gmail.com";
 
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Form tab switching
+    const formTabs = document.querySelectorAll(".formTab");
+    const quickQuoteForm = document.getElementById("quickQuoteForm");
+    const detailedQuoteForm = document.getElementById("detailedQuoteForm");
+    const progressWrap = document.getElementById("progressWrap");
+
+    formTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const tabType = tab.getAttribute("data-tab");
+        
+        // Update tab styles
+        formTabs.forEach(t => {
+          const isActive = t.getAttribute("data-tab") === tabType;
+          t.style.color = isActive ? "var(--text)" : "var(--muted)";
+          t.style.borderBottomColor = isActive ? "var(--accent)" : "transparent";
+          if (isActive) t.classList.add("active");
+          else t.classList.remove("active");
+        });
+        
+        // Toggle forms
+        if (tabType === "quick") {
+          quickQuoteForm.style.display = "block";
+          detailedQuoteForm.style.display = "none";
+          progressWrap.style.display = "none";
+        } else {
+          quickQuoteForm.style.display = "none";
+          detailedQuoteForm.style.display = "block";
+          progressWrap.style.display = "flex";
+        }
+      });
+    });
 
     const topbar = document.getElementById("topbar");
     const menuBtn = document.getElementById("menuBtn");
