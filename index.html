@@ -435,6 +435,16 @@
       50%{transform:scale(1.05)}
     }
 
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-8px)}
+      75%{transform:translateX(8px)}
+    }
+
+    .shake{
+      animation: shake 0.5s ease-in-out;
+    }
+
     /* Emergency Modal */
     .emergency-modal{
       display:none;
@@ -720,7 +730,7 @@
       <!-- Form will be cloned here by JavaScript -->
       <form id="quoteModalForm" action="https://formspree.io/f/xjggayzj" method="POST">
         <div class="step active" data-step="1">
-          <div class="q">What do you need help with?</div>
+          <div class="q">What do you need help with? <small style="color:var(--muted);font-weight:800;font-size:12px">(Select one or more)</small></div>
           <div class="options" data-name="service">
             <button type="button" class="opt" data-value="Lighting">Lighting <small>Downlights, LEDs, sensors</small></button>
             <button type="button" class="opt" data-value="Power Points">Power points <small>New GPOs, upgrades</small></button>
@@ -954,7 +964,7 @@
         <!-- Detailed Quote Form (existing 4-step form) -->
         <form id="detailedQuoteForm" class="quoteFormVariant" action="https://formspree.io/f/xjggayzj" method="POST" style="display:none">
           <div class="step active" data-step="1">
-            <div class="q">What do you need help with?</div>
+            <div class="q">What do you need help with? <small style="color:var(--muted);font-weight:800;font-size:12px">(Select one or more)</small></div>
             <div class="options" data-name="service">
               <button type="button" class="opt" data-value="Lighting">Lighting <small>Downlights, LEDs, sensors</small></button>
               <button type="button" class="opt" data-value="Power Points">Power points <small>New GPOs, upgrades</small></button>
@@ -1407,11 +1417,26 @@
     detailedForm.querySelectorAll(".options").forEach(group => {
       const name = group.getAttribute("data-name");
       const hidden = detailedForm.querySelector(`input[name="${name}"]`);
+      const nextBtn = group.closest('.step').querySelector('[data-next]');
+      
       group.querySelectorAll(".opt").forEach(btn => {
         btn.addEventListener("click", () => {
-          group.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
-          btn.classList.add("selected");
-          hidden.value = btn.getAttribute("data-value");
+          // Toggle selection (multi-select)
+          btn.classList.toggle("selected");
+          
+          // Update hidden field with comma-separated values
+          const selected = Array.from(group.querySelectorAll(".opt.selected"))
+            .map(b => b.getAttribute("data-value"))
+            .join(", ");
+          hidden.value = selected;
+          
+          // Shake the Next button to draw attention
+          if (nextBtn && selected) {
+            nextBtn.classList.remove('shake');
+            void nextBtn.offsetWidth; // Force reflow
+            nextBtn.classList.add('shake');
+            setTimeout(() => nextBtn.classList.remove('shake'), 500);
+          }
         });
       });
     });
@@ -1611,11 +1636,26 @@
     modalForm.querySelectorAll('.options').forEach(group => {
       const name = group.getAttribute('data-name');
       const hidden = modalForm.querySelector(`input[name="${name}"]`);
+      const nextBtn = group.closest('.step').querySelector('[data-next]');
+      
       group.querySelectorAll('.opt').forEach(btn => {
         btn.addEventListener('click', () => {
-          group.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          hidden.value = btn.getAttribute('data-value');
+          // Toggle selection (multi-select)
+          btn.classList.toggle('selected');
+          
+          // Update hidden field with comma-separated values
+          const selected = Array.from(group.querySelectorAll('.opt.selected'))
+            .map(b => b.getAttribute('data-value'))
+            .join(', ');
+          hidden.value = selected;
+          
+          // Shake the Next button to draw attention
+          if (nextBtn && selected) {
+            nextBtn.classList.remove('shake');
+            void nextBtn.offsetWidth; // Force reflow
+            nextBtn.classList.add('shake');
+            setTimeout(() => nextBtn.classList.remove('shake'), 500);
+          }
         });
       });
     });
