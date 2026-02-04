@@ -1349,49 +1349,60 @@
       document.getElementById('emergencyModal').classList.remove('show');
     }
 
-    const emergencyBtn = document.getElementById('emergencyBtn');
-    if (emergencyBtn) {
-      emergencyBtn.addEventListener('click', (e) => {
-        if (window.innerWidth > 768) {
-          e.preventDefault();
-          document.getElementById('emergencyModal').classList.add('show');
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const emergencyBtn = document.getElementById('emergencyBtn');
+      if (emergencyBtn) {
+        emergencyBtn.addEventListener('click', (e) => {
+          // Always show popup on desktop (not mobile)
+          if (window.innerWidth >= 769) {
+            e.preventDefault();
+            const modal = document.getElementById('emergencyModal');
+            if (modal) modal.classList.add('show');
+          }
+          // On mobile, let the tel: link work naturally
+        });
+      }
+
+      const emergencyModal = document.getElementById('emergencyModal');
+      if (emergencyModal) {
+        emergencyModal.addEventListener('click', (e) => {
+          if (e.target.id === 'emergencyModal') {
+            closeEmergencyModal();
+          }
+        });
+      }
+
+      // Call modal (desktop only)
+      const callBtn = document.getElementById('callBtn');
+      if (callBtn) {
+        callBtn.addEventListener('click', (e) => {
+          // Always show popup on desktop (not mobile)
+          if (window.innerWidth >= 769) {
+            e.preventDefault();
+            const modal = document.getElementById('callModal');
+            if (modal) modal.classList.add('show');
+          }
+          // On mobile, let the tel: link work naturally
+        });
+      }
+
+      const callModal = document.getElementById('callModal');
+      if (callModal) {
+        callModal.addEventListener('click', (e) => {
+          if (e.target.id === 'callModal') {
+            closeCallModal();
+          }
+        });
+      }
+
+      // Close modals on ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeEmergencyModal();
+          closeCallModal();
         }
       });
-    }
-
-    document.getElementById('emergencyModal')?.addEventListener('click', (e) => {
-      if (e.target.id === 'emergencyModal') {
-        closeEmergencyModal();
-      }
-    });
-
-    // Call modal (desktop only)
-    function closeCallModal() {
-      document.getElementById('callModal').classList.remove('show');
-    }
-
-    const callBtn = document.getElementById('callBtn');
-    if (callBtn) {
-      callBtn.addEventListener('click', (e) => {
-        if (window.innerWidth > 768) {
-          e.preventDefault();
-          document.getElementById('callModal').classList.add('show');
-        }
-      });
-    }
-
-    document.getElementById('callModal')?.addEventListener('click', (e) => {
-      if (e.target.id === 'callModal') {
-        closeCallModal();
-      }
-    });
-
-    // Close modals on ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeEmergencyModal();
-        closeCallModal();
-      }
     });
   </script>
 
