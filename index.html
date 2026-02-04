@@ -624,6 +624,36 @@
 </head>
 
 <body>
+  <!-- Emergency Modal (Desktop) -->
+  <div class="emergency-modal" id="emergencyModal">
+    <div class="emergency-content">
+      <button class="emergency-close" onclick="closeEmergencyModal()">&times;</button>
+      <h2>🚨 Emergency Electrical Service</h2>
+      <p>Available 24/7 for urgent electrical issues</p>
+      <div class="emergency-phone">0410 414 969</div>
+      <div class="emergency-actions">
+        <a href="tel:0410414969">Call Now</a>
+        <a href="sms:0410414969?&body=EMERGENCY:%20">Text Marcus</a>
+      </div>
+      <p style="margin-top:20px;font-size:14px;opacity:0.9">Power outages • Electrical faults • Safety hazards</p>
+    </div>
+  </div>
+
+  <!-- Call Modal (Desktop) -->
+  <div class="call-modal" id="callModal">
+    <div class="call-content">
+      <button class="call-close" onclick="closeCallModal()">&times;</button>
+      <h2>📞 Call Marcus</h2>
+      <p>Fast quotes, same-week availability</p>
+      <div class="call-phone">0410 414 969</div>
+      <div class="call-actions">
+        <a href="tel:0410414969">Call Now</a>
+        <a href="sms:0410414969?&body=Hi%20Marcus,%20I%20need%20">Text Instead</a>
+      </div>
+      <p style="margin-top:20px;font-size:14px;opacity:0.9">Or scroll down for a quote form</p>
+    </div>
+  </div>
+
   <a class="skip" href="#quote">Skip to quote</a>
 
   <div class="callbar" aria-label="Quick actions">
@@ -1276,8 +1306,42 @@
       document.getElementById('emergencyModal').classList.remove('show');
     }
 
-    // Emergency and Call buttons - removed modal complexity, now just direct links
-    // Modals removed for simplicity - buttons call/link directly on all devices
+    const emergencyBtn = document.getElementById('emergencyBtn');
+    if (emergencyBtn) {
+      emergencyBtn.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) {
+          e.preventDefault();
+          document.getElementById('emergencyModal').classList.add('show');
+        }
+      });
+    }
+
+    document.getElementById('emergencyModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'emergencyModal') {
+        closeEmergencyModal();
+      }
+    });
+
+    // Call modal (desktop only)
+    function closeCallModal() {
+      document.getElementById('callModal').classList.remove('show');
+    }
+
+    const callBtn = document.getElementById('callBtn');
+    if (callBtn) {
+      callBtn.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) {
+          e.preventDefault();
+          document.getElementById('callModal').classList.add('show');
+        }
+      });
+    }
+
+    document.getElementById('callModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'callModal') {
+        closeCallModal();
+      }
+    });
 
     // Close modals on ESC key
     document.addEventListener('keydown', (e) => {
