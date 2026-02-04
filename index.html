@@ -1195,8 +1195,9 @@
       });
     }
 
-    const form = document.getElementById("quoteForm");
-    const steps = [...form.querySelectorAll(".step")];
+    // Detailed Quote Form (4-step)
+    const detailedForm = document.getElementById("detailedQuoteForm");
+    const steps = [...detailedForm.querySelectorAll(".step")];
     const bar = document.getElementById("bar");
     const pct = document.getElementById("pct");
     const success = document.getElementById("success");
@@ -1211,9 +1212,9 @@
       steps.forEach((s, i) => s.classList.toggle("active", i === stepIndex));
     };
 
-    form.querySelectorAll(".options").forEach(group => {
+    detailedForm.querySelectorAll(".options").forEach(group => {
       const name = group.getAttribute("data-name");
-      const hidden = form.querySelector(`input[name="${name}"]`);
+      const hidden = detailedForm.querySelector(`input[name="${name}"]`);
       group.querySelectorAll(".opt").forEach(btn => {
         btn.addEventListener("click", () => {
           group.querySelectorAll(".opt").forEach(b => b.classList.remove("selected"));
@@ -1223,18 +1224,18 @@
       });
     });
 
-    form.querySelectorAll("[data-next]").forEach(btn => {
+    detailedForm.querySelectorAll("[data-next]").forEach(btn => {
       btn.addEventListener("click", () => {
-        if (stepIndex === 0 && !form.service.value) return alert("Select what you need help with.");
-        if (stepIndex === 1 && !form.site.value) return alert("Select where the work will be conducted.");
-        if (stepIndex === 2 && !form.urgency.value) return alert("Select how urgent it is.");
+        if (stepIndex === 0 && !detailedForm.service.value) return alert("Select what you need help with.");
+        if (stepIndex === 1 && !detailedForm.site.value) return alert("Select where the work will be conducted.");
+        if (stepIndex === 2 && !detailedForm.urgency.value) return alert("Select how urgent it is.");
         stepIndex = Math.min(stepIndex + 1, steps.length - 1);
         updateProgress();
         document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
 
-    form.querySelectorAll("[data-back]").forEach(btn => {
+    detailedForm.querySelectorAll("[data-back]").forEach(btn => {
       btn.addEventListener("click", () => {
         stepIndex = Math.max(stepIndex - 1, 0);
         updateProgress();
@@ -1247,35 +1248,21 @@
       q.addEventListener("click", () => item.classList.toggle("open"));
     });
 
-    const mailtoFallback = () => {
-      const subject = encodeURIComponent("New Quote Request - Amped Up Electrical Adelaide");
-      const body = encodeURIComponent(
-        `Service: ${form.service.value}\n` +
-        `Site: ${form.site.value}\n` +
-        `Urgency: ${form.urgency.value}\n` +
-        `Suburb: ${form.suburb.value || "-"}\n` +
-        `Details: ${form.details.value || "-"}\n\n` +
-        `Name: ${form.name.value}\nPhone: ${form.phone.value}\nEmail: ${form.email.value}\n` +
-        `Source: Website Quote Form\n`
-      );
-      window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
-    };
-
-    // AJAX submit -> show success panel (and fallback to mailto if blocked)
-    form.addEventListener("submit", async (e) => {
+    // Detailed form submit handler
+    detailedForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const phone = form.phone.value.trim();
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
+      const phone = detailedForm.phone.value.trim();
+      const name = detailedForm.name.value.trim();
+      const email = detailedForm.email.value.trim();
       if (!phone || !name || !email) return alert("Please fill out phone, name and email.");
 
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
       try {
-        const formData = new FormData(form);
-        formData.append("_subject", "New Quote Request - Amped Up Electrical Adelaide");
+        const formData = new FormData(detailedForm);
+        formData.append("_subject", "Detailed Quote Request - Amped Up Electrical Adelaide");
         formData.append("_replyto", email);
 
         const res = await fetch(FORMSPREE_ENDPOINT, {
@@ -1285,17 +1272,73 @@
         });
 
         if (res.ok) {
-          form.style.display = "none";
+          detailedForm.style.display = "none";
+          document.getElementById("progressWrap").style.display = "none";
+          success.innerHTML = `
+            <strong>Quote request sent ✅</strong>
+            <span>Marcus from Amped Up Electrical Adelaide will be in touch with you shortly.</span>
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+              <a class="btn primary" href="tel:0410414969">Call Now</a>
+              <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+            </div>
+          `;
           success.style.display = "block";
           document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
         } else {
-          mailtoFallback();
+          alert("Something went wrong. Please call 0410 414 969 instead.");
         }
       } catch (err) {
-        mailtoFallback();
+        alert("Something went wrong. Please call 0410 414 969 instead.");
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Send request";
+      }
+    });
+
+    // Quick Quote Form submit handler
+    const quickForm = document.getElementById("quickQuoteForm");
+    quickForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const phone = quickForm.phone.value.trim();
+      const name = quickForm.name.value.trim();
+      const job = quickForm.job.value.trim();
+      if (!phone || !name || !job) return alert("Please fill out all fields.");
+
+      const submitButton = quickForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+
+      try {
+        const formData = new FormData(quickForm);
+        formData.append("_subject", "Quick Quote Request - Amped Up Electrical Adelaide");
+
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: "POST",
+          body: formData,
+          headers: { "Accept": "application/json" }
+        });
+
+        if (res.ok) {
+          quickForm.style.display = "none";
+          success.innerHTML = `
+            <strong>Quote request sent ✅</strong>
+            <span>Marcus from Amped Up Electrical Adelaide will be in touch with you shortly.</span>
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+              <a class="btn primary" href="tel:0410414969">Call Now</a>
+              <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+            </div>
+          `;
+          success.style.display = "block";
+          document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
+        } else {
+          alert("Something went wrong. Please call 0410 414 969 instead.");
+        }
+      } catch (err) {
+        alert("Something went wrong. Please call 0410 414 969 instead.");
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Get Free Quote →";
       }
     });
 
