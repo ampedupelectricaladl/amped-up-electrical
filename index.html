@@ -582,6 +582,55 @@
       background:rgba(0,0,0,.3);
     }
 
+    /* Quote Modal */
+    .quote-modal{
+      display:none;
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,.85);
+      z-index:9999;
+      align-items:center;
+      justify-content:center;
+      overflow-y:auto;
+      padding:20px;
+    }
+    .quote-modal.show{display:flex}
+    .quote-modal-content{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:30px;
+      max-width:600px;
+      width:100%;
+      position:relative;
+      box-shadow:var(--shadow);
+      margin:auto;
+    }
+    .quote-close{
+      position:absolute;
+      top:14px;right:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+      width:36px;height:36px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+      display:grid;
+      place-items:center;
+    }
+    .quote-close:hover{
+      background:rgba(255,255,255,.1);
+    }
+    .quote-modal-content h2{
+      margin:0 0 8px;
+      font-size:28px;
+    }
+    .quote-modal-content .sub{
+      margin:0 0 20px;
+    }
+
     @media (max-width: 960px){
       :root{ --topbarH: 64px; }
       .topbar{top:0;border-radius:0;padding:12px}
@@ -650,7 +699,123 @@
         <a href="tel:0410414969">Call Now</a>
         <a href="sms:0410414969?&body=Hi%20Marcus,%20I%20need%20">Text Instead</a>
       </div>
-      <p style="margin-top:20px;font-size:14px;opacity:0.9">Or scroll down for a quote form</p>
+      <p style="margin-top:20px;font-size:14px;opacity:0.9">Or use the quote form below</p>
+    </div>
+  </div>
+
+  <!-- Quote Modal -->
+  <div class="quote-modal" id="quoteModal">
+    <div class="quote-modal-content">
+      <button class="quote-close" onclick="closeQuoteModal()">&times;</button>
+      <h2>Get Your Quote</h2>
+      <p class="sub">Tell us about your job and we'll get back to you ASAP</p>
+      
+      <div class="formTitle">
+        <div class="progressWrap">
+          <div class="progress"><div class="bar" id="modalBar"></div></div>
+          <div class="pct" id="modalPct">0%</div>
+        </div>
+      </div>
+
+      <!-- Form will be cloned here by JavaScript -->
+      <form id="quoteModalForm" action="https://formspree.io/f/xjggayzj" method="POST">
+        <div class="step active" data-step="1">
+          <div class="q">What do you need help with?</div>
+          <div class="options" data-name="service">
+            <button type="button" class="opt" data-value="Lighting">Lighting <small>Downlights, LEDs, sensors</small></button>
+            <button type="button" class="opt" data-value="Power Points">Power points <small>New GPOs, upgrades</small></button>
+            <button type="button" class="opt" data-value="Switchboard">Switchboard <small>RCD/RCBO, upgrades</small></button>
+            <button type="button" class="opt" data-value="Fault Finding">Fault finding <small>Trips, dead circuits</small></button>
+            <button type="button" class="opt" data-value="Safety Inspection">Safety inspection <small>Compliance & testing</small></button>
+            <button type="button" class="opt" data-value="EV Charging">EV charging <small>Home charger install</small></button>
+            <button type="button" class="opt" data-value="Renovation / Fit-out">Renovation / fit-out <small>Kitchens, bathrooms, shops</small></button>
+            <button type="button" class="opt" data-value="Other">Other <small>Tell us what you need</small></button>
+          </div>
+          <div class="formActions">
+            <span></span>
+            <button type="button" class="btn primary" data-next>Next</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="2">
+          <div class="q">Where will the work be conducted?</div>
+          <div class="options" data-name="site">
+            <button type="button" class="opt" data-value="Home">Home</button>
+            <button type="button" class="opt" data-value="Business">Business</button>
+            <button type="button" class="opt" data-value="Strata / Rental">Strata / rental</button>
+            <button type="button" class="opt" data-value="Other">Other</button>
+          </div>
+
+          <label>Suburb</label>
+          <input name="suburb" placeholder="e.g. Westbourne Park" />
+
+          <div class="formActions">
+            <button type="button" class="btn" data-back>Back</button>
+            <button type="button" class="btn primary" data-next>Next</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="3">
+          <div class="q">How urgent is it?</div>
+          <div class="options" data-name="urgency">
+            <button type="button" class="opt" data-value="Emergency - Today">Emergency - today</button>
+            <button type="button" class="opt" data-value="Within a week">Within a week</button>
+            <button type="button" class="opt" data-value="Flexible">Flexible</button>
+            <button type="button" class="opt" data-value="Just after a quote">Just after a quote</button>
+          </div>
+
+          <label>Extra details (optional)</label>
+          <textarea name="details" placeholder="Briefly describe the issue / job."></textarea>
+
+          <div class="formActions">
+            <button type="button" class="btn" data-back>Back</button>
+            <button type="button" class="btn primary" data-next>Next</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="4">
+          <div class="q">How can we reach you?</div>
+
+          <div class="row2">
+            <div>
+              <label>Phone *</label>
+              <input name="phone" required placeholder="04xx xxx xxx" />
+            </div>
+            <div>
+              <label>Your name *</label>
+              <input name="name" required placeholder="Your name" />
+            </div>
+          </div>
+
+          <label>Email *</label>
+          <input name="email" required type="email" placeholder="you@email.com" />
+
+          <input type="hidden" name="source" value="Website Quote Form (Modal)" />
+          <input type="hidden" name="_subject" value="New Quote Request - Amped Up Electrical Adelaide" />
+
+          <div class="formActions">
+            <button type="button" class="btn" data-back>Back</button>
+            <button type="submit" class="btn primary" id="modalSubmitBtn">Send request</button>
+          </div>
+
+          <div class="note" id="modalSubmitNote">
+            Submitting sends instantly. If urgent, call <b>0410 414 969</b>.
+          </div>
+        </div>
+
+        <input type="hidden" name="service" />
+        <input type="hidden" name="site" />
+        <input type="hidden" name="urgency" />
+      </form>
+
+      <div class="success" id="modalSuccess">
+        <strong>Request received ✅</strong>
+        <span>We'll call or text you ASAP. If it's urgent, tap below.</span>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn primary" href="tel:0410414969">Call now</a>
+          <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20My%20suburb%20is%20%5Bsuburb%5D.%20Thanks!">Text now</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1390,8 +1555,145 @@
       if (e.key === 'Escape') {
         closeEmergencyModal();
         closeCallModal();
+        closeQuoteModal();
       }
     });
+
+    // Quote modal (desktop only)
+    function closeQuoteModal() {
+      document.getElementById('quoteModal').classList.remove('show');
+    }
+
+    function openQuoteModal() {
+      document.getElementById('quoteModal').classList.add('show');
+      // Reset form
+      const modalForm = document.getElementById('quoteModalForm');
+      modalForm.reset();
+      modalStepIndex = 0;
+      updateModalProgress();
+      document.getElementById('modalSuccess').style.display = 'none';
+      modalForm.style.display = 'block';
+    }
+
+    // Handle "Get a quote" button clicks (desktop: modal, mobile: scroll)
+    document.querySelectorAll('a[href="#quote"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (window.innerWidth > 768) {
+          e.preventDefault();
+          openQuoteModal();
+        }
+      });
+    });
+
+    document.getElementById('quoteModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'quoteModal') {
+        closeQuoteModal();
+      }
+    });
+
+    // Modal form logic (same as main form but for modal)
+    const modalForm = document.getElementById('quoteModalForm');
+    const modalSteps = [...modalForm.querySelectorAll('.step')];
+    const modalBar = document.getElementById('modalBar');
+    const modalPct = document.getElementById('modalPct');
+    const modalSuccess = document.getElementById('modalSuccess');
+    const modalSubmitBtn = document.getElementById('modalSubmitBtn');
+
+    let modalStepIndex = 0;
+
+    const updateModalProgress = () => {
+      const percent = Math.round((modalStepIndex / (modalSteps.length - 1)) * 100);
+      modalBar.style.width = percent + "%";
+      modalPct.textContent = percent + "%";
+      modalSteps.forEach((s, i) => s.classList.toggle("active", i === modalStepIndex));
+    };
+
+    modalForm.querySelectorAll('.options').forEach(group => {
+      const name = group.getAttribute('data-name');
+      const hidden = modalForm.querySelector(`input[name="${name}"]`);
+      group.querySelectorAll('.opt').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          hidden.value = btn.getAttribute('data-value');
+        });
+      });
+    });
+
+    modalForm.querySelectorAll('[data-next]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (modalStepIndex === 0 && !modalForm.service.value) return alert('Select what you need help with.');
+        if (modalStepIndex === 1 && !modalForm.site.value) return alert('Select where the work will be conducted.');
+        if (modalStepIndex === 2 && !modalForm.urgency.value) return alert('Select how urgent it is.');
+        modalStepIndex = Math.min(modalStepIndex + 1, modalSteps.length - 1);
+        updateModalProgress();
+      });
+    });
+
+    modalForm.querySelectorAll('[data-back]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        modalStepIndex = Math.max(modalStepIndex - 1, 0);
+        updateModalProgress();
+      });
+    });
+
+    modalForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const phone = modalForm.phone.value.trim();
+      const name = modalForm.name.value.trim();
+      const email = modalForm.email.value.trim();
+      if (!phone || !name || !email) return alert('Please fill out phone, name and email.');
+
+      modalSubmitBtn.disabled = true;
+      modalSubmitBtn.textContent = 'Sending...';
+
+      try {
+        const formData = new FormData(modalForm);
+        formData.append('_subject', 'New Quote Request - Amped Up Electrical Adelaide');
+        formData.append('_replyto', email);
+
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          modalForm.style.display = 'none';
+          modalSuccess.style.display = 'block';
+        } else {
+          const subject = encodeURIComponent('New Quote Request - Amped Up Electrical Adelaide');
+          const body = encodeURIComponent(
+            `Service: ${modalForm.service.value}\n` +
+            `Site: ${modalForm.site.value}\n` +
+            `Urgency: ${modalForm.urgency.value}\n` +
+            `Suburb: ${modalForm.suburb.value || '-'}\n` +
+            `Details: ${modalForm.details.value || '-'}\n\n` +
+            `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n` +
+            `Source: Website Quote Form (Modal)\n`
+          );
+          window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+        }
+      } catch (err) {
+        const subject = encodeURIComponent('New Quote Request - Amped Up Electrical Adelaide');
+        const body = encodeURIComponent(
+          `Service: ${modalForm.service.value}\n` +
+          `Site: ${modalForm.site.value}\n` +
+          `Urgency: ${modalForm.urgency.value}\n` +
+          `Suburb: ${modalForm.suburb.value || '-'}\n` +
+          `Details: ${modalForm.details.value || '-'}\n\n` +
+          `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n` +
+          `Source: Website Quote Form (Modal)\n`
+        );
+        window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+      } finally {
+        modalSubmitBtn.disabled = false;
+        modalSubmitBtn.textContent = 'Send request';
+      }
+    });
+
+    updateModalProgress();
   </script>
 
   <!-- Tawk.to Live Chat -->
