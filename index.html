@@ -104,7 +104,7 @@
     .skip:focus{left:12px}
 
     .callbar{
-      display:none;
+      display:flex;
       position:fixed;
       left:12px; right:12px; bottom:12px;
       z-index:9999;
@@ -679,6 +679,13 @@
       .aboutGrid{grid-template-columns:1fr}
       .profilePhoto{width:76px;height:76px}
     }
+
+    /* Hide callbar on desktop, show text button */
+    @media (min-width: 961px){
+      .callbar{display:none !important;}
+      body{padding-bottom:0;}
+      .cta .btn[href^="sms"]{display:inline-flex !important;}
+    }
   </style>
 </head>
 
@@ -851,6 +858,7 @@
       <div class="cta">
         <a class="btn emergency" href="tel:0410414969" id="emergencyBtn" onclick="return handleEmergencyClick(event)" style="background:linear-gradient(135deg,#ff3333,#cc0000);animation:pulse 2s infinite">🚨 Emergency</a>
         <a class="btn" href="tel:0410414969" id="callBtn" onclick="return handleCallClick(event)">Call</a>
+        <a class="btn" href="sms:0410414969?&body=Hi%20Marcus,%20I%20need%20an%20electrician%20for%20" style="display:none">💬 Text</a>
 
         <a class="btn ig" href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" aria-label="Open Instagram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -912,6 +920,20 @@
           <div class="trustBadge"><span>24/7</span> Emergency-ready response</div>
           <div class="trustBadge"><span>✓</span> AS/NZS compliant workmanship</div>
           <div class="trustBadge"><span>★</span> Local 5-star service</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Text Us CTA -->
+        <div style="margin-top:14px;padding:16px;border-radius:18px;background:linear-gradient(135deg,rgba(255,176,0,.16),rgba(255,122,0,.12));border:2px solid rgba(255,176,0,.40);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:28px">💬</span>
+            <div>
+              <strong style="font-size:16px;display:block;margin-bottom:2px">Prefer to Text?</strong>
+              <span style="font-size:14px;color:var(--muted)">Send photos for instant quote</span>
+            </div>
+          </div>
+          <a href="sms:0410414969?&body=Hi%20Marcus%2C%20I%20need%20an%20electrician%20for%20" class="btn primary" style="white-space:nowrap">Text 0410 414 969</a>
         </div>
 
         <div class="divider"></div>
