@@ -784,6 +784,12 @@
           <label>Extra details (optional)</label>
           <textarea name="details" placeholder="Briefly describe the issue / job."></textarea>
 
+          <label>Add a photo (optional) <small style="color:var(--muted);font-weight:400">Helps us quote faster!</small></label>
+          <input type="file" name="photo" accept="image/jpeg,image/jpg,image/png,image/heic" style="padding:10px;font-size:14px" />
+          <small style="display:block;color:var(--muted);margin-top:4px;font-size:12px">
+            📷 Switchboard, fault location, existing setup, etc. Max 10MB.
+          </small>
+
           <div class="formActions">
             <button type="button" class="btn" data-back>Back</button>
             <button type="button" class="btn primary" data-next>Next</button>
