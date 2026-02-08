@@ -1517,7 +1517,10 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
+      let photoNote = "";
+      
       try {
+        // ATTEMPT 1: Try with photo
         const formData = new FormData(detailedForm);
         formData.append("_subject", "Detailed Quote Request - Amped Up Electrical Adelaide");
         formData.append("_replyto", email);
@@ -1529,6 +1532,7 @@
         });
 
         if (res.ok) {
+          // SUCCESS WITH PHOTO
           detailedForm.style.display = "none";
           document.getElementById("progressWrap").style.display = "none";
           success.innerHTML = `
@@ -1542,10 +1546,74 @@
           success.style.display = "block";
           document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
         } else {
-          alert("Something went wrong. Please call 0410 414 969 instead.");
+          // ATTEMPT 2: Retry WITHOUT photo
+          const formDataNoPhoto = new FormData(detailedForm);
+          formDataNoPhoto.delete("photo");
+          formDataNoPhoto.append("_subject", "Detailed Quote Request - Amped Up Electrical Adelaide");
+          formDataNoPhoto.append("_replyto", email);
+          formDataNoPhoto.append("note", "⚠️ Customer tried to attach a photo but it failed to upload");
+
+          const retryRes = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formDataNoPhoto,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (retryRes.ok) {
+            photoNote = '<div style="margin-top:10px;padding:10px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:8px;font-size:13px;color:var(--text)">📸 Your photo couldn\'t attach, but your quote request was sent successfully. We\'ll call you to get details.</div>';
+            detailedForm.style.display = "none";
+            document.getElementById("progressWrap").style.display = "none";
+            success.innerHTML = `
+              <strong>Quote request sent ✅</strong>
+              <span>Marcus from Amped Up Electrical Adelaide will be in touch with you shortly.</span>
+              ${photoNote}
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <a class="btn primary" href="tel:0410414969">Call Now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+              </div>
+            `;
+            success.style.display = "block";
+            document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
+          } else {
+            alert("Form submission failed. Please call 0410 414 969 or text instead.");
+          }
         }
       } catch (err) {
-        alert("Something went wrong. Please call 0410 414 969 instead.");
+        // Network error - try without photo
+        try {
+          const formDataNoPhoto = new FormData(detailedForm);
+          formDataNoPhoto.delete("photo");
+          formDataNoPhoto.append("_subject", "Detailed Quote Request - Amped Up Electrical Adelaide");
+          formDataNoPhoto.append("_replyto", email);
+          formDataNoPhoto.append("note", "⚠️ Customer tried to attach a photo but network error occurred");
+
+          const retryRes = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formDataNoPhoto,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (retryRes.ok) {
+            photoNote = '<div style="margin-top:10px;padding:10px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:8px;font-size:13px;color:var(--text)">📸 Your photo couldn\'t attach, but your quote request was sent successfully. We\'ll call you to get details.</div>';
+            detailedForm.style.display = "none";
+            document.getElementById("progressWrap").style.display = "none";
+            success.innerHTML = `
+              <strong>Quote request sent ✅</strong>
+              <span>Marcus from Amped Up Electrical Adelaide will be in touch with you shortly.</span>
+              ${photoNote}
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <a class="btn primary" href="tel:0410414969">Call Now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+              </div>
+            `;
+            success.style.display = "block";
+            document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
+          } else {
+            alert("Something went wrong. Please call 0410 414 969 instead.");
+          }
+        } catch (finalErr) {
+          alert("Something went wrong. Please call 0410 414 969 instead.");
+        }
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Send request";
@@ -1566,7 +1634,10 @@
       submitButton.disabled = true;
       submitButton.textContent = "Sending...";
 
+      let photoNote = "";
+
       try {
+        // ATTEMPT 1: Try with photo
         const formData = new FormData(quickForm);
         formData.append("_subject", "Quick Quote Request - Amped Up Electrical Adelaide");
 
@@ -1577,10 +1648,11 @@
         });
 
         if (res.ok) {
+          // SUCCESS WITH PHOTO
           quickForm.style.display = "none";
           success.innerHTML = `
             <strong>Quote request sent ✅</strong>
-            <span>Marcus from Amped Up Electrical Adelaide will be in touch with you shortly.</span>
+            <span>Marcus from Amped Up Electrical Adelaide will be in touch shortly.</span>
             <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
               <a class="btn primary" href="tel:0410414969">Call Now</a>
               <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
@@ -1589,10 +1661,70 @@
           success.style.display = "block";
           document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
         } else {
-          alert("Something went wrong. Please call 0410 414 969 instead.");
+          // ATTEMPT 2: Retry WITHOUT photo
+          const formDataNoPhoto = new FormData(quickForm);
+          formDataNoPhoto.delete("photo");
+          formDataNoPhoto.append("_subject", "Quick Quote Request - Amped Up Electrical Adelaide");
+          formDataNoPhoto.append("note", "⚠️ Customer tried to attach a photo but it failed to upload");
+
+          const retryRes = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formDataNoPhoto,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (retryRes.ok) {
+            photoNote = '<div style="margin-top:10px;padding:10px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:8px;font-size:13px;color:var(--text)">📸 Your photo couldn\'t attach, but your quote request was sent successfully. We\'ll call you to get details.</div>';
+            quickForm.style.display = "none";
+            success.innerHTML = `
+              <strong>Quote request sent ✅</strong>
+              <span>Marcus from Amped Up Electrical Adelaide will be in touch shortly.</span>
+              ${photoNote}
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <a class="btn primary" href="tel:0410414969">Call Now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+              </div>
+            `;
+            success.style.display = "block";
+            document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
+          } else {
+            alert("Form submission failed. Please call 0410 414 969 or text instead.");
+          }
         }
       } catch (err) {
-        alert("Something went wrong. Please call 0410 414 969 instead.");
+        // Network error - try without photo
+        try {
+          const formDataNoPhoto = new FormData(quickForm);
+          formDataNoPhoto.delete("photo");
+          formDataNoPhoto.append("_subject", "Quick Quote Request - Amped Up Electrical Adelaide");
+          formDataNoPhoto.append("note", "⚠️ Customer tried to attach a photo but network error occurred");
+
+          const retryRes = await fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            body: formDataNoPhoto,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (retryRes.ok) {
+            photoNote = '<div style="margin-top:10px;padding:10px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:8px;font-size:13px;color:var(--text)">📸 Your photo couldn\'t attach, but your quote request was sent successfully. We\'ll call you to get details.</div>';
+            quickForm.style.display = "none";
+            success.innerHTML = `
+              <strong>Quote request sent ✅</strong>
+              <span>Marcus from Amped Up Electrical Adelaide will be in touch shortly.</span>
+              ${photoNote}
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <a class="btn primary" href="tel:0410414969">Call Now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+              </div>
+            `;
+            success.style.display = "block";
+            document.getElementById("quote").scrollIntoView({behavior:"smooth", block:"start"});
+          } else {
+            alert("Something went wrong. Please call 0410 414 969 instead.");
+          }
+        } catch (finalErr) {
+          alert("Something went wrong. Please call 0410 414 969 instead.");
+        }
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = "Get Free Quote →";
@@ -1728,7 +1860,10 @@
       modalSubmitBtn.disabled = true;
       modalSubmitBtn.textContent = 'Sending...';
 
+      let photoNote = "";
+
       try {
+        // ATTEMPT 1: Try with photo
         const formData = new FormData(modalForm);
         formData.append('_subject', 'New Quote Request - Amped Up Electrical Adelaide');
         formData.append('_replyto', email);
@@ -1740,9 +1875,98 @@
         });
 
         if (res.ok) {
+          // SUCCESS WITH PHOTO
           modalForm.style.display = 'none';
           modalSuccess.style.display = 'block';
         } else {
+          // ATTEMPT 2: Retry WITHOUT photo
+          const formDataNoPhoto = new FormData(modalForm);
+          formDataNoPhoto.delete("photo");
+          formDataNoPhoto.append('_subject', 'New Quote Request - Amped Up Electrical Adelaide');
+          formDataNoPhoto.append('_replyto', email);
+          formDataNoPhoto.append("note", "⚠️ Customer tried to attach a photo but it failed to upload");
+
+          const retryRes = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            body: formDataNoPhoto,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (retryRes.ok) {
+            // SUCCESS WITHOUT PHOTO - update success message
+            photoNote = '<div style="margin-top:10px;padding:10px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:8px;font-size:13px;color:var(--text)">📸 Your photo couldn\'t attach, but your quote request was sent successfully. We\'ll call you to get details.</div>';
+            modalForm.style.display = 'none';
+            modalSuccess.innerHTML = `
+              <strong>Quote request sent ✅</strong>
+              <span>Marcus from Amped Up Electrical Adelaide will be in touch shortly.</span>
+              ${photoNote}
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <a class="btn primary" href="tel:0410414969">Call Now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+              </div>
+            `;
+            modalSuccess.style.display = 'block';
+          } else {
+            // Fallback to mailto
+            const subject = encodeURIComponent('New Quote Request - Amped Up Electrical Adelaide');
+            const body = encodeURIComponent(
+              `Service: ${modalForm.service.value}\n` +
+              `Site: ${modalForm.site.value}\n` +
+              `Urgency: ${modalForm.urgency.value}\n` +
+              `Suburb: ${modalForm.suburb.value || '-'}\n` +
+              `Details: ${modalForm.details.value || '-'}\n\n` +
+              `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n` +
+              `Source: Website Quote Form (Modal)\n` +
+              `Note: Photo failed to upload\n`
+            );
+            window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+          }
+        }
+      } catch (err) {
+        // Network error - try without photo
+        try {
+          const formDataNoPhoto = new FormData(modalForm);
+          formDataNoPhoto.delete("photo");
+          formDataNoPhoto.append('_subject', 'New Quote Request - Amped Up Electrical Adelaide');
+          formDataNoPhoto.append('_replyto', email);
+          formDataNoPhoto.append("note", "⚠️ Customer tried to attach a photo but network error occurred");
+
+          const retryRes = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            body: formDataNoPhoto,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (retryRes.ok) {
+            photoNote = '<div style="margin-top:10px;padding:10px;background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.3);border-radius:8px;font-size:13px;color:var(--text)">📸 Your photo couldn\'t attach, but your quote request was sent successfully. We\'ll call you to get details.</div>';
+            modalForm.style.display = 'none';
+            modalSuccess.innerHTML = `
+              <strong>Quote request sent ✅</strong>
+              <span>Marcus from Amped Up Electrical Adelaide will be in touch shortly.</span>
+              ${photoNote}
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <a class="btn primary" href="tel:0410414969">Call Now</a>
+                <a class="btn" href="sms:0410414969?&body=Hi%20Marcus%20-%20I%20just%20submitted%20a%20quote%20request.%20Thanks!">Text Instead</a>
+              </div>
+            `;
+            modalSuccess.style.display = 'block';
+          } else {
+            // Final fallback to mailto
+            const subject = encodeURIComponent('New Quote Request - Amped Up Electrical Adelaide');
+            const body = encodeURIComponent(
+              `Service: ${modalForm.service.value}\n` +
+              `Site: ${modalForm.site.value}\n` +
+              `Urgency: ${modalForm.urgency.value}\n` +
+              `Suburb: ${modalForm.suburb.value || '-'}\n` +
+              `Details: ${modalForm.details.value || '-'}\n\n` +
+              `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n` +
+              `Source: Website Quote Form (Modal)\n` +
+              `Note: Network error, photo failed\n`
+            );
+            window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+          }
+        } catch (finalErr) {
+          // Absolute fallback
           const subject = encodeURIComponent('New Quote Request - Amped Up Electrical Adelaide');
           const body = encodeURIComponent(
             `Service: ${modalForm.service.value}\n` +
@@ -1751,22 +1975,11 @@
             `Suburb: ${modalForm.suburb.value || '-'}\n` +
             `Details: ${modalForm.details.value || '-'}\n\n` +
             `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n` +
-            `Source: Website Quote Form (Modal)\n`
+            `Source: Website Quote Form (Modal)\n` +
+            `Note: Complete submission failure\n`
           );
           window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
         }
-      } catch (err) {
-        const subject = encodeURIComponent('New Quote Request - Amped Up Electrical Adelaide');
-        const body = encodeURIComponent(
-          `Service: ${modalForm.service.value}\n` +
-          `Site: ${modalForm.site.value}\n` +
-          `Urgency: ${modalForm.urgency.value}\n` +
-          `Suburb: ${modalForm.suburb.value || '-'}\n` +
-          `Details: ${modalForm.details.value || '-'}\n\n` +
-          `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n` +
-          `Source: Website Quote Form (Modal)\n`
-        );
-        window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
       } finally {
         modalSubmitBtn.disabled = false;
         modalSubmitBtn.textContent = 'Send request';
