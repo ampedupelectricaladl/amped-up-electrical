@@ -3,51 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Amped Up Electrical Adelaide | Licensed Electrician</title>
-  <meta name="description" content="Owner-operated electrical service in Adelaide. Switchboard upgrades, emergency callouts, EV chargers. Same-week availability. Call 0410 414 969." />
+  <title>Electrician Adelaide | Same-Day Service | Amped Up Electrical</title>
+  <meta name="description" content="Adelaide electrician available now. Switchboard upgrades, emergency callouts, EV chargers. Marcus personally handles every job. Call 0410 414 969." />
 
-  <!-- Social preview -->
-  <meta property="og:title" content="Amped Up Electrical Adelaide" />
-  <meta property="og:description" content="Reliable electrician in Adelaide. Clean work, upfront pricing, fast response. Call 0410 414 969." />
+  <meta property="og:title" content="Electrician Adelaide | Amped Up Electrical" />
+  <meta property="og:description" content="Owner-operated electrical service. Same-day availability. Call 0410 414 969." />
   <meta property="og:type" content="website" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
 
-  <!-- LocalBusiness schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Electrician",
     "name":"Amped Up Electrical Adelaide",
-    "description":"Fast, reliable electrical service & maintenance for Adelaide metro. Switchboard upgrades, emergency callouts, EV chargers. Owner-operated.",
+    "description":"Fast, reliable electrical service for Adelaide metro. Switchboard upgrades, emergency callouts, EV chargers. Owner-operated.",
     "priceRange":"$$",
     "telephone":"+61410414969",
     "email":"ampedupelectricaladl@gmail.com",
     "url":"https://ampedupelectricaladelaide.com.au/",
     "image":"https://ampedupelectricaladelaide.com.au/avatar-crossed-arms.jpg",
-    "address":{
-      "@type":"PostalAddress",
-      "addressLocality":"Vale Park",
-      "addressRegion":"SA",
-      "addressCountry":"AU"
-    },
-    "geo":{
-      "@type":"GeoCoordinates",
-      "latitude":-34.8819,
-      "longitude":138.6222
-    },
-    "openingHoursSpecification":[
-      {
-        "@type":"OpeningHoursSpecification",
-        "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens":"07:00",
-        "closes":"18:00"
-      }
-    ],
-    "sameAs":[
-      "https://www.instagram.com/ampedupelectricaladelaide/"
-    ]
+    "address":{"@type":"PostalAddress","addressLocality":"Vale Park","addressRegion":"SA","addressCountry":"AU"},
+    "geo":{"@type":"GeoCoordinates","latitude":-34.8819,"longitude":138.6222},
+    "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"18:00"}],
+    "sameAs":["https://www.instagram.com/ampedupelectricaladelaide/"]
   }
   </script>
 
@@ -60,13 +39,13 @@
       --border:rgba(255,255,255,.10);
       --accent:#ffb000;
       --accent2:#ff7a00;
+      --green:#00ff88;
       --shadow: 0 18px 60px rgba(0,0,0,.45);
       --radius:22px;
     }
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:
         radial-gradient(900px 500px at 15% 0%, rgba(255,176,0,.20), transparent 60%),
@@ -76,20 +55,72 @@
       line-height:1.6;
     }
     a{color:inherit;text-decoration:none}
-    .wrap{max-width:1020px;margin:0 auto;padding:32px 24px}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px}
+
+    /* Live Emergency Banner */
+    .liveBanner{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      background:linear-gradient(135deg,#ff3333,#cc0000);
+      padding:12px 20px;
+      text-align:center;
+      z-index:100;
+      box-shadow:0 4px 20px rgba(0,0,0,.3);
+      animation: slideDown 0.5s ease;
+    }
+    @keyframes slideDown{
+      from{transform:translateY(-100%)}
+      to{transform:translateY(0)}
+    }
+    .liveBanner strong{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:15px;
+      font-weight:1000;
+      color:#fff;
+    }
+    .liveDot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+      animation: pulse 1.5s ease-in-out infinite;
+      box-shadow:0 0 0 0 rgba(0,255,136,.7);
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(0,255,136,.7)}
+      50%{box-shadow:0 0 0 8px rgba(0,255,136,0)}
+      100%{box-shadow:0 0 0 0 rgba(0,255,136,0)}
+    }
+    .liveBanner a{
+      margin-left:16px;
+      padding:8px 20px;
+      background:rgba(255,255,255,.2);
+      border-radius:8px;
+      font-weight:1000;
+      border:1px solid rgba(255,255,255,.3);
+      display:inline-block;
+    }
+    .liveBanner a:hover{
+      background:rgba(255,255,255,.3);
+    }
+    body{padding-top:48px}
 
     .header{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:20px 0;
-      margin-bottom:40px;
+      padding:24px 0;
+      margin-bottom:48px;
     }
     .logo{height:58px;width:auto}
     .headerCTA{display:flex;gap:12px;flex-wrap:wrap}
 
     .btn{
-      padding:12px 20px;
+      padding:14px 24px;
       border-radius:16px;
       border:1px solid var(--border);
       background: rgba(255,255,255,.02);
@@ -100,72 +131,99 @@
       align-items:center;
       gap:8px;
       white-space:nowrap;
+      transition:all 0.2s;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      background: rgba(255,255,255,.05);
     }
     .btn.primary{
       border:none;
       background: linear-gradient(135deg,var(--accent),var(--accent2));
       color:#111;
+      box-shadow:0 8px 24px rgba(255,176,0,.3);
+    }
+    .btn.primary:hover{
+      box-shadow:0 12px 32px rgba(255,176,0,.4);
     }
 
     .hero{
       text-align:center;
-      margin:60px 0 80px;
-      max-width:720px;
-      margin-left:auto;
-      margin-right:auto;
+      margin:60px auto 100px;
+      max-width:780px;
     }
-    .kicker{
-      color:var(--muted);
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 16px;
+      border-radius:999px;
+      background:rgba(255,176,0,.12);
+      border:1px solid rgba(255,176,0,.3);
+      color:var(--accent);
       font-weight:1000;
-      letter-spacing:1px;
-      text-transform:uppercase;
-      font-size:13px;
-      margin-bottom:14px;
+      font-size:14px;
+      margin-bottom:20px;
     }
     h1{
-      margin:0 0 16px;
-      font-size:56px;
-      line-height:1.1;
-      letter-spacing:-0.02em;
+      margin:0 0 20px;
+      font-size:60px;
+      line-height:1.05;
+      letter-spacing:-0.03em;
+      background:linear-gradient(135deg,#fff,#e0e0e0);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
     }
     .sub{
-      font-size:19px;
+      font-size:20px;
       color:var(--muted);
-      margin:0 0 32px;
-      max-width:600px;
-      margin-left:auto;
-      margin-right:auto;
+      margin:0 0 40px;
+      line-height:1.6;
     }
     .ctaGroup{
       display:flex;
-      gap:14px;
+      gap:16px;
       justify-content:center;
       flex-wrap:wrap;
-      margin-bottom:32px;
+      margin-bottom:40px;
     }
-    .trustLine{
+    .trustBadges{
       display:flex;
-      gap:24px;
+      gap:32px;
       justify-content:center;
       flex-wrap:wrap;
-      color:var(--muted);
-      font-size:15px;
+      padding-top:20px;
+      border-top:1px solid var(--border);
     }
-    .trustLine strong{color:var(--text)}
+    .trustBadge{
+      text-align:center;
+    }
+    .trustBadge strong{
+      display:block;
+      font-size:28px;
+      color:var(--accent);
+      margin-bottom:4px;
+    }
+    .trustBadge span{
+      font-size:14px;
+      color:var(--muted);
+    }
 
     .section{
-      margin:80px 0;
+      margin:100px 0;
     }
     h2{
       margin:0 0 16px;
-      font-size:36px;
+      font-size:40px;
       text-align:center;
+      letter-spacing:-0.02em;
     }
     .sectionSub{
       text-align:center;
       color:var(--muted);
-      font-size:17px;
-      margin:0 0 48px;
+      font-size:18px;
+      margin:0 0 60px;
       max-width:640px;
       margin-left:auto;
       margin-right:auto;
@@ -173,88 +231,102 @@
 
     .card{
       border:1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius:24px;
       background: rgba(20,20,26,.72);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
-      padding:32px;
-      margin:24px 0;
+      padding:40px;
+      margin:32px 0;
     }
 
     .grid3{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:20px;
+      gap:24px;
     }
     .serviceCard{
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:24px;
-      background: rgba(20,20,26,.72);
-      text-align:center;
-    }
-    .serviceCard img{
-      width:100%;
-      aspect-ratio:1;
-      object-fit:cover;
-      border-radius:14px;
-      margin-bottom:16px;
-    }
-    .serviceCard h3{
-      margin:0 0 8px;
-      font-size:20px;
-    }
-    .serviceCard p{
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-    }
-
-    .whyGrid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:20px;
-    }
-    .whyCard{
       border:1px solid var(--border);
       border-radius:20px;
       padding:28px;
       background: rgba(20,20,26,.72);
       text-align:center;
+      transition:all 0.3s;
     }
-    .whyCard strong{
-      display:block;
-      font-size:18px;
-      margin-bottom:10px;
+    .serviceCard:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,176,0,.4);
+      box-shadow:0 12px 32px rgba(0,0,0,.4);
     }
-    .whyCard span{
+    .serviceCard img{
+      width:100%;
+      aspect-ratio:1;
+      object-fit:cover;
+      border-radius:16px;
+      margin-bottom:20px;
+    }
+    .serviceCard h3{
+      margin:0 0 10px;
+      font-size:22px;
+    }
+    .serviceCard p{
+      margin:0;
       color:var(--muted);
       font-size:15px;
       line-height:1.6;
     }
 
+    .whyGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+    .whyCard{
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:32px;
+      background: rgba(20,20,26,.72);
+      text-align:center;
+    }
+    .whyIcon{
+      font-size:48px;
+      margin-bottom:16px;
+      display:block;
+    }
+    .whyCard strong{
+      display:block;
+      font-size:20px;
+      margin-bottom:12px;
+    }
+    .whyCard p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.7;
+    }
+
     .reviewGrid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:20px;
+      gap:24px;
     }
     .review{
       border:1px solid var(--border);
       border-radius:20px;
-      padding:24px;
+      padding:28px;
       background: rgba(20,20,26,.72);
     }
     .stars{
       color:var(--accent);
       font-size:18px;
-      margin-bottom:12px;
+      margin-bottom:16px;
       letter-spacing:2px;
     }
     .review p{
-      margin:0 0 16px;
+      margin:0 0 20px;
       color:var(--muted);
-      font-size:15px;
+      font-size:16px;
       line-height:1.7;
+      font-style:italic;
     }
     .review strong{
       font-size:14px;
@@ -263,8 +335,8 @@
 
     .faqGrid{
       display:grid;
-      gap:14px;
-      max-width:800px;
+      gap:16px;
+      max-width:840px;
       margin:0 auto;
     }
     .faqItem{
@@ -278,138 +350,183 @@
       background:transparent;
       border:none;
       color:var(--text);
-      padding:18px 20px;
+      padding:20px 24px;
       text-align:left;
       font-weight:1000;
       cursor:pointer;
       display:flex;
       justify-content:space-between;
-      font-size:16px;
+      font-size:17px;
+    }
+    .faqQ:hover{
+      background:rgba(255,255,255,.02);
     }
     .faqA{
       display:none;
-      padding:0 20px 20px;
+      padding:0 24px 24px;
       color:var(--muted);
-      line-height:1.7;
+      line-height:1.8;
+      font-size:15px;
     }
     .faqItem.open .faqA{display:block}
+    .faqItem.open .faqQ{
+      background:rgba(255,255,255,.02);
+    }
 
     .ctaBanner{
       background:linear-gradient(135deg, rgba(255,176,0,.16), rgba(255,122,0,.12));
       border:2px solid rgba(255,176,0,.35);
-      border-radius:20px;
-      padding:48px;
+      border-radius:24px;
+      padding:60px 48px;
       text-align:center;
-      margin:80px 0;
+      margin:100px 0;
     }
     .ctaBanner h2{
-      margin:0 0 12px;
-      font-size:32px;
+      margin:0 0 16px;
+      font-size:36px;
     }
     .ctaBanner p{
-      margin:0 0 24px;
+      margin:0 0 32px;
       color:var(--muted);
-      font-size:17px;
+      font-size:18px;
     }
 
     footer{
       text-align:center;
       color:var(--muted);
       font-size:14px;
-      padding:40px 0 20px;
+      padding:60px 0 32px;
       border-top:1px solid var(--border);
-      margin-top:80px;
+      margin-top:100px;
     }
-    footer p{margin:8px 0}
+    footer p{margin:10px 0}
+    footer a{
+      color:var(--accent);
+      transition:opacity 0.2s;
+    }
+    footer a:hover{opacity:0.8}
 
     @media (max-width: 768px){
-      .wrap{padding:20px 16px}
-      .header{flex-direction:column;gap:16px;margin-bottom:32px}
-      .headerCTA{width:100%}
-      .headerCTA .btn{flex:1;justify-content:center}
+      body{padding-top:72px}
+      .liveBanner{padding:16px;font-size:14px}
+      .liveBanner strong{flex-direction:column;gap:6px}
+      .liveBanner a{margin:8px 0 0;width:100%;text-align:center}
       
-      h1{font-size:36px}
-      h2{font-size:28px}
-      .hero{margin:40px 0 60px}
-      .section{margin:60px 0}
+      .wrap{padding:20px 16px}
+      .header{flex-direction:column;gap:16px;margin-bottom:32px;padding:16px 0}
+      .headerCTA{width:100%}
+      .headerCTA .btn{flex:1;justify-content:center;font-size:15px}
+      
+      h1{font-size:40px}
+      h2{font-size:32px}
+      .hero{margin:40px auto 80px}
+      .sub{font-size:18px}
+      .section{margin:80px 0}
+      .ctaBanner{padding:40px 24px}
       
       .grid3,.whyGrid,.reviewGrid{grid-template-columns:1fr}
-      .ctaBanner{padding:32px 24px}
+      .trustBadges{gap:24px}
+      
+      .btn{padding:14px 20px;font-size:16px}
     }
   </style>
 </head>
 
 <body>
+  <!-- LIVE Emergency Banner -->
+  <div class="liveBanner">
+    <strong>
+      <span class="liveDot"></span>
+      LIVE NOW - Emergency Electrician Available 24/7
+    </strong>
+    <a href="tel:0410414969">Call 0410 414 969</a>
+  </div>
+
   <div class="wrap">
     <div class="header">
       <img class="logo" src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide" />
       <div class="headerCTA">
-        <a class="btn" href="tel:0410414969">📞 Call</a>
-        <a class="btn primary" href="#quote">Get a Quote</a>
+        <a class="btn" href="tel:0410414969">📞 Call Marcus</a>
+        <a class="btn primary" href="#quote">Get Free Quote</a>
       </div>
     </div>
 
     <div class="hero">
-      <div class="kicker">Adelaide's Trusted Electrician</div>
-      <h1>Same-Week Electrical Service</h1>
+      <div class="badge">⚡ Adelaide's Trusted Electrician</div>
+      <h1>Fast, Reliable Electrical Service</h1>
       <p class="sub">
-        Owner-operated electrical service for Adelaide metro. Switchboard upgrades, emergency callouts, EV chargers. 
-        Marcus personally handles every job—no subcontractors, no surprises.
+        Hi, I'm Marcus—licensed electrician servicing Adelaide metro. I personally handle every job, from switchboard upgrades to emergency callouts. No subcontractors, no runaround, just quality electrical work done right.
       </p>
       <div class="ctaGroup">
-        <a class="btn primary" href="tel:0410414969" style="font-size:18px;padding:16px 32px">Call 0410 414 969</a>
-        <a class="btn" href="#quote" style="font-size:18px;padding:16px 32px">Request Quote</a>
+        <a class="btn primary" href="tel:0410414969" style="font-size:19px;padding:18px 36px">
+          📞 Call 0410 414 969
+        </a>
+        <a class="btn" href="#quote" style="font-size:19px;padding:18px 36px">
+          Request Quote
+        </a>
       </div>
-      <div class="trustLine">
-        <span>⭐ <strong>17 Five-Star Reviews</strong></span>
-        <span>✓ <strong>Licensed & Insured</strong></span>
-        <span>👤 <strong>Owner on Every Job</strong></span>
+      <div class="trustBadges">
+        <div class="trustBadge">
+          <strong>6+</strong>
+          <span>Years Experience</span>
+        </div>
+        <div class="trustBadge">
+          <strong>17</strong>
+          <span>Five-Star Reviews</span>
+        </div>
+        <div class="trustBadge">
+          <strong>100%</strong>
+          <span>Owner-Operated</span>
+        </div>
       </div>
     </div>
 
     <div class="section" id="services">
-      <h2>What We Do</h2>
-      <p class="sectionSub">Fast, reliable electrical service for homes and businesses across Adelaide metro.</p>
+      <h2>What I Do</h2>
+      <p class="sectionSub">Fast, reliable electrical service for Adelaide homes and businesses.</p>
       
       <div class="grid3">
         <div class="serviceCard">
           <img src="service-switchboard.jpg" alt="Switchboard Upgrades Adelaide" />
           <h3>Switchboard Upgrades</h3>
-          <p>Modern RCD protection, safety switches, compliant installations.</p>
+          <p>Modern RCD protection, safety switches. Compliant installations that keep your family safe.</p>
         </div>
         <div class="serviceCard">
           <img src="service-emergency.jpg" alt="24/7 Emergency Electrical" />
           <h3>Emergency Service</h3>
-          <p>Power outages, sparking outlets, electrical faults. Fast response.</p>
+          <p>Power outages, sparking outlets, electrical faults. Available 24/7 for urgent issues.</p>
         </div>
         <div class="serviceCard">
           <img src="service-ceiling-fan.jpg" alt="Ceiling Fan Installation" />
           <h3>Lighting & Fans</h3>
-          <p>LED upgrades, downlights, ceiling fans, outdoor lighting.</p>
+          <p>LED upgrades, downlights, ceiling fans. Clean installations, no mess left behind.</p>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:32px;color:var(--muted)">
-        <p>Plus: EV charger installation • Shop fit-outs • Fault finding • Safety inspections • Test & tag</p>
+      <div style="text-align:center;margin-top:48px;color:var(--muted);font-size:16px">
+        <p><strong>Plus:</strong> EV charger installation • Shop fit-outs • Fault finding • Safety inspections • Test & tag</p>
       </div>
     </div>
 
     <div class="section" id="why">
-      <h2>Why Choose Amped Up</h2>
-      <p class="sectionSub">You're trusting me with your home's safety. Here's why 17 Adelaide families chose us.</p>
+      <h2>Why Choose Me</h2>
+      <p class="sectionSub">You're trusting me with your home's safety. Here's what you get.</p>
       
       <div class="whyGrid">
         <div class="whyCard">
-          <strong>👤 Owner-Operated</strong>
-          <span>Marcus personally handles every job. No random techs, no subcontractors.</span>
+          <span class="whyIcon">👤</span>
+          <strong>I Do Every Job</strong>
+          <p>No subcontractors. No apprentices. Just me—Marcus—personally handling your electrical work from start to finish.</p>
         </div>
         <div class="whyCard">
-          <strong>✅ Licensed & Insured</strong>
-          <span>SA licensed electrician (PGE 305058). All work compliant with AS/NZS standards.</span>
+          <span class="whyIcon">✅</span>
+          <strong>Licensed & Insured</strong>
+          <p>SA licensed electrician (PGE 305058). Fully insured. All work compliant with AS/NZS 3000 standards.</p>
         </div>
         <div class="whyCard">
-          <strong>⚡ Same-Week Service</strong>
-          <span>Fast scheduling for most jobs. Emergency callouts available 24/7.</span>
+          <span class="whyIcon">⚡</span>
+          <strong>Same-Week Service</strong>
+          <p>Most jobs scheduled within days, not weeks. Emergency callouts available 24/7 for urgent issues.</p>
         </div>
       </div>
     </div>
@@ -422,23 +539,23 @@
         <div class="review">
           <div class="stars">★★★★★</div>
           <p>"On time, explained the options and got it sorted without upselling. Super neat finish and cleaned up properly."</p>
-          <strong>Sarah M, Unley</strong>
+          <strong>— Sarah M, Unley</strong>
         </div>
         <div class="review">
           <div class="stars">★★★★★</div>
           <p>"Power kept tripping. Found the fault fast, fixed it the same visit and tested everything before leaving."</p>
-          <strong>James T, Norwood</strong>
+          <strong>— James T, Norwood</strong>
         </div>
         <div class="review">
           <div class="stars">★★★★★</div>
           <p>"Downlights and sensors came up unreal. No dust left behind, and the price was exactly what we agreed."</p>
-          <strong>Daniel R, Glenelg</strong>
+          <strong>— Daniel R, Glenelg</strong>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:40px">
-        <a class="btn" href="https://g.page/r/CX65-gZOnppNEBM/review" target="_blank" rel="noopener" style="font-size:16px;padding:14px 28px">
-          Read All Google Reviews →
+      <div style="text-align:center;margin-top:48px">
+        <a class="btn" href="https://g.page/r/CX65-gZOnppNEBM/review" target="_blank" rel="noopener" style="font-size:17px;padding:16px 32px">
+          Read All 17 Google Reviews →
         </a>
       </div>
     </div>
@@ -449,83 +566,85 @@
       <div class="faqGrid">
         <div class="faqItem">
           <button class="faqQ" type="button">Do you provide free quotes? <span>+</span></button>
-          <div class="faqA">Yes—call 0410 414 969 or use the quote form. Send photos + suburb for fastest turnaround.</div>
+          <div class="faqA">Yes—call 0410 414 969 or use the quote form below. Send photos + suburb for fastest turnaround. No obligation, no pressure.</div>
         </div>
         <div class="faqItem">
           <button class="faqQ" type="button">Are you licensed and insured? <span>+</span></button>
-          <div class="faqA">Fully licensed SA electrician (PGE 305058) with public liability insurance. All work compliant with AS/NZS 3000 standards.</div>
+          <div class="faqA">Fully licensed SA electrician (PGE 305058) with public liability insurance. All work compliant with AS/NZS 3000 standards. Safety-first approach on every job.</div>
         </div>
         <div class="faqItem">
           <button class="faqQ" type="button">How fast can you get out? <span>+</span></button>
-          <div class="faqA">Most jobs scheduled same-week. Emergency callouts available 24/7. Call 0410 414 969 and we'll tell you the soonest slot.</div>
+          <div class="faqA">Most jobs scheduled same-week. Emergency callouts available 24/7—call 0410 414 969 and I'll tell you the soonest slot.</div>
         </div>
         <div class="faqItem">
           <button class="faqQ" type="button">What areas do you service? <span>+</span></button>
-          <div class="faqA">Adelaide metro within 30km of CBD—Burnside, Norwood, Unley, Glenelg, Prospect, North Adelaide, and all eastern suburbs.</div>
+          <div class="faqA">Adelaide metro within 30km of CBD—Burnside, Norwood, Unley, Glenelg, Prospect, North Adelaide, and all eastern suburbs. Call to confirm your suburb.</div>
         </div>
         <div class="faqItem">
           <button class="faqQ" type="button">Do you subcontract work? <span>+</span></button>
-          <div class="faqA">No. You get Marcus on every job. Owner-operated means I'm personally accountable for quality.</div>
+          <div class="faqA">No. You get me (Marcus) on every job. Owner-operated means I'm personally accountable for quality. No random techs, no surprises.</div>
         </div>
         <div class="faqItem">
           <button class="faqQ" type="button">Will you clean up after the job? <span>+</span></button>
-          <div class="faqA">Always. Drop sheets, careful drilling, full clean-up including vacuuming. Spotless finish every time.</div>
+          <div class="faqA">Always. Drop sheets, careful drilling, full clean-up including vacuuming. Spotless finish every time—you won't know I was there (except for the working electrical!).</div>
         </div>
       </div>
     </div>
 
     <div class="card" id="quote">
-      <h2 style="text-align:left;margin-bottom:12px">Get Your Free Quote</h2>
-      <p style="color:var(--muted);margin:0 0 24px">Tell us about your job and we'll get back to you within 2 hours (7am-6pm weekdays).</p>
+      <h2 style="text-align:left;margin-bottom:16px">Get Your Free Quote</h2>
+      <p style="color:var(--muted);margin:0 0 32px;font-size:16px">Tell me about your job and I'll get back to you within 2 hours (7am-6pm weekdays).</p>
       
       <form id="quoteForm" action="https://formspree.io/f/xjggayzj" method="POST">
-        <input type="hidden" name="source" value="Website Quote Form (Clean)" />
+        <input type="hidden" name="source" value="Website Quote Form (Improved)" />
         <input type="hidden" name="_subject" value="New Quote Request - Amped Up Electrical Adelaide" />
         
-        <label style="display:block;margin:16px 0 8px;color:var(--muted);font-size:14px;font-weight:1000">Your Name *</label>
-        <input name="name" required placeholder="Your name" style="width:100%;padding:14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:15px" />
+        <label style="display:block;margin:20px 0 10px;color:var(--muted);font-size:14px;font-weight:1000">Your Name *</label>
+        <input name="name" required placeholder="Your name" style="width:100%;padding:16px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:16px" />
         
-        <label style="display:block;margin:16px 0 8px;color:var(--muted);font-size:14px;font-weight:1000">Phone *</label>
-        <input name="phone" required placeholder="04xx xxx xxx" style="width:100%;padding:14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:15px" />
+        <label style="display:block;margin:20px 0 10px;color:var(--muted);font-size:14px;font-weight:1000">Phone *</label>
+        <input name="phone" required placeholder="04xx xxx xxx" style="width:100%;padding:16px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:16px" />
         
-        <label style="display:block;margin:16px 0 8px;color:var(--muted);font-size:14px;font-weight:1000">What do you need? *</label>
-        <input name="job" required placeholder="e.g. switchboard upgrade in Unley" style="width:100%;padding:14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:15px" />
+        <label style="display:block;margin:20px 0 10px;color:var(--muted);font-size:14px;font-weight:1000">What do you need? *</label>
+        <input name="job" required placeholder="e.g. switchboard upgrade in Unley" style="width:100%;padding:16px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);outline:none;font-size:16px" />
         
-        <label style="display:block;margin:20px 0 8px;color:var(--muted);font-size:14px;font-weight:1000">Add a Photo (Optional)</label>
-        <input type="file" name="photo" accept="image/jpeg,image/jpg,image/png,image/heic" style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);font-size:14px" />
-        <small style="display:block;color:var(--muted);margin-top:6px;font-size:13px">
-          Photos help us provide accurate quotes faster.
+        <label style="display:block;margin:24px 0 10px;color:var(--muted);font-size:14px;font-weight:1000">Add a Photo (Optional)</label>
+        <input type="file" name="photo" accept="image/jpeg,image/jpg,image/png,image/heic" style="width:100%;padding:14px;border-radius:14px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);font-size:15px" />
+        <small style="display:block;color:var(--muted);margin-top:8px;font-size:14px">
+          📷 Photos help me provide accurate quotes faster
         </small>
         
-        <button type="submit" class="btn primary" style="width:100%;margin-top:24px;padding:16px;font-size:17px;justify-content:center">
+        <button type="submit" class="btn primary" style="width:100%;margin-top:32px;padding:18px;font-size:18px;justify-content:center">
           Send Quote Request →
         </button>
       </form>
 
-      <div id="success" style="display:none;margin-top:24px;padding:24px;background:rgba(0,255,0,.08);border:1px solid rgba(0,255,0,.3);border-radius:16px;text-align:center">
-        <strong style="display:block;font-size:18px;margin-bottom:8px">✅ Quote Request Sent</strong>
-        <span style="color:var(--muted)">We'll be in touch within 2 hours.</span>
+      <div id="success" style="display:none;margin-top:32px;padding:32px;background:rgba(0,255,0,.08);border:1px solid rgba(0,255,0,.3);border-radius:20px;text-align:center">
+        <strong style="display:block;font-size:20px;margin-bottom:12px">✅ Quote Request Sent</strong>
+        <span style="color:var(--muted);font-size:16px">I'll be in touch within 2 hours.</span>
       </div>
     </div>
 
     <div class="ctaBanner">
       <h2>Ready to Get Started?</h2>
       <p>Call now for same-week service or emergency callouts.</p>
-      <a class="btn primary" href="tel:0410414969" style="font-size:20px;padding:18px 36px">Call 0410 414 969</a>
+      <a class="btn primary" href="tel:0410414969" style="font-size:22px;padding:20px 40px">
+        📞 Call 0410 414 969
+      </a>
     </div>
 
     <footer>
-      <p><strong>Amped Up Electrical Adelaide</strong></p>
+      <p style="font-size:16px;margin-bottom:16px"><strong>Amped Up Electrical Adelaide</strong></p>
       <p>Licensed SA Electrician • PGE 305058</p>
+      <p style="margin-top:20px">
+        <a href="tel:0410414969">0410 414 969</a> • 
+        <a href="mailto:ampedupelectricaladl@gmail.com">ampedupelectricaladl@gmail.com</a>
+      </p>
       <p style="margin-top:16px">
-        <a href="tel:0410414969" style="color:var(--accent)">0410 414 969</a> • 
-        <a href="mailto:ampedupelectricaladl@gmail.com" style="color:var(--accent)">ampedupelectricaladl@gmail.com</a>
+        <a href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener">Instagram</a> • 
+        <a href="https://g.page/r/CX65-gZOnppNEBM/review" target="_blank" rel="noopener">Google Reviews</a>
       </p>
-      <p style="margin-top:12px">
-        <a href="https://www.instagram.com/ampedupelectricaladelaide/" target="_blank" rel="noopener" style="color:var(--accent)">Instagram</a> • 
-        <a href="https://g.page/r/CX65-gZOnppNEBM/review" target="_blank" rel="noopener" style="color:var(--accent)">Google Reviews</a>
-      </p>
-      <p style="margin-top:16px;font-size:13px">© <span id="year"></span> Amped Up Electrical Adelaide</p>
+      <p style="margin-top:24px;font-size:13px;opacity:0.7">© <span id="year"></span> Amped Up Electrical Adelaide</p>
     </footer>
   </div>
 
@@ -535,7 +654,11 @@
     // FAQ accordion
     document.querySelectorAll(".faqItem").forEach(item => {
       const q = item.querySelector(".faqQ");
-      q.addEventListener("click", () => item.classList.toggle("open"));
+      q.addEventListener("click", () => {
+        const wasOpen = item.classList.contains("open");
+        document.querySelectorAll(".faqItem").forEach(i => i.classList.remove("open"));
+        if (!wasOpen) item.classList.add("open");
+      });
     });
 
     // Quote form submission
@@ -574,9 +697,9 @@
           if (retryRes.ok) {
             form.style.display = "none";
             success.innerHTML = `
-              <strong style="display:block;font-size:18px;margin-bottom:8px">✅ Quote Request Sent</strong>
-              <span style="color:var(--muted)">We'll be in touch within 2 hours.</span>
-              <small style="display:block;margin-top:12px;color:var(--muted);font-size:13px">(Photo couldn't attach, but your request went through)</small>
+              <strong style="display:block;font-size:20px;margin-bottom:12px">✅ Quote Request Sent</strong>
+              <span style="color:var(--muted);font-size:16px">I'll be in touch within 2 hours.</span>
+              <small style="display:block;margin-top:16px;color:var(--muted);font-size:14px">(Photo couldn't attach, but your request went through)</small>
             `;
             success.style.display = "block";
             document.getElementById("quote").scrollIntoView({behavior:"smooth"});
