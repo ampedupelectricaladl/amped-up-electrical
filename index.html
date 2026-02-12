@@ -651,6 +651,38 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
+    // Phone popup for desktop
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    if (!isMobile) {
+      // Create modal
+      const modal = document.createElement('div');
+      modal.style.cssText = 'display:none;position:fixed;z-index:1000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);';
+      modal.innerHTML = `
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--panel);border:1px solid var(--border);border-radius:24px;padding:48px;text-align:center;box-shadow:var(--shadow);min-width:400px">
+          <div style="font-size:48px;margin-bottom:16px">📞</div>
+          <h2 style="margin:0 0 24px;font-size:32px">Call Marcus</h2>
+          <a href="tel:0410414969" style="display:block;font-size:36px;font-weight:bold;color:var(--accent);margin-bottom:24px;letter-spacing:2px">0410 414 969</a>
+          <p style="color:var(--muted);margin-bottom:32px">Available 24/7 for emergencies</p>
+          <button onclick="this.parentElement.parentElement.style.display='none'" style="background:rgba(255,255,255,0.1);border:1px solid var(--border);color:var(--text);padding:12px 32px;border-radius:12px;cursor:pointer;font-size:16px;font-weight:bold">Close</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      
+      // Close on backdrop click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+      
+      // Intercept phone links
+      document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          modal.style.display = 'block';
+        });
+      });
+    }
+
     // FAQ accordion
     document.querySelectorAll(".faqItem").forEach(item => {
       const q = item.querySelector(".faqQ");
