@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Electrical Safety Inspection Report | Amped Up Electrical Adelaide</title>
+  <link rel="icon" type="image/png" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
+  
+  <style>
+    :root{
+      --bg:#0b0b0e;
+      --panel:#14141a;
+      --text:#ffffff;
+      --muted:#c9c9d6;
+      --border:rgba(255,255,255,.10);
+      --accent:#ffb000;
+      --green:#00ff88;
+      --red:#ff3333;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      padding:20px;
+    }
+    .wrap{max-width:800px;margin:0 auto}
+    
+    .header{
+      text-align:center;
+      margin-bottom:32px;
+      padding-bottom:24px;
+      border-bottom:2px solid var(--border);
+    }
+    .logo{height:48px;margin-bottom:16px}
+    h1{font-size:28px;margin-bottom:8px;color:var(--accent)}
+    .subtitle{color:var(--muted);font-size:15px}
+    
+    .customerInfo{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:24px;
+      margin-bottom:32px;
+    }
+    .customerInfo h2{font-size:20px;margin-bottom:16px;color:var(--accent)}
+    .formGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    .formField{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .formField.full{grid-column:1/-1}
+    label{font-size:14px;font-weight:600;color:var(--muted)}
+    input,textarea{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px 16px;
+      color:var(--text);
+      font-size:15px;
+      font-family:inherit;
+    }
+    input:focus,textarea:focus{
+      outline:none;
+      border-color:var(--accent);
+    }
+    
+    .section{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:24px;
+      margin-bottom:24px;
+    }
+    .section h3{
+      font-size:20px;
+      margin-bottom:20px;
+      color:var(--accent);
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    
+    .checkItem{
+      border-bottom:1px solid var(--border);
+      padding:16px 0;
+    }
+    .checkItem:last-child{border:none}
+    
+    .checkRow{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:8px;
+    }
+    .checkLabel{font-weight:500;font-size:15px}
+    
+    .toggleButtons{
+      display:flex;
+      gap:8px;
+    }
+    .toggleBtn{
+      padding:8px 20px;
+      border-radius:8px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      cursor:pointer;
+      font-weight:600;
+      font-size:14px;
+      transition:all 0.2s;
+    }
+    .toggleBtn:hover{background:rgba(255,255,255,.05)}
+    .toggleBtn.pass{border-color:var(--green);background:rgba(0,255,136,.1);color:var(--green)}
+    .toggleBtn.fail{border-color:var(--red);background:rgba(255,51,51,.1);color:var(--red)}
+    .toggleBtn.na{border-color:var(--muted);background:rgba(201,201,214,.1);color:var(--muted)}
+    
+    .notes{
+      margin-top:8px;
+    }
+    .notes textarea{
+      width:100%;
+      min-height:60px;
+      font-size:14px;
+    }
+    
+    .photoUpload{
+      margin-top:12px;
+      display:none;
+    }
+    .photoUpload.show{display:block}
+    .photoBtn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 16px;
+      background:rgba(255,176,0,.12);
+      border:1px solid rgba(255,176,0,.3);
+      border-radius:10px;
+      color:var(--accent);
+      cursor:pointer;
+      font-size:14px;
+      font-weight:600;
+    }
+    
+    .summary{
+      background:linear-gradient(135deg,rgba(255,176,0,.16),rgba(255,122,0,.12));
+      border:2px solid rgba(255,176,0,.35);
+      border-radius:16px;
+      padding:32px;
+      margin-bottom:32px;
+      text-align:center;
+    }
+    .summary h2{font-size:24px;margin-bottom:16px}
+    .summaryGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:24px;
+    }
+    .summaryCard{
+      background:rgba(0,0,0,.3);
+      border-radius:12px;
+      padding:20px;
+    }
+    .summaryCard strong{
+      display:block;
+      font-size:36px;
+      margin-bottom:8px;
+    }
+    .summaryCard.pass strong{color:var(--green)}
+    .summaryCard.fail strong{color:var(--red)}
+    .summaryCard.na strong{color:var(--muted)}
+    .summaryCard span{font-size:14px;color:var(--muted)}
+    
+    .recommendations{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:24px;
+      margin-bottom:32px;
+    }
+    .recommendations h3{font-size:20px;margin-bottom:16px;color:var(--red)}
+    .recommendations ul{
+      list-style:none;
+      margin:16px 0;
+    }
+    .recommendations li{
+      padding:12px;
+      background:rgba(255,51,51,.05);
+      border:1px solid rgba(255,51,51,.2);
+      border-radius:10px;
+      margin-bottom:8px;
+      color:var(--muted);
+    }
+    .recommendations li strong{color:var(--red)}
+    
+    .actions{
+      display:flex;
+      gap:16px;
+      margin-top:32px;
+    }
+    .btn{
+      flex:1;
+      padding:18px 32px;
+      border-radius:12px;
+      border:none;
+      font-weight:bold;
+      font-size:16px;
+      cursor:pointer;
+      transition:all 0.2s;
+    }
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),#ff7a00);
+      color:#111;
+    }
+    .btn.secondary{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+    .btn:hover{transform:translateY(-2px)}
+    
+    @media (max-width: 768px){
+      .formGrid{grid-template-columns:1fr}
+      .summaryGrid{grid-template-columns:1fr}
+      .actions{flex-direction:column}
+    }
+    
+    @media print{
+      body{background:#fff;color:#000}
+      .btn,.photoBtn{display:none}
+      .toggleButtons{pointer-events:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="header">
+      <img class="logo" src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide" />
+      <h1>Electrical Safety Inspection Report</h1>
+      <p class="subtitle">Licensed Electrician PGE 305056 | AS/NZS 3000:2018 Compliant</p>
+    </div>
+
+    <div class="customerInfo">
+      <h2>📋 Property & Contact Details</h2>
+      <div class="formGrid">
+        <div class="formField">
+          <label>Customer Name</label>
+          <input type="text" id="customerName" placeholder="Enter customer name" />
+        </div>
+        <div class="formField">
+          <label>Customer Email</label>
+          <input type="email" id="customerEmail" placeholder="email@example.com" />
+        </div>
+        <div class="formField">
+          <label>Property Address</label>
+          <input type="text" id="propertyAddress" placeholder="Street address" />
+        </div>
+        <div class="formField">
+          <label>Inspection Date</label>
+          <input type="date" id="inspectionDate" />
+        </div>
+        <div class="formField full">
+          <label>Additional Notes</label>
+          <textarea id="generalNotes" placeholder="General observations about the property..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary" id="summary">
+      <h2>Inspection Summary</h2>
+      <div class="summaryGrid">
+        <div class="summaryCard pass">
+          <strong id="passCount">0</strong>
+          <span>Pass</span>
+        </div>
+        <div class="summaryCard fail">
+          <strong id="failCount">0</strong>
+          <span>Fail</span>
+        </div>
+        <div class="summaryCard na">
+          <strong id="naCount">0</strong>
+          <span>N/A</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWITCHBOARD -->
+    <div class="section">
+      <h3>⚡ Switchboard & Main Panel</h3>
+      
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Switchboard condition (no damage, corrosion, or overheating)</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">RCD/Safety switches present and operational</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Circuit breakers correctly rated and labelled</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">No rewirable fuses (ceramic/wire fuses)</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- POWER POINTS -->
+    <div class="section">
+      <h3>🔌 Power Points & Sockets</h3>
+      
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">All power points secure and undamaged</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">No overloaded circuits (double adaptors/powerboards)</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Bathroom/outdoor sockets are weatherproof rated</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIGHTING -->
+    <div class="section">
+      <h3>💡 Lighting & Switches</h3>
+      
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">All light switches functional and secure</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Light fittings properly installed (no exposed wiring)</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Downlights have adequate clearance/insulation</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAFETY DEVICES -->
+    <div class="section">
+      <h3>🔥 Safety Devices</h3>
+      
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Smoke alarms installed (all bedrooms, hallways, living areas)</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Smoke alarms functional (tested)</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Smoke alarms less than 10 years old</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTDOOR -->
+    <div class="section">
+      <h3>🏡 Outdoor Electrical</h3>
+      
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Outdoor lights secure and weatherproof</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">Meter box accessible and undamaged</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+
+      <div class="checkItem">
+        <div class="checkRow">
+          <span class="checkLabel">No exposed wiring or damaged cables visible</span>
+          <div class="toggleButtons">
+            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
+            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
+          </div>
+        </div>
+        <div class="notes">
+          <textarea placeholder="Notes..."></textarea>
+        </div>
+        <div class="photoUpload">
+          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations" id="recommendations" style="display:none">
+      <h3>⚠️ Issues Requiring Attention</h3>
+      <ul id="issuesList"></ul>
+    </div>
+
+    <div class="actions">
+      <button class="btn secondary" onclick="window.print()">🖨️ Print Report</button>
+      <button class="btn primary" onclick="emailReport()">📧 Email to Customer</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Set today's date
+    document.getElementById('inspectionDate').valueAsDate = new Date();
+
+    // Toggle item status
+    function toggleStatus(btn, status) {
+      const buttons = btn.parentElement.querySelectorAll('.toggleBtn');
+      buttons.forEach(b => {
+        b.classList.remove('pass', 'fail', 'na');
+      });
+      btn.classList.add(status);
+      
+      const photoUpload = btn.closest('.checkItem').querySelector('.photoUpload');
+      if (status === 'fail') {
+        photoUpload.classList.add('show');
+      } else {
+        photoUpload.classList.remove('show');
+      }
+      
+      updateSummary();
+    }
+
+    // Update summary counts
+    function updateSummary() {
+      const passCount = document.querySelectorAll('.toggleBtn.pass').length;
+      const failCount = document.querySelectorAll('.toggleBtn.fail').length;
+      const naCount = document.querySelectorAll('.toggleBtn.na').length;
+      
+      document.getElementById('passCount').textContent = passCount;
+      document.getElementById('failCount').textContent = failCount;
+      document.getElementById('naCount').textContent = naCount;
+      
+      // Show recommendations if there are failures
+      if (failCount > 0) {
+        updateRecommendations();
+        document.getElementById('recommendations').style.display = 'block';
+      } else {
+        document.getElementById('recommendations').style.display = 'none';
+      }
+    }
+
+    // Update recommendations list
+    function updateRecommendations() {
+      const issuesList = document.getElementById('issuesList');
+      issuesList.innerHTML = '';
+      
+      const failedItems = document.querySelectorAll('.toggleBtn.fail');
+      failedItems.forEach(btn => {
+        const label = btn.closest('.checkRow').querySelector('.checkLabel').textContent;
+        const notes = btn.closest('.checkItem').querySelector('textarea').value;
+        
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${label}</strong>${notes ? '<br>' + notes : ''}`;
+        issuesList.appendChild(li);
+      });
+    }
+
+    // Email report function
+    function emailReport() {
+      const customerName = document.getElementById('customerName').value;
+      const customerEmail = document.getElementById('customerEmail').value;
+      const propertyAddress = document.getElementById('propertyAddress').value;
+      
+      if (!customerName || !customerEmail || !propertyAddress) {
+        alert('Please fill in customer details before sending report');
+        return;
+      }
+      
+      const passCount = document.getElementById('passCount').textContent;
+      const failCount = document.getElementById('failCount').textContent;
+      
+      // Collect failed items
+      const issues = [];
+      document.querySelectorAll('.toggleBtn.fail').forEach(btn => {
+        const label = btn.closest('.checkRow').querySelector('.checkLabel').textContent;
+        const notes = btn.closest('.checkItem').querySelector('textarea').value;
+        issues.push(label + (notes ? ' - ' + notes : ''));
+      });
+      
+      const subject = `Electrical Safety Inspection Report - ${propertyAddress}`;
+      const body = `Hi ${customerName},
+
+Please find your electrical safety inspection report for ${propertyAddress}.
+
+INSPECTION SUMMARY:
+✅ Pass: ${passCount}
+❌ Fail: ${failCount}
+
+${issues.length > 0 ? 'ISSUES REQUIRING ATTENTION:\n' + issues.map((i, idx) => `${idx + 1}. ${i}`).join('\n') : 'No issues found - property passed all safety checks.'}
+
+${issues.length > 0 ? '\nI can provide a quote to fix these issues. Call me on 0410 414 969 or reply to this email.\n' : ''}
+Professional service, transparent pricing, quality workmanship guaranteed.
+
+Marcus Derbali
+Amped Up Electrical Adelaide
+Licensed Electrician PGE 305056
+📞 0410 414 969
+🌐 ampedupelectricaladelaide.com.au`;
+      
+      // Create mailto link
+      const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}&bcc=ampedupelectricaladl@gmail.com`;
+      window.location.href = mailtoLink;
+    }
+  </script>
+</body>
+</html>
