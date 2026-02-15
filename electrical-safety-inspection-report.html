@@ -738,12 +738,16 @@ Licensed Electrician PGE 305056
 📞 0410 414 969
 🌐 ampedupelectricaladelaide.com.au`;
       
-      // Generate PDF first
+      const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
+      
+      // Open email first (must happen directly from user action to avoid blocking)
+      const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&bcc=ampedupelectricaladl@gmail.com&body=${encodeURIComponent(body)}`;
+      window.open(mailtoLink, '_blank');
+      
+      // Then generate PDF
       const actions = document.querySelector('.actions');
       const originalDisplay = actions.style.display;
       actions.style.display = 'none';
-      
-      const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
       
       const opt = {
         margin: 10,
@@ -753,15 +757,10 @@ Licensed Electrician PGE 305056
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       
+      alert(`Generating PDF: ${filename}\n\nThe PDF will download shortly. Attach it to the email that just opened.`);
+      
       html2pdf().set(opt).from(document.body).save().then(() => {
         actions.style.display = originalDisplay;
-        
-        // Show instructions and open email
-        alert(`PDF downloaded as:\n${filename}\n\nYour email program will now open. Please attach the downloaded PDF to the email.`);
-        
-        // Create mailto link
-        const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&bcc=ampedupelectricaladl@gmail.com&body=${encodeURIComponent(body)}`;
-        window.location.href = mailtoLink;
       });
     }
   </script>
