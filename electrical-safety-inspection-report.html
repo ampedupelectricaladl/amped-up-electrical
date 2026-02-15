@@ -238,7 +238,13 @@
       .btn,.photoBtn{display:none}
       .toggleButtons{pointer-events:none}
     }
+    
+    .pdf-only{display:none}
+    @media print{
+      .pdf-only{display:block}
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
@@ -597,7 +603,8 @@
 
     <div class="actions">
       <button class="btn secondary" onclick="window.print()">🖨️ Print Report</button>
-      <button class="btn primary" onclick="emailReport()">📧 Email to Customer</button>
+      <button class="btn secondary" onclick="downloadPDF()">📄 Download PDF</button>
+      <button class="btn primary" onclick="emailReport()">📧 Generate PDF & Email</button>
     </div>
 
   </div>
@@ -659,7 +666,37 @@
       });
     }
 
-    // Email report function
+    // Download PDF function
+    function downloadPDF() {
+      const customerName = document.getElementById('customerName').value;
+      const propertyAddress = document.getElementById('propertyAddress').value;
+      
+      if (!customerName || !propertyAddress) {
+        alert('Please fill in customer name and property address before generating PDF');
+        return;
+      }
+      
+      // Hide action buttons for PDF
+      const actions = document.querySelector('.actions');
+      const originalDisplay = actions.style.display;
+      actions.style.display = 'none';
+      
+      const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
+      
+      const opt = {
+        margin: 10,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      html2pdf().set(opt).from(document.body).save().then(() => {
+        actions.style.display = originalDisplay;
+      });
+    }
+
+    // Email report function (generates PDF then opens email)
     function emailReport() {
       const customerName = document.getElementById('customerName').value;
       const customerEmail = document.getElementById('customerEmail').value;
@@ -676,7 +713,7 @@
       // Collect failed items
       const issues = [];
       document.querySelectorAll('.toggleBtn.fail').forEach(btn => {
-        const label = btn.closest('.checkRow').querySelector('.checkLabel').textContent;
+        const label = btn.closest('.checkRow').querySelector('.checkLabel').textContent.split('\n')[0]; // Get only the main label
         const notes = btn.closest('.checkItem').querySelector('textarea').value;
         issues.push(label + (notes ? ' - ' + notes : ''));
       });
@@ -684,7 +721,7 @@
       const subject = `Electrical Safety Inspection Report - ${propertyAddress}`;
       const body = `Hi ${customerName},
 
-Please find your electrical safety inspection report for ${propertyAddress}.
+Please find attached your electrical safety inspection report for ${propertyAddress}.
 
 INSPECTION SUMMARY:
 ✅ Pass: ${passCount}
@@ -701,9 +738,31 @@ Licensed Electrician PGE 305056
 📞 0410 414 969
 🌐 ampedupelectricaladelaide.com.au`;
       
-      // Create mailto link
-      const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}&bcc=ampedupelectricaladl@gmail.com`;
-      window.location.href = mailtoLink;
+      // Generate PDF first
+      const actions = document.querySelector('.actions');
+      const originalDisplay = actions.style.display;
+      actions.style.display = 'none';
+      
+      const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
+      
+      const opt = {
+        margin: 10,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      html2pdf().set(opt).from(document.body).save().then(() => {
+        actions.style.display = originalDisplay;
+        
+        // Show instructions and open email
+        alert(`PDF downloaded as:\n${filename}\n\nYour email program will now open. Please attach the downloaded PDF to the email.`);
+        
+        // Create mailto link
+        const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&bcc=ampedupelectricaladl@gmail.com&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+      });
     }
   </script>
 </body>
