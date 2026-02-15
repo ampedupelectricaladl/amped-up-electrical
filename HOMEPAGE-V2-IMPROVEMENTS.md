@@ -87,7 +87,7 @@ Displayed prominently in hero section with accent color highlights.
 - **CTA placement:** Hero, after services, after reviews, footer
 
 ### Trust Building
-- License number visible (PGE 305058)
+- License number visible (PGE 305056)
 - "I do every job" messaging (personal accountability)
 - Real reviews with names + suburbs (social proof)
 - Clean work photos (visual proof)
