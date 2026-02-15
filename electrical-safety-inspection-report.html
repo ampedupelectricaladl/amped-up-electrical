@@ -233,15 +233,84 @@
       .actions{flex-direction:column}
     }
     
+    /* PDF-friendly styles */
+    .pdf-mode{
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    .pdf-mode body{
+      background:#fff !important;
+      color:#000 !important;
+    }
+    .pdf-mode .wrap{
+      background:#fff !important;
+    }
+    .pdf-mode .header{
+      border-bottom:2px solid #333 !important;
+    }
+    .pdf-mode h1,.pdf-mode h2,.pdf-mode h3{
+      color:#ffb000 !important;
+    }
+    .pdf-mode .subtitle,.pdf-mode label,.pdf-mode .muted{
+      color:#666 !important;
+    }
+    .pdf-mode .customerInfo,.pdf-mode .section,.pdf-mode .recommendations{
+      background:#f5f5f5 !important;
+      border:1px solid #ddd !important;
+      color:#000 !important;
+    }
+    .pdf-mode input,.pdf-mode textarea{
+      background:#fff !important;
+      border:1px solid #ccc !important;
+      color:#000 !important;
+    }
+    .pdf-mode .summary{
+      background:#fff4e6 !important;
+      border:2px solid #ffb000 !important;
+      color:#000 !important;
+    }
+    .pdf-mode .summaryCard{
+      background:#f0f0f0 !important;
+      color:#000 !important;
+    }
+    .pdf-mode .toggleBtn.pass{
+      border-color:#00cc66 !important;
+      background:#e6ffe6 !important;
+      color:#00cc66 !important;
+    }
+    .pdf-mode .toggleBtn.fail{
+      border-color:#ff3333 !important;
+      background:#ffe6e6 !important;
+      color:#ff3333 !important;
+    }
+    .pdf-mode .toggleBtn.na{
+      border-color:#999 !important;
+      background:#f0f0f0 !important;
+      color:#666 !important;
+    }
+    .pdf-mode .recommendations{
+      background:#fff5f5 !important;
+    }
+    .pdf-mode .recommendations h3{
+      color:#ff3333 !important;
+    }
+    .pdf-mode .recommendations li{
+      background:#ffe6e6 !important;
+      border:1px solid #ffcccc !important;
+      color:#000 !important;
+    }
+    .pdf-mode .recommendations li strong{
+      color:#ff3333 !important;
+    }
+    .pdf-mode .btn,.pdf-mode .photoBtn,.pdf-mode .actions{
+      display:none !important;
+    }
+    
     @media print{
       body{background:#fff;color:#000}
       .btn,.photoBtn{display:none}
       .toggleButtons{pointer-events:none}
-    }
-    
-    .pdf-only{display:none}
-    @media print{
-      .pdf-only{display:block}
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -676,23 +745,26 @@
         return;
       }
       
-      // Hide action buttons for PDF
-      const actions = document.querySelector('.actions');
-      const originalDisplay = actions.style.display;
-      actions.style.display = 'none';
-      
       const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
+      
+      // Enable PDF mode styling
+      document.documentElement.classList.add('pdf-mode');
       
       const opt = {
         margin: 10,
         filename: filename,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        html2canvas: { 
+          scale: 2, 
+          useCORS: true, 
+          letterRendering: true,
+          backgroundColor: '#ffffff'
+        },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       
-      html2pdf().set(opt).from(document.body).save().then(() => {
-        actions.style.display = originalDisplay;
+      html2pdf().set(opt).from(document.querySelector('.wrap')).save().then(() => {
+        document.documentElement.classList.remove('pdf-mode');
       });
     }
 
@@ -744,23 +816,26 @@ Licensed Electrician PGE 305056
       const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&bcc=ampedupelectricaladl@gmail.com&body=${encodeURIComponent(body)}`;
       window.open(mailtoLink, '_blank');
       
-      // Then generate PDF
-      const actions = document.querySelector('.actions');
-      const originalDisplay = actions.style.display;
-      actions.style.display = 'none';
+      alert(`Generating PDF: ${filename}\n\nThe PDF will download shortly. Attach it to the email that just opened.`);
+      
+      // Enable PDF mode styling
+      document.documentElement.classList.add('pdf-mode');
       
       const opt = {
         margin: 10,
         filename: filename,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+        html2canvas: { 
+          scale: 2, 
+          useCORS: true, 
+          letterRendering: true,
+          backgroundColor: '#ffffff'
+        },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
       
-      alert(`Generating PDF: ${filename}\n\nThe PDF will download shortly. Attach it to the email that just opened.`);
-      
-      html2pdf().set(opt).from(document.body).save().then(() => {
-        actions.style.display = originalDisplay;
+      html2pdf().set(opt).from(document.querySelector('.wrap')).save().then(() => {
+        document.documentElement.classList.remove('pdf-mode');
       });
     }
   </script>
