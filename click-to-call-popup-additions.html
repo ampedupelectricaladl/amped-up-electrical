@@ -1,0 +1,372 @@
+<!-- =================================================================
+     LOCAL SEO 2026 IMPROVEMENTS
+     Add these sections to index.html
+     ================================================================= -->
+
+<!-- 1. ADD THIS CSS TO THE <style> SECTION (after existing styles) -->
+<style>
+/* ========== CLICK-TO-CALL STICKY BUTTON (Mobile Priority) ========== */
+.stickyCallBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  background: linear-gradient(135deg, #ff7a00, #ffb000);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(255, 122, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  animation: callPulse 2s ease-in-out infinite;
+}
+.stickyCallBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 40px rgba(255, 122, 0, 0.6);
+}
+@keyframes callPulse {
+  0%, 100% { box-shadow: 0 8px 30px rgba(255, 122, 0, 0.4); }
+  50% { box-shadow: 0 8px 30px rgba(255, 122, 0, 0.7), 0 0 0 15px rgba(255, 122, 0, 0.1); }
+}
+
+/* Desktop: Show phone number too */
+@media (min-width: 768px) {
+  .stickyCallBtn {
+    width: auto;
+    padding: 18px 28px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    gap: 10px;
+  }
+  .stickyCallBtn::before {
+    content: "📞";
+    font-size: 24px;
+  }
+  .stickyCallBtn::after {
+    content: "0410 414 969";
+    font-size: 16px;
+  }
+}
+
+/* Mobile: Just phone icon */
+@media (max-width: 767px) {
+  .stickyCallBtn::before {
+    content: "📞";
+  }
+}
+
+/* ========== QUOTE REQUEST POPUP ========== */
+.quotePopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+}
+.quotePopup.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quotePopupInner {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 40px;
+  max-width: 520px;
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  animation: slideUp 0.4s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.quotePopupClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.quotePopupClose:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.quotePopupInner h3 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: var(--accent);
+  font-weight: 800;
+}
+.quotePopupInner p {
+  color: var(--muted);
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.quoteForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.quoteForm input,
+.quoteForm textarea,
+.quoteForm select {
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.quoteForm input:focus,
+.quoteForm textarea:focus,
+.quoteForm select:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+.quoteForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.quoteForm button {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+.quoteForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 176, 0, 0.4);
+}
+
+.quoteSuccessMessage {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+.quoteSuccessMessage.show {
+  display: block;
+}
+.quoteSuccessMessage h4 {
+  color: var(--green);
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.quoteSuccessMessage p {
+  color: var(--muted);
+  font-size: 16px;
+}
+</style>
+
+<!-- 2. ADD THIS BEFORE CLOSING </body> TAG -->
+
+<!-- Sticky Click-to-Call Button -->
+<a href="tel:0410414969" class="stickyCallBtn" aria-label="Call Amped Up Electrical"></a>
+
+<!-- Quote Request Popup -->
+<div class="quotePopup" id="quotePopup">
+  <div class="quotePopupInner">
+    <button class="quotePopupClose" onclick="closeQuotePopup()" aria-label="Close">×</button>
+    
+    <div id="quoteFormContainer">
+      <h3>Get Your Free Quote</h3>
+      <p>Response within 2 hours • No obligation</p>
+      
+      <form class="quoteForm" id="quoteForm" onsubmit="submitQuoteForm(event)">
+        <input type="text" name="name" placeholder="Your Name *" required />
+        <input type="tel" name="phone" placeholder="Phone Number *" required pattern="[0-9\s\+\-\(\)]+" />
+        <input type="email" name="email" placeholder="Email Address *" required />
+        <select name="suburb" required>
+          <option value="">Select Suburb *</option>
+          <option value="Prospect">Prospect</option>
+          <option value="Norwood">Norwood</option>
+          <option value="Unley">Unley</option>
+          <option value="St Peters">St Peters</option>
+          <option value="Burnside">Burnside</option>
+          <option value="Vale Park">Vale Park</option>
+          <option value="Glenelg">Glenelg</option>
+          <option value="North Adelaide">North Adelaide</option>
+          <option value="Adelaide CBD">Adelaide CBD</option>
+          <option value="Other">Other Adelaide Suburb</option>
+        </select>
+        <textarea name="description" placeholder="Brief description of work needed *" required></textarea>
+        <select name="contact_time">
+          <option value="">Preferred Contact Time (Optional)</option>
+          <option value="Morning (7am-12pm)">Morning (7am-12pm)</option>
+          <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
+          <option value="Evening (5pm-7pm)">Evening (5pm-7pm)</option>
+          <option value="Anytime">Anytime</option>
+        </select>
+        <button type="submit">Send Quote Request</button>
+      </form>
+    </div>
+    
+    <div class="quoteSuccessMessage" id="quoteSuccessMessage">
+      <h4>✅ Request Received!</h4>
+      <p>Thanks! I'll call you within 2 hours (usually much faster).</p>
+      <p style="margin-top:16px;"><strong>— Marcus, Amped Up Electrical</strong></p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== QUOTE POPUP LOGIC ========== 
+
+// Show popup triggers
+let popupShown = false;
+let userInteracted = false;
+
+// Track user interaction (scroll or click)
+document.addEventListener('scroll', () => { userInteracted = true; }, { once: true });
+document.addEventListener('click', () => { userInteracted = true; }, { once: true });
+
+// Desktop: Exit intent
+if (window.innerWidth >= 768) {
+  document.addEventListener('mouseout', (e) => {
+    if (!popupShown && userInteracted && e.clientY < 10) {
+      showQuotePopup();
+    }
+  });
+}
+
+// Mobile: Show after 30 seconds OR 50% scroll
+if (window.innerWidth < 768) {
+  setTimeout(() => {
+    if (!popupShown && userInteracted) showQuotePopup();
+  }, 30000);
+  
+  window.addEventListener('scroll', () => {
+    if (!popupShown && userInteracted) {
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 50) showQuotePopup();
+    }
+  });
+}
+
+function showQuotePopup() {
+  if (popupShown) return;
+  document.getElementById('quotePopup').classList.add('show');
+  popupShown = true;
+  document.body.style.overflow = 'hidden'; // Prevent background scroll
+}
+
+function closeQuotePopup() {
+  document.getElementById('quotePopup').classList.remove('show');
+  document.body.style.overflow = 'auto';
+}
+
+// Close on background click
+document.getElementById('quotePopup').addEventListener('click', (e) => {
+  if (e.target.id === 'quotePopup') closeQuotePopup();
+});
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeQuotePopup();
+});
+
+// ========== FORM SUBMISSION ========== 
+async function submitQuoteForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData);
+  
+  try {
+    // Send to FormSpree (free form endpoint - sign up at formspree.io)
+    // Replace YOUR_FORM_ID with actual FormSpree form ID
+    const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    if (response.ok) {
+      // Show success message
+      document.getElementById('quoteFormContainer').style.display = 'none';
+      document.getElementById('quoteSuccessMessage').classList.add('show');
+      
+      // Optional: Send to Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_lead', {
+          'event_category': 'Form',
+          'event_label': 'Quote Request',
+          'value': data.suburb
+        });
+      }
+      
+      // Auto-close after 4 seconds
+      setTimeout(() => {
+        closeQuotePopup();
+        // Reset form for next time
+        setTimeout(() => {
+          document.getElementById('quoteFormContainer').style.display = 'block';
+          document.getElementById('quoteSuccessMessage').classList.remove('show');
+          form.reset();
+        }, 500);
+      }, 4000);
+      
+    } else {
+      alert('Oops! Something went wrong. Please call 0410 414 969 instead.');
+    }
+  } catch (error) {
+    console.error('Form submission error:', error);
+    alert('Network error. Please call 0410 414 969 directly.');
+  }
+}
+
+// Manual trigger for "Get Quote" buttons on page
+function openQuotePopup() {
+  showQuotePopup();
+}
+</script>
+
+<!-- 3. UPDATE EXISTING "GET QUOTE" BUTTONS -->
+<!-- 
+Find any existing quote buttons and add onclick="openQuotePopup(); return false;"
+Example:
+<a href="tel:0410414969" class="ctaBtn" onclick="openQuotePopup(); return false;">Get Free Quote</a>
+-->
