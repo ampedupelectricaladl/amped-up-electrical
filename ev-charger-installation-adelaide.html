@@ -298,6 +298,13 @@
           Or call <a href="tel:0410414969" style="color:var(--accent);font-weight:1000">0410 414 969</a> for immediate quote
         </p>
       </form>
+
+      <div id="quoteSuccess" style="display:none;margin-top:32px;padding:32px;background:rgba(0,255,136,.08);border:1px solid rgba(0,255,136,.3);border-radius:20px;text-align:center">
+        <strong style="display:block;font-size:22px;margin-bottom:12px;color:#00ff88">✓ Quote Request Sent</strong>
+        <span style="color:var(--muted);font-size:16px">I'll be in touch within 2 hours.</span>
+        <p style="margin-top:16px;color:var(--muted)"><strong>- Marcus, Amped Up Electrical</strong></p>
+      </div>
+
     </div>
 
     <div class="card">
@@ -365,5 +372,46 @@
       </p>
     </footer>
   </div>
+
+  <script>
+    // Quote form success handler
+    const quoteForm = document.querySelector('form[action*="formspree"]');
+    const successDiv = document.getElementById('quoteSuccess');
+    
+    if (quoteForm && successDiv) {
+      quoteForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = quoteForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        try {
+          const formData = new FormData(quoteForm);
+          const res = await fetch(quoteForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+          
+          if (res.ok) {
+            quoteForm.style.display = 'none';
+            successDiv.style.display = 'block';
+            document.getElementById('quote').scrollIntoView({behavior:'smooth'});
+          } else {
+            alert('Something went wrong. Please call 0410 414 969 instead.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        } catch (err) {
+          alert('Something went wrong. Please call 0410 414 969 instead.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
