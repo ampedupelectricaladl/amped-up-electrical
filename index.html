@@ -522,50 +522,58 @@
       .btn{padding:14px 20px;font-size:16px}
     }
 
-    /* ========== LOCAL SEO 2026: STICKY CALL + QUOTE POPUP ========== */
+    /* ========== LOCAL SEO 2026: STICKY CALL BUTTON ========== */
     .stickyCallBtn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      z-index: 99;
-      background: linear-gradient(135deg, #ff7a00, #ffb000);
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 8px 30px rgba(255, 122, 0, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      z-index: 9999;
+      display: block;
+      background: linear-gradient(135deg, #ffb000 0%, #ff7a00 100%);
+      color: white;
+      padding: 16px 28px;
+      border-radius: 50px;
       text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0 4px 20px rgba(255, 176, 0, 0.4);
       transition: all 0.3s ease;
-      animation: callPulse 2s ease-in-out infinite;
+      animation: callPulse 2s infinite;
     }
     .stickyCallBtn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 40px rgba(255, 122, 0, 0.6);
+      background: linear-gradient(135deg, #ff7a00 0%, #ff5500 100%);
+      box-shadow: 0 6px 30px rgba(255, 176, 0, 0.6);
+      transform: translateY(-2px);
+    }
+    .stickyCallBtn::before {
+      content: "📞 ";
+      font-size: 20px;
+      margin-right: 8px;
     }
     @keyframes callPulse {
-      0%, 100% { box-shadow: 0 8px 30px rgba(255, 122, 0, 0.4); }
-      50% { box-shadow: 0 8px 30px rgba(255, 122, 0, 0.7), 0 0 0 15px rgba(255, 122, 0, 0.1); }
-    }
-    @media (min-width: 768px) {
-      .stickyCallBtn {
-        width: auto;
-        padding: 18px 28px;
-        border-radius: 50px;
-        font-size: 18px;
-        font-weight: 700;
-        gap: 10px;
+      0%, 100% {
+        box-shadow: 0 4px 20px rgba(255, 176, 0, 0.4);
       }
-      .stickyCallBtn::before { content: "📞"; font-size: 24px; }
-      .stickyCallBtn::after { content: "0410 414 969"; font-size: 16px; }
+      50% {
+        box-shadow: 0 4px 25px rgba(255, 176, 0, 0.7);
+      }
     }
-    @media (max-width: 767px) {
-      .stickyCallBtn::before { content: "📞"; }
+    /* Mobile optimization */
+    @media (max-width: 768px) {
+      .stickyCallBtn {
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        text-align: center;
+        font-size: 20px;
+        padding: 18px 24px;
+      }
+    }
+    @media (max-width: 360px) {
+      .stickyCallBtn {
+        font-size: 16px;
+        padding: 14px 20px;
+      }
     }
     .quotePopupNew {
       position: fixed;
@@ -1013,7 +1021,7 @@
   </div>
 
   <!-- LOCAL SEO 2026: Sticky Call Button & Quote Popup -->
-  <a href="tel:0410414969" class="stickyCallBtn" aria-label="Call Amped Up Electrical"></a>
+  <a href="tel:0410414969" class="stickyCallBtn" aria-label="Call Amped Up Electrical now">CALL NOW 0410 414 969</a>
 
   <div class="quotePopupNew" id="quotePopupNew">
     <div class="quotePopupInnerNew">
