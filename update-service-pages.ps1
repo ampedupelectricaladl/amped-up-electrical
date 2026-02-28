@@ -252,12 +252,12 @@ foreach ($filename in $files) {
         $content = Get-Content $filename -Raw
         
         # Add popup CSS before </style>
-        if ($content -notmatch "quotePopup") {
+        if ($content -notmatch "\.quotePopup \{") {
             $content = $content -replace "</style>", "$popupCSS`n  </style>"
         }
         
         # Add popup HTML and script before </body>
-        if ($content -notmatch "quotePopup") {
+        if ($content -notmatch "Quote Request Popup") {
             $content = $content -replace "</body>", "$popupHTML`n</body>"
         }
         

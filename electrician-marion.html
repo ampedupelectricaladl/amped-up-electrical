@@ -130,4 +130,100 @@
       color: var(--muted);
       font-size: 16px;
     }
-  </style></head><body><div class="wrap"><div class="card"><h1>⚡ Electrician Marion</h1><p style="font-size:18px;color:var(--text)"><strong>Reliable electrical service for Marion.</strong></p><div class="highlight"><p style="margin:0">Fast booking. Call <strong>0410 414 969</strong>.</p></div><h2>Marion Services</h2><ul><li>Switchboards</li><li>Lighting</li><li>Power points</li><li>EV chargers</li></ul><h2>Marion & Area</h2><p>Marion, Oaklands Park, Park Holme, Morphettville</p><div class="highlight"><strong style="display:block;margin-bottom:8px">📞 Marion Electrician</strong><p style="margin-bottom:12px">Owner-operated.</p><a href="tel:0410414969" class="btn">Call 0410 414 969</a> <a href="/" class="btn" style="background:rgba(255,255,255,.08);color:var(--text)">Main Site</a></div><p><strong>Phone:</strong> 0410 414 969 | <strong>Email:</strong> ampedupelectricaladl@gmail.com</p></div></div></body></html>
+  </style></head><body><div class="wrap"><div class="card"><h1>⚡ Electrician Marion</h1><p style="font-size:18px;color:var(--text)"><strong>Reliable electrical service for Marion.</strong></p><div class="highlight"><p style="margin:0">Fast booking. Call <strong>0410 414 969</strong>.</p></div><h2>Marion Services</h2><ul><li>Switchboards</li><li>Lighting</li><li>Power points</li><li>EV chargers</li></ul><h2>Marion & Area</h2><p>Marion, Oaklands Park, Park Holme, Morphettville</p><div class="highlight"><strong style="display:block;margin-bottom:8px">📞 Marion Electrician</strong><p style="margin-bottom:12px">Owner-operated.</p><a href="tel:0410414969" class="btn">Call 0410 414 969</a> <a href="/" class="btn" style="background:rgba(255,255,255,.08);color:var(--text)">Main Site</a></div><p><strong>Phone:</strong> 0410 414 969 | <strong>Email:</strong> ampedupelectricaladl@gmail.com</p></div></div>
+  <!-- Quote Request Popup -->
+  <div class="quotePopup" id="quotePopup">
+    <div class="quotePopupInner">
+      <button class="quotePopupClose" onclick="closeQuotePopup()" aria-label="Close">×</button>
+      
+      <div id="quoteFormContainer">
+        <h3>Get Your Free Quote</h3>
+        <p>Response within 2 hours • No obligation</p>
+        
+        <form class="quoteForm" id="quoteForm" onsubmit="submitQuoteForm(event)">
+          <input type="text" name="name" placeholder="Your Name *" required />
+          <input type="tel" name="phone" placeholder="Phone Number *" required pattern="[0-9\s\+\-\(\)]+" />
+          <input type="email" name="email" placeholder="Email Address *" required />
+          <select name="suburb" required>
+            <option value="">Select Suburb *</option>
+            <option value="Prospect">Prospect</option>
+            <option value="Norwood">Norwood</option>
+            <option value="Unley">Unley</option>
+            <option value="St Peters">St Peters</option>
+            <option value="Burnside">Burnside</option>
+            <option value="Vale Park">Vale Park</option>
+            <option value="Glenelg">Glenelg</option>
+            <option value="North Adelaide">North Adelaide</option>
+            <option value="Adelaide CBD">Adelaide CBD</option>
+            <option value="Other">Other Adelaide Suburb</option>
+          </select>
+          <textarea name="description" placeholder="Brief description of work needed *" required></textarea>
+          <select name="contact_time">
+            <option value="">Preferred Contact Time (Optional)</option>
+            <option value="Morning (7am-12pm)">Morning (7am-12pm)</option>
+            <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
+            <option value="Evening (5pm-7pm)">Evening (5pm-7pm)</option>
+            <option value="Anytime">Anytime</option>
+          </select>
+          <button type="submit">Send Quote Request</button>
+        </form>
+      </div>
+      
+      <div class="quoteSuccessMessage" id="quoteSuccessMessage">
+        <h4>✅ Request Received!</h4>
+        <p>Thanks! I'll call you within 2 hours (usually much faster).</p>
+        <p style="margin-top:16px;"><strong>— Marcus, Amped Up Electrical</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quote popup logic
+    let popupShown = false;
+
+    function showQuotePopup() {
+      if (popupShown) return;
+      document.getElementById('quotePopup').classList.add('show');
+      popupShown = true;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeQuotePopup() {
+      document.getElementById('quotePopup').classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+    function openQuotePopup() {
+      showQuotePopup();
+    }
+
+    document.getElementById('quotePopup').addEventListener('click', (e) => {
+      if (e.target.id === 'quotePopup') closeQuotePopup();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeQuotePopup();
+    });
+
+    async function submitQuoteForm(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      
+      document.getElementById('quoteFormContainer').style.display = 'none';
+      document.getElementById('quoteSuccessMessage').classList.add('show');
+      
+      console.log('Quote request:', data);
+      
+      setTimeout(() => {
+        closeQuotePopup();
+        setTimeout(() => {
+          document.getElementById('quoteFormContainer').style.display = 'block';
+          document.getElementById('quoteSuccessMessage').classList.remove('show');
+          form.reset();
+        }, 500);
+      }, 4000);
+    }
+  </script>
+</body></html>
