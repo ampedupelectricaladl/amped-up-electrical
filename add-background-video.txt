@@ -1,0 +1,43 @@
+=== Background Video Implementation ===
+
+1. CSS to add (in the <style> section):
+
+/* Background Video */
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.bg-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(3px);
+  opacity: 0.25;
+}
+
+@media (max-width: 768px) {
+  .bg-video {
+    display: none; /* Hide on mobile to save data */
+  }
+}
+
+2. HTML to add (right after <body> tag):
+
+<!-- Background Video -->
+<div class="bg-video">
+  <video autoplay muted loop playsinline>
+    <source src="adelaide-bg-video-compressed.mp4" type="video/mp4">
+  </video>
+</div>
+
+3. Notes:
+- Video is blurred (blur(3px)) and low opacity (0.25) so content stays readable
+- Muted autoplay loop - plays continuously in background
+- Hidden on mobile to save data/bandwidth
+- playsinline prevents fullscreen on iOS

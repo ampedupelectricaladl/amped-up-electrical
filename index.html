@@ -833,22 +833,55 @@
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
       
-      // For now, just show success (you can integrate with ServiceM8 or email later)
-      document.getElementById('quoteFormContainer').style.display = 'none';
-      document.getElementById('quoteSuccessMessage').classList.add('show');
-      
-      // Send data to Marcus via SMS or email (add integration here)
-      console.log('Quote request:', data);
-      
-      // Auto-close after 4 seconds
-      setTimeout(() => {
-        closeQuotePopup();
-        setTimeout(() => {
-          document.getElementById('quoteFormContainer').style.display = 'block';
-          document.getElementById('quoteSuccessMessage').classList.remove('show');
-          form.reset();
-        }, 500);
-      }, 4000);
+      try {
+        // Send to Formspree (Marcus: sign up at formspree.io and replace YOUR_FORM_ID)
+        const response = await fetch('https://formspree.io/f/xeojqbqw', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: data.name,
+            phone: data.phone,
+            email: data.email,
+            suburb: data.suburb,
+            description: data.description,
+            contact_time: data.contact_time || 'Anytime',
+            _subject: `New Quote Request from ${data.name}`,
+            _replyto: data.email
+          })
+        });
+        
+        if (response.ok) {
+          // Show success message
+          document.getElementById('quoteFormContainer').style.display = 'none';
+          document.getElementById('quoteSuccessMessage').classList.add('show');
+          
+          // Track conversion in Google Analytics (if set up)
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'quote_request', {
+              'event_category': 'conversion',
+              'value': 200
+            });
+          }
+          
+          // Auto-close after 4 seconds
+          setTimeout(() => {
+            closeQuotePopup();
+            setTimeout(() => {
+              document.getElementById('quoteFormContainer').style.display = 'block';
+              document.getElementById('quoteSuccessMessage').classList.remove('show');
+              form.reset();
+            }, 500);
+          }, 4000);
+        } else {
+          alert('Oops! Something went wrong. Please call 0410 414 969 instead.');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Network error. Please call 0410 414 969 directly.');
+      }
     }
   </script>
 </body>
