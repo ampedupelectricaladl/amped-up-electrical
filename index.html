@@ -11,6 +11,15 @@
   <meta property="og:description" content="Owner-operated electrical service. Same-day availability. Call 0410 414 969." />
   <meta property="og:type" content="website" />
 
+  <!-- Google Ads Conversion Tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17871843169"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17871843169');
+  </script>
+
   <link rel="icon" type="image/png" href="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" />
 
   <script type="application/ld+json">
@@ -874,6 +883,12 @@
             gtag('event', 'quote_request', {
               'event_category': 'conversion',
               'value': 200
+            });
+            // Google Ads conversion tracking
+            gtag('event', 'conversion', {
+              'send_to': 'AW-17871843169/uCeJCLaZvYAcEOHe-slC',
+              'value': 200.0,
+              'currency': 'AUD'
             });
           }
           
