@@ -264,7 +264,7 @@
       </div>
 
       <div style="text-align:center">
-        <a href="tel:0410414969" class="btn" style="font-size:24px;padding:20px 40px">📞 Call Emergency Line</a>
+        <a href="tel:0410414969" class="btn" style="font-size:24px;padding:20px 40px" onclick="return handleCallClick(event)">📞 Call Emergency Line</a>
         <p style="color:var(--muted);font-size:14px;margin-top:12px">Available 24 hours • 7 days • Owner-operated</p>
       </div>
     </div>
@@ -421,7 +421,7 @@
       <p class="sub">Electrical emergencies don't wait for business hours. Neither do I.</p>
       
       <div style="margin:24px 0">
-        <a href="tel:0410414969" class="btn" style="font-size:26px;padding:22px 48px">📞 0410 414 969</a>
+        <a href="tel:0410414969" class="btn" style="font-size:26px;padding:22px 48px" onclick="return handleCallClick(event)">📞 0410 414 969</a>
       </div>
       
       <p style="color:var(--muted);font-size:14px">
@@ -673,7 +673,7 @@
     }
   </style>
 
-  <a href="tel:0410414969" class="sticky-call-button" aria-label="Call Emergency Electrician now">
+  <a href="tel:0410414969" class="sticky-call-button" aria-label="Call Emergency Electrician now" onclick="return handleCallClick(event)">
     CALL NOW 0410 414 969
   </a>
   <!-- END STICKY CALL BUTTON -->
@@ -743,6 +743,17 @@
 
     function openQuotePopup() {
       showQuotePopup();
+    }
+
+    // Handle call button clicks - popup on desktop, call on mobile
+    function handleCallClick(event) {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+      if (!isMobile) {
+        event.preventDefault();
+        openQuotePopup();
+        return false;
+      }
+      return true; // Allow phone call on mobile
     }
 
     document.getElementById('quotePopup').addEventListener('click', (e) => {
