@@ -865,10 +865,20 @@
       showQuotePopup();
     }
 
-    // Handle call button clicks - always allow phone call to go through
+    // Handle call button clicks - desktop shows popup, mobile makes call
     function handleCallClick(event) {
-      // Let the tel: link work normally - don't intercept
-      return true;
+      // Check if mobile (screen width < 768px)
+      const isMobile = window.innerWidth < 768;
+      
+      if (isMobile) {
+        // Mobile: let the tel: link work normally
+        return true;
+      } else {
+        // Desktop: prevent the call, show quote popup instead
+        event.preventDefault();
+        showQuotePopup();
+        return false;
+      }
     }
 
     // Form submission
