@@ -865,15 +865,10 @@
       showQuotePopup();
     }
 
-    // Handle call button clicks - popup on desktop, call on mobile
+    // Handle call button clicks - always allow phone call to go through
     function handleCallClick(event) {
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
-      if (!isMobile) {
-        event.preventDefault();
-        openQuotePopup();
-        return false;
-      }
-      return true; // Allow phone call on mobile
+      // Let the tel: link work normally - don't intercept
+      return true;
     }
 
     // Form submission
