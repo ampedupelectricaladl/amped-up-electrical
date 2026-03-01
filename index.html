@@ -817,20 +817,46 @@
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set year
+      const yearEl = document.getElementById("year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
 
-    // ========== QUOTE POPUP LOGIC ========== v2.0
+      // Setup event listeners
+      const quotePopup = document.getElementById('quotePopup');
+      if (quotePopup) {
+        quotePopup.addEventListener('click', (e) => {
+          if (e.target.id === 'quotePopup') closeQuotePopup();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeQuotePopup();
+      });
+    });
+
+    // ========== QUOTE POPUP LOGIC ========== v3.0
     let popupShown = false;
 
     function showQuotePopup() {
       if (popupShown) return;
-      document.getElementById('quotePopup').classList.add('show');
+      const popup = document.getElementById('quotePopup');
+      if (!popup) {
+        console.error('Quote popup element not found');
+        return;
+      }
+      popup.classList.add('show');
       popupShown = true;
       document.body.style.overflow = 'hidden';
     }
 
     function closeQuotePopup() {
-      document.getElementById('quotePopup').classList.remove('show');
+      const popup = document.getElementById('quotePopup');
+      if (!popup) return;
+      popup.classList.remove('show');
       document.body.style.overflow = 'auto';
     }
 
@@ -848,16 +874,6 @@
       }
       return true; // Allow phone call on mobile
     }
-
-    // Close on background click
-    document.getElementById('quotePopup').addEventListener('click', (e) => {
-      if (e.target.id === 'quotePopup') closeQuotePopup();
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeQuotePopup();
-    });
 
     // Form submission
     async function submitQuoteForm(e) {
