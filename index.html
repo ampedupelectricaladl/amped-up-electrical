@@ -857,6 +857,7 @@
       const popup = document.getElementById('quotePopup');
       if (!popup) return;
       popup.classList.remove('show');
+      popupShown = false; // Reset flag so popup can be opened again
       document.body.style.overflow = 'auto';
     }
 
