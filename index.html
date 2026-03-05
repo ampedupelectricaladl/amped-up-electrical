@@ -910,7 +910,8 @@
           })
         });
         
-        if (response.ok) {
+        const result = await response.json().catch(() => ({}));
+        if (response.ok && result.success !== 'false') {
           // Show success message
           document.getElementById('quoteFormContainer').style.display = 'none';
           document.getElementById('quoteSuccessMessage').classList.add('show');
