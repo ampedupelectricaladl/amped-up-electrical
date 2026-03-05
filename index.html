@@ -890,8 +890,8 @@
       const data = Object.fromEntries(formData);
       
       try {
-        // Send to Formspree (Marcus: sign up at formspree.io and replace YOUR_FORM_ID)
-        const response = await fetch('https://formspree.io/f/xeojqbqw', {
+        // Send via FormSubmit (no account needed - emails directly to ampedupelectricaladl@gmail.com)
+        const response = await fetch('https://formsubmit.co/ajax/ampedupelectricaladl@gmail.com', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -904,8 +904,9 @@
             suburb: data.suburb,
             description: data.description,
             contact_time: data.contact_time || 'Anytime',
-            _subject: `New Quote Request from ${data.name}`,
-            _replyto: data.email
+            _subject: `⚡ New Quote Request from ${data.name} - ${data.suburb}`,
+            _replyto: data.email,
+            _template: 'table'
           })
         });
         
