@@ -611,6 +611,8 @@
       overflow: hidden;
     }
     .bg-video video {
+      pointer-events:none;
+      -webkit-mask-image:-webkit-radial-gradient(white,black);
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -623,7 +625,7 @@
 <body>
   <!-- Background Video -->
   <div class="bg-video">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5">
       <source src="adelaide-bg.mp4" type="video/mp4">
     </video>
   </div>
@@ -948,6 +950,38 @@
       }
     }
   </script>
+
+<script>
+(function(){
+  // Force autoplay on all background videos (bypasses iOS Safari restrictions)
+  function playAllVideos(){
+    document.querySelectorAll('video').forEach(function(v){
+      v.muted=true;
+      v.setAttribute('muted','');
+      v.setAttribute('playsinline','');
+      v.setAttribute('webkit-playsinline','');
+      v.play && v.play().catch(function(){
+        // autoplay still blocked - hide video, show solid bg colour instead
+        if(v.parentElement) v.parentElement.style.background='linear-gradient(135deg,#1a1a2e,#16213e)';
+      });
+    });
+  }
+  // Try immediately
+  playAllVideos();
+  // Also try after any user gesture (unlocks autoplay for real)
+  var once=false;
+  ['touchstart','click','scroll'].forEach(function(evt){
+    document.addEventListener(evt,function(){
+      if(!once){once=true;playAllVideos();}
+    },{passive:true,once:true});
+  });
+  // Prevent browser from showing native video controls overlay
+  document.querySelectorAll('video').forEach(function(v){
+    v.style.pointerEvents='none';
+    v.controls=false;
+  });
+})();
+</script>
 </body>
 </html>
 
