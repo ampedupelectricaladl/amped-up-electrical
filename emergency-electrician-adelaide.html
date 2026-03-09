@@ -142,7 +142,7 @@
       margin:24px 0;
       letter-spacing:2px;
     }
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
+    .stat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}
     .stat{
       border:1px solid var(--border);
       border-radius:18px;
@@ -150,8 +150,8 @@
       background:#f8f9fa;
       text-align:center;
     }
-    .stat strong{font-size:28px;display:block;color:var(--accent);margin-bottom:8px}
-    .stat span{color:var(--muted);font-size:14px}
+    .stat{font-size:28px;display:block;color:var(--accent);margin-bottom:8px}
+    .stat{color:var(--muted);font-size:14px}
     .checkList{list-style:none;padding:0;margin:20px 0}
     .checkList li{padding:12px 0;border-bottom:1px solid var(--border);font-size:16px}
     .checkList li:before{content:"⚡";color:var(--accent);font-weight:1000;margin-right:12px;font-size:18px}
@@ -159,7 +159,7 @@
     .urgentList li{padding:16px;margin:10px 0;border-radius:14px;background:rgba(255,51,51,.10);border:1px solid rgba(255,51,51,.30);font-size:16px;font-weight:600}
     .urgentList li:before{content:"🚨";margin-right:12px;font-size:20px}
     @media (max-width: 768px){
-      .stats{grid-template-columns:1fr}
+      .stat{grid-template-columns:1fr}
       h1{font-size:36px}
       .phoneNumber{font-size:36px}
       .card{padding:24px}
