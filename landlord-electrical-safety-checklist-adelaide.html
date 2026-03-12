@@ -829,19 +829,30 @@
           <input type="text" name="name" placeholder="Your Name *" required />
           <input type="tel" name="phone" placeholder="Phone Number *" required pattern="[0-9\s\+\-\(\)]+" />
           <input type="email" name="email" placeholder="Email Address *" required />
-          <select name="suburb" required>
-            <option value="">Select Suburb *</option>
-            <option value="Prospect">Prospect</option>
-            <option value="Norwood">Norwood</option>
-            <option value="Unley">Unley</option>
-            <option value="St Peters">St Peters</option>
-            <option value="Burnside">Burnside</option>
-            <option value="Vale Park">Vale Park</option>
-            <option value="Glenelg">Glenelg</option>
-            <option value="North Adelaide">North Adelaide</option>
-            <option value="Adelaide CBD">Adelaide CBD</option>
-            <option value="Other">Other Adelaide Suburb</option>
-          </select>
+          <input type="text" name="suburb" placeholder="Your Suburb *" required autocomplete="off" list="suburb-suggestions" style="text-transform:capitalize" />
+          <datalist id="suburb-suggestions">
+            <option value="Adelaide CBD"><option value="Aberfoyle Park"><option value="Aldgate"><option value="Angle Park"><option value="Ascot Park">
+            <option value="Athelstone"><option value="Belair"><option value="Beverley"><option value="Black Forest"><option value="Blackwood">
+            <option value="Blair Athol"><option value="Bowden"><option value="Brighton"><option value="Broadview"><option value="Brompton">
+            <option value="Burnside"><option value="Campbelltown"><option value="Clarence Park"><option value="Clearview"><option value="Coromandel Valley">
+            <option value="Colonel Light Gardens"><option value="Croydon"><option value="Daw Park"><option value="Dulwich"><option value="Edwardstown">
+            <option value="Enfield"><option value="Felixstow"><option value="Firle"><option value="Flinders Park"><option value="Forestville">
+            <option value="Fulham"><option value="Fullarton"><option value="Gilles Plains"><option value="Glenelg"><option value="Glenelg North">
+            <option value="Glenelg South"><option value="Glenunga"><option value="Goodwood"><option value="Grange"><option value="Hackham">
+            <option value="Hallett Cove"><option value="Hampstead Gardens"><option value="Hawthorn"><option value="Henley Beach"><option value="Highbury">
+            <option value="Highgate"><option value="Hindmarsh"><option value="Holden Hill"><option value="Hyde Park"><option value="Kensington">
+            <option value="Kensington Gardens"><option value="Kensington Park"><option value="Kent Town"><option value="Kingswood"><option value="Linden Park">
+            <option value="Lockleys"><option value="Magill"><option value="Malvern"><option value="Marden"><option value="Marion">
+            <option value="Marleston"><option value="Modbury"><option value="Mile End"><option value="Millswood"><option value="Mitcham">
+            <option value="Morphett Vale"><option value="Nailsworth"><option value="Newton"><option value="Norwood"><option value="North Adelaide">
+            <option value="Northgate"><option value="O'Halloran Hill"><option value="Paradise"><option value="Parkside"><option value="Pasadena">
+            <option value="Payneham"><option value="Plympton"><option value="Port Adelaide"><option value="Prospect"><option value="Rostrevor">
+            <option value="Rose Park"><option value="Salisbury"><option value="Semaphore"><option value="Seaton"><option value="Skye">
+            <option value="Springfield"><option value="St Peters"><option value="Stonyfell"><option value="Thebarton"><option value="Toorak Gardens">
+            <option value="Torrensville"><option value="Unley"><option value="Vale Park"><option value="Valley View"><option value="Walkerville">
+            <option value="Wayville"><option value="West Lakes"><option value="Westbourne Park"><option value="Windsor Gardens"><option value="Woodville">
+            <option value="Crafers"><option value="Stirling"><option value="Blackwood"><option value="Belair"><option value="Coromandel Valley">
+          </datalist>
           <textarea name="description" placeholder="Brief description of work needed *" required></textarea>
           <select name="contact_time">
             <option value="">Preferred Contact Time (Optional)</option>
