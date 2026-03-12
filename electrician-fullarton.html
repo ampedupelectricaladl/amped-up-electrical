@@ -152,11 +152,12 @@
     function openQ(){document.getElementById('qpop').style.display='flex';document.body.style.overflow='hidden'}
     document.getElementById('qpop').onclick=function(e){if(e.target===this){this.style.display='none';document.body.style.overflow=''}}
     async function submitQ(e){
-      e.preventDefault();const fd=new FormData(e.target),d=Object.fromEntries(fd);
+      e.preventDefault();const fd=new FormData(e.target),d=Object.fromEntries(fd);sendToGHL(d);
       document.getElementById('qform').style.display='none';document.getElementById('qsuccess').style.display='block';
       await fetch('https://formsubmit.co/ajax/919397667cb22965ddcda1db70ee9eab',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({name:d.name,phone:d.phone,email:d.email||'-',description:d.desc,suburb:'Fullarton',_subject:'Quote request – Fullarton'})});
       setTimeout(()=>{document.getElementById('qpop').style.display='none';document.body.style.overflow='';document.getElementById('qform').style.display='block';document.getElementById('qsuccess').style.display='none';e.target.reset()},4000)
     }
+  function sendToGHL(d){try{fetch('https://services.leadconnectorhq.com/contacts/',{method:'POST',headers:{'Authorization':'Bearer pit-79bc7b99-59f9-42d5-8e29-b91db08e3546','Version':'2021-07-28','Content-Type':'application/json'},body:JSON.stringify({locationId:'LzJb6cIZYOO3kfG5z8yG',firstName:(d.name||'').split(' ')[0]||'Website',lastName:(d.name||'').split(' ').slice(1).join(' ')||'Lead',phone:d.phone,email:d.email,address1:d.suburb||d.desc||'Fullarton',source:'Website',tags:['new-lead','website-lead']})}).catch(()=>{})}catch(e){}}
   </script>
 </body>
 </html>
