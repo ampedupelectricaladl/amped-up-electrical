@@ -895,12 +895,41 @@
       }
     }
 
+    // Send lead to GHL CRM (silent, fire-and-forget)
+    function sendToGHL(data) {
+      try {
+        const ghlBody = {
+          locationId: 'LzJb6cIZYOO3kfG5z8yG',
+          firstName: (data.name||'').split(' ')[0] || 'Website',
+          lastName: (data.name||'').split(' ').slice(1).join(' ') || 'Lead',
+          phone: data.phone,
+          email: data.email,
+          address1: data.suburb,
+          source: 'Website',
+          tags: ['new-lead','website-lead'],
+        };
+        // Use GHL Private Integration token (read-only risk: contact creation only)
+        fetch('https://services.leadconnectorhq.com/contacts/', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer pit-79bc7b99-59f9-42d5-8e29-b91db08e3546',
+            'Version': '2021-07-28',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(ghlBody)
+        }).catch(()=>{});
+      } catch(e) {}
+    }
+
     // Form submission
     async function submitQuoteForm(e) {
       e.preventDefault();
       const form = e.target;
       const formData = new FormData(form);
       const data = Object.fromEntries(formData);
+
+      // Fire lead into GHL CRM immediately
+      sendToGHL(data);
       
       try {
         // Send via FormSubmit (no account needed - emails directly to ampedupelectricaladl@gmail.com)
