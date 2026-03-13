@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -14,8 +14,9 @@
       --muted:#666666;
       --border:#e0e0e0;
       --accent:#ffb000;
-      --green:#00ff88;
+      --green:#00cc70;
       --red:#ff3333;
+      --grey:#999999;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
@@ -24,1083 +25,1247 @@
       color:var(--text);
       line-height:1.6;
       padding:20px;
+      max-width:900px;
+      margin:0 auto;
     }
-    .wrap{max-width:800px;margin:0 auto}
-    
+
     .header{
       text-align:center;
       margin-bottom:32px;
       padding-bottom:24px;
       border-bottom:2px solid var(--border);
     }
-    .logo{height:48px;margin-bottom:16px}
-    h1{font-size:28px;margin-bottom:8px;color:var(--accent)}
-    .subtitle{color:var(--muted);font-size:15px}
-    
-    .customerInfo{
+    .logo{height:48px;margin-bottom:12px}
+    h1{font-size:26px;margin-bottom:6px;color:var(--accent);font-weight:800}
+    .subtitle{color:var(--muted);font-size:14px}
+
+    .btn-print{
+      display:inline-block;
+      background:var(--accent);
+      color:#1a1a1a;
+      border:none;
+      padding:14px 28px;
+      border-radius:8px;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      margin-bottom:24px;
+      transition:background .2s;
+    }
+    .btn-print:hover{background:#ff9500}
+    .btn-print svg{
+      width:18px;height:18px;
+      display:inline-block;
+      vertical-align:middle;
+      margin-right:6px;
+    }
+
+    /* ── TIER SELECTOR ── */
+    .tier-selector{
       background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:16px;
+      border:2px solid var(--border);
+      border-radius:12px;
       padding:24px;
       margin-bottom:32px;
     }
-    .customerInfo h2{font-size:20px;margin-bottom:16px;color:var(--accent)}
-    .formGrid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-    .formField{
+    .tier-selector h2{font-size:18px;margin-bottom:16px;color:var(--text);font-weight:700}
+    .tier-buttons{
       display:flex;
-      flex-direction:column;
-      gap:8px;
+      gap:12px;
+      flex-wrap:wrap;
     }
-    .formField.full{grid-column:1/-1}
-    label{font-size:14px;font-weight:600;color:var(--muted)}
-    input,textarea{
-      background:rgba(255,255,255,.05);
+    .tier-btn{
+      flex:1;
+      min-width:140px;
+      background:#fff;
+      border:2px solid var(--border);
+      border-radius:8px;
+      padding:16px 12px;
+      cursor:pointer;
+      text-align:center;
+      transition:all .2s;
+      font-size:15px;
+      font-weight:600;
+    }
+    .tier-btn:hover{border-color:var(--accent)}
+    .tier-btn.active{
+      background:var(--accent);
+      border-color:var(--accent);
+      color:#1a1a1a;
+      font-weight:700;
+    }
+    .tier-btn .tier-num{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.7}
+    .tier-btn .tier-name{font-size:15px}
+
+    /* ── SECTIONS ── */
+    .section{
+      background:#fff;
       border:1px solid var(--border);
       border-radius:12px;
-      padding:12px 16px;
-      color:var(--text);
-      font-size:15px;
-      font-family:inherit;
-    }
-    input:focus,textarea:focus{
-      outline:none;
-      border-color:var(--accent);
-    }
-    
-    .section{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:16px;
       padding:24px;
       margin-bottom:24px;
     }
-    .section h3{
-      font-size:20px;
+    .section.hidden{display:none}
+    .section h2{
+      font-size:18px;
+      font-weight:700;
+      color:var(--text);
       margin-bottom:20px;
-      color:var(--accent);
-      display:flex;
-      align-items:center;
-      gap:12px;
+      padding-bottom:12px;
+      border-bottom:2px solid var(--border);
     }
-    
-    .checkItem{
-      border-bottom:1px solid var(--border);
-      padding:16px 0;
-    }
-    .checkItem:last-child{border:none}
-    
-    .checkRow{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:8px;
-    }
-    .checkLabel{font-weight:500;font-size:15px}
-    
-    .toggleButtons{
-      display:flex;
-      gap:8px;
-    }
-    .toggleBtn{
-      padding:8px 20px;
-      border-radius:8px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.02);
-      color:var(--muted);
-      cursor:pointer;
-      font-weight:600;
-      font-size:14px;
-      transition:all 0.2s;
-    }
-    .toggleBtn:hover{background:rgba(255,255,255,.05)}
-    .toggleBtn.pass{border-color:var(--green);background:rgba(0,255,136,.1);color:var(--green)}
-    .toggleBtn.fail{border-color:var(--red);background:rgba(255,51,51,.1);color:var(--red)}
-    .toggleBtn.na{border-color:var(--muted);background:rgba(201,201,214,.1);color:var(--muted)}
-    
-    .notes{
-      margin-top:8px;
-    }
-    .notes textarea{
-      width:100%;
-      min-height:60px;
-      font-size:14px;
-    }
-    
-    .photoUpload{
-      margin-top:12px;
-      display:none;
-    }
-    .photoUpload.show{display:block}
-    .photoBtn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 16px;
-      background:rgba(255,176,0,.12);
-      border:1px solid rgba(255,176,0,.3);
-      border-radius:10px;
-      color:var(--accent);
-      cursor:pointer;
-      font-size:14px;
-      font-weight:600;
-    }
-    
-    .summary{
-      background:linear-gradient(135deg,rgba(255,176,0,.16),rgba(255,122,0,.12));
-      border:2px solid rgba(255,176,0,.35);
-      border-radius:16px;
-      padding:32px;
-      margin-bottom:32px;
-      text-align:center;
-    }
-    .summary h2{font-size:24px;margin-bottom:16px}
-    .summaryGrid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-      margin-top:24px;
-    }
-    .summaryCard{
-      background:rgba(0,0,0,.3);
-      border-radius:12px;
-      padding:20px;
-    }
-    .summaryCard strong{
-      display:block;
-      font-size:36px;
-      margin-bottom:8px;
-    }
-    .summaryCard.pass strong{color:var(--green)}
-    .summaryCard.fail strong{color:var(--red)}
-    .summaryCard.na strong{color:var(--muted)}
-    .summaryCard span{font-size:14px;color:var(--muted)}
-    
-    .recommendations{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:24px;
-      margin-bottom:32px;
-    }
-    .recommendations h3{font-size:20px;margin-bottom:16px;color:var(--red)}
-    .recommendations ul{
-      list-style:none;
-      margin:16px 0;
-    }
-    .recommendations li{
-      padding:12px;
-      background:rgba(255,51,51,.05);
-      border:1px solid rgba(255,51,51,.2);
-      border-radius:10px;
-      margin-bottom:8px;
-      color:var(--muted);
-    }
-    .recommendations li strong{color:var(--red)}
-    
-    .actions{
-      display:flex;
-      gap:16px;
-      margin-top:32px;
-    }
-    .btn{
-      flex:1;
-      padding:18px 32px;
-      border-radius:12px;
-      border:none;
-      font-weight:bold;
+    .section h3{
       font-size:16px;
-      cursor:pointer;
-      transition:all 0.2s;
+      font-weight:700;
+      color:var(--text);
+      margin:24px 0 12px;
     }
-    .btn.primary{
-      background:linear-gradient(135deg,var(--accent),#ff7a00);
-      color:#111;
+
+    /* ── FORM GRID ── */
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-bottom:20px;
     }
-    .btn.secondary{
-      background:rgba(255,255,255,.05);
+    @media(max-width:600px){
+      .form-grid{grid-template-columns:1fr}
+    }
+    .form-field{display:flex;flex-direction:column;gap:6px}
+    .form-field.full{grid-column:1/-1}
+    label{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea{
       border:1px solid var(--border);
+      border-radius:6px;
+      padding:12px;
+      font-size:15px;
+      font-family:inherit;
+      background:#fff;
       color:var(--text);
     }
-    .btn:hover{transform:translateY(-2px)}
-    
-    @media (max-width: 768px){
-      .formGrid{grid-template-columns:1fr}
-      .summaryGrid{grid-template-columns:1fr}
-      .actions{flex-direction:column}
+    input:focus,select:focus,textarea:focus{
+      outline:none;
+      border-color:var(--accent);
     }
-    
-    /* PDF-friendly styles */
-    .pdf-mode{
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-      color-adjust: exact !important;
+    textarea{resize:vertical;min-height:80px}
+
+    /* ── CHECK ITEMS ── */
+    .check-item{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      padding:16px 0;
+      border-bottom:1px solid var(--border);
     }
-    .pdf-mode body{
-      background:#fff !important;
-      color:#000 !important;
+    .check-item:last-child{border-bottom:none}
+    .check-label{
+      flex:1;
+      font-size:15px;
+      color:var(--text);
+      padding-top:8px;
+      font-weight:500;
     }
-    .pdf-mode .wrap{
-      background:#fff !important;
+    .check-controls{
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+      flex-direction:column;
     }
-    .pdf-mode .header{
-      border-bottom:2px solid #333 !important;
+    .toggle-group{
+      display:flex;
+      gap:6px;
     }
-    .pdf-mode h1,.pdf-mode h2,.pdf-mode h3{
-      color:#ffb000 !important;
+    .toggle-btn{
+      min-width:70px;
+      min-height:44px;
+      padding:10px 14px;
+      border:2px solid var(--border);
+      border-radius:6px;
+      background:#fff;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.05em;
+      transition:all .15s;
+      color:var(--muted);
     }
-    .pdf-mode .subtitle,.pdf-mode label,.pdf-mode .muted{
-      color:#666 !important;
+    .toggle-btn:hover{border-color:var(--accent)}
+    .toggle-btn.active.pass{
+      background:var(--green);
+      border-color:var(--green);
+      color:#fff;
     }
-    .pdf-mode .customerInfo,.pdf-mode .section,.pdf-mode .recommendations{
-      background:#f5f5f5 !important;
-      border:1px solid #ddd !important;
-      color:#000 !important;
+    .toggle-btn.active.fail{
+      background:var(--red);
+      border-color:var(--red);
+      color:#fff;
     }
-    .pdf-mode input,.pdf-mode textarea{
-      background:#fff !important;
-      border:1px solid #ccc !important;
-      color:#000 !important;
+    .toggle-btn.active.na{
+      background:var(--grey);
+      border-color:var(--grey);
+      color:#fff;
     }
-    .pdf-mode .summary{
-      background:#fff4e6 !important;
-      border:2px solid #ffb000 !important;
-      color:#000 !important;
+    .check-notes{
+      width:100%;
+      margin-top:8px;
+      display:none;
     }
-    .pdf-mode .summaryCard{
-      background:#f0f0f0 !important;
-      color:#000 !important;
+    .check-notes.visible{display:block}
+    .check-notes textarea{
+      width:100%;
+      min-height:70px;
+      font-size:14px;
     }
-    .pdf-mode .toggleBtn.pass{
-      border-color:#00cc66 !important;
-      background:#e6ffe6 !important;
-      color:#00cc66 !important;
+
+    /* ── ROOM CHECKLIST ── */
+    .room-checks{
+      display:flex;
+      flex-direction:column;
+      gap:0;
     }
-    .pdf-mode .toggleBtn.fail{
-      border-color:#ff3333 !important;
-      background:#ffe6e6 !important;
-      color:#ff3333 !important;
+    .room-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      border-bottom:1px solid var(--border);
+      gap:16px;
+      flex-wrap:wrap;
     }
-    .pdf-mode .toggleBtn.na{
-      border-color:#999 !important;
-      background:#f0f0f0 !important;
-      color:#666 !important;
+    .room-item:last-child{border-bottom:none}
+    .room-name{
+      font-weight:600;
+      font-size:15px;
+      color:var(--text);
+      min-width:140px;
     }
-    .pdf-mode .recommendations{
-      background:#fff5f5 !important;
+    .room-controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
     }
-    .pdf-mode .recommendations h3{
-      color:#ff3333 !important;
+    .room-notes{
+      flex-basis:100%;
+      margin-top:8px;
+      display:none;
     }
-    .pdf-mode .recommendations li{
-      background:#ffe6e6 !important;
-      border:1px solid #ffcccc !important;
-      color:#000 !important;
+    .room-notes.visible{display:block}
+
+    /* ── SUMMARY ── */
+    .summary-status{
+      background:var(--panel);
+      border:2px solid var(--border);
+      border-radius:8px;
+      padding:20px;
+      margin-bottom:20px;
+      text-align:center;
     }
-    .pdf-mode .recommendations li strong{
-      color:#ff3333 !important;
+    .summary-status h3{
+      font-size:14px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--muted);
+      margin-bottom:8px;
     }
-    .pdf-mode .btn,.pdf-mode .photoBtn,.pdf-mode .actions{
-      display:none !important;
+    .summary-status .status-value{
+      font-size:24px;
+      font-weight:800;
+      color:var(--text);
     }
-    
+    .summary-status.pass-status .status-value{color:var(--green)}
+    .summary-status.fail-status .status-value{color:var(--red)}
+    .summary-status.attention-status .status-value{color:#ff9500}
+
+    .fail-list{
+      background:#fff5f5;
+      border:1px solid #ffcccc;
+      border-radius:8px;
+      padding:16px;
+      margin-bottom:20px;
+    }
+    .fail-list h3{
+      font-size:15px;
+      font-weight:700;
+      color:var(--red);
+      margin-bottom:12px;
+    }
+    .fail-list ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .fail-list li{
+      padding:8px 0;
+      border-bottom:1px solid #ffe0e0;
+      font-size:14px;
+      color:var(--text);
+    }
+    .fail-list li:last-child{border-bottom:none}
+    .fail-list li strong{color:var(--red);font-weight:700}
+    .fail-list .no-fails{color:var(--muted);font-style:italic}
+
+    /* ── PRINT STYLES ── */
     @media print{
-      body{background:#fff;color:#000}
-      .btn,.photoBtn{display:none}
-      .toggleButtons{pointer-events:none}
+      body{
+        padding:0;
+        max-width:100%;
+        background:#fff;
+      }
+      .btn-print,.tier-selector{display:none !important}
+      .section{
+        border:none;
+        box-shadow:none;
+        page-break-inside:avoid;
+        padding:12px 0;
+      }
+      .section h2{
+        font-size:16px;
+        margin-bottom:12px;
+        padding-bottom:8px;
+      }
+      .header{
+        text-align:center;
+        margin-bottom:20px;
+        padding-bottom:16px;
+      }
+      .logo{height:40px}
+      h1{font-size:20px;color:#1a1a1a}
+      .subtitle{font-size:12px}
+      .check-item,.room-item{
+        padding:8px 0;
+      }
+      .check-label,.room-name{font-size:13px}
+      .toggle-btn{
+        min-height:32px;
+        padding:6px 10px;
+        font-size:11px;
+      }
+      .check-notes textarea,.room-notes textarea{
+        border:1px solid #ccc;
+        padding:8px;
+        font-size:12px;
+        min-height:50px;
+      }
+      .form-grid{gap:10px}
+      input,select,textarea{
+        font-size:13px;
+        padding:6px 8px;
+        border:1px solid #ccc;
+      }
+      .summary-status{
+        border:2px solid #1a1a1a;
+        padding:12px;
+      }
+      .summary-status .status-value{font-size:18px}
+      .fail-list{
+        background:#f9f9f9;
+        border:1px solid #ccc;
+        padding:12px;
+      }
+      .fail-list li{font-size:12px;padding:6px 0}
     }
-      /* ========== QUOTE POPUP ========== */
-    .quotePopup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      backdrop-filter: blur(8px);
-    }
-    .quotePopup.show {
-      display: flex;
-      animation: fadeIn 0.3s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .quotePopupInner {
-      background: var(--bg);
-      border-radius: var(--radius);
-      padding: 40px;
-      max-width: 520px;
-      width: 100%;
-      position: relative;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      animation: slideUp 0.4s ease;
-    }
-    @keyframes slideUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .quotePopupClose {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(255, 176, 0, 0.1);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-    .quotePopupClose:hover {
-      background: var(--accent);
-      color: #000;
-      transform: rotate(90deg);
-    }
-    .quotePopupInner h3 {
-      font-size: 28px;
-      margin-bottom: 12px;
-      color: var(--accent);
-      font-weight: 800;
-    }
-    .quotePopupInner p {
-      color: var(--muted);
-      margin-bottom: 24px;
-      font-size: 15px;
-    }
-    .quoteForm {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .quoteForm input,
-    .quoteForm textarea,
-    .quoteForm select {
-      padding: 14px 18px;
-      background: rgba(255, 176, 0, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-size: 15px;
-      font-family: inherit;
-      transition: all 0.2s;
-    }
-    .quoteForm input:focus,
-    .quoteForm textarea:focus,
-    .quoteForm select:focus {
-      outline: none;
-      border-color: var(--accent);
-      background: rgba(255, 176, 0, 0.08);
-    }
-    .quoteForm textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    .quoteForm button {
-      padding: 16px 32px;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      color: #000;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-top: 8px;
-    }
-    .quoteForm button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 176, 0, 0.4);
-    }
-    .quoteSuccessMessage {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
-    .quoteSuccessMessage.show {
-      display: block;
-    }
-    .quoteSuccessMessage h4 {
-      color: #00cc70;
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-    .quoteSuccessMessage p {
-      color: var(--muted);
-      font-size: 16px;
+
+    @media(max-width:600px){
+      .toggle-group{flex-wrap:wrap}
+      .toggle-btn{flex:1;min-width:60px}
+      .room-controls{width:100%}
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
-
 <body>
 
-<nav style="position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #e0e0e0;z-index:100">
-  <div style="max-width:1120px;margin:0 auto;padding:0 22px;height:60px;display:flex;justify-content:space-between;align-items:center">
-    <a href="/" style="text-decoration:none;display:flex;align-items:center"><img src="/5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical Adelaide" style="height:44px;width:auto" /></a>
-    <div style="display:flex;gap:10px;align-items:center">
-      <a href="/blog/" style="color:#666;font-size:14px;text-decoration:none;padding:6px 10px">Blog</a>
-      <a href="tel:0410414969" style="padding:8px 16px;background:linear-gradient(135deg,#ffb000,#ff7a00);border-radius:8px;font-weight:700;color:#111;font-size:14px;text-decoration:none;white-space:nowrap">0410 414 969</a>
+<div class="header">
+  <img src="5B7A145D-2F0E-475A-A662-B21DD54F930B.png" alt="Amped Up Electrical" class="logo" />
+  <h1>Electrical Safety Inspection Report</h1>
+  <p class="subtitle">Amped Up Electrical Adelaide · Licence PGE 305056 · 0410 414 969</p>
+</div>
+
+<button class="btn-print" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+  Print / Save PDF
+</button>
+
+<!-- TIER SELECTOR -->
+<div class="tier-selector">
+  <h2>Select Inspection Tier</h2>
+  <div class="tier-buttons">
+    <div class="tier-btn" data-tier="3">
+      <div class="tier-num">Tier 3</div>
+      <div class="tier-name">Basic Compliance</div>
+    </div>
+    <div class="tier-btn" data-tier="2">
+      <div class="tier-num">Tier 2</div>
+      <div class="tier-name">Standard Inspection</div>
+    </div>
+    <div class="tier-btn active" data-tier="1">
+      <div class="tier-num">Tier 1</div>
+      <div class="tier-name">Elite Safety Audit</div>
     </div>
   </div>
-</nav>
-<div style="height:56px"></div>
+</div>
 
-<div class="wrap">
-    <div class="customerInfo">
-      <h2>📋 Property & Contact Details</h2>
-      <div class="formGrid">
-        <div class="formField">
-          <label>Customer Name</label>
-          <input type="text" id="customerName" placeholder="Enter customer name" />
-        </div>
-        <div class="formField">
-          <label>Customer Email</label>
-          <input type="email" id="customerEmail" placeholder="email@example.com" />
-        </div>
-        <div class="formField">
-          <label>Property Address</label>
-          <input type="text" id="propertyAddress" placeholder="Street address" />
-        </div>
-        <div class="formField">
-          <label>Inspection Date</label>
-          <input type="date" id="inspectionDate" />
-        </div>
-        <div class="formField full">
-          <label>Additional Notes</label>
-          <textarea id="generalNotes" placeholder="General observations about the property..."></textarea>
-        </div>
+<!-- CUSTOMER INFO (Always visible) -->
+<section class="section" id="customerInfo">
+  <h2>Customer Information</h2>
+  <div class="form-grid">
+    <div class="form-field">
+      <label>Customer Name</label>
+      <input type="text" id="custName" placeholder="Full name" />
+    </div>
+    <div class="form-field">
+      <label>Phone</label>
+      <input type="tel" id="custPhone" placeholder="0400 000 000" />
+    </div>
+    <div class="form-field full">
+      <label>Property Address</label>
+      <input type="text" id="custAddress" placeholder="Street address" />
+    </div>
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" id="custEmail" placeholder="email@example.com" />
+    </div>
+    <div class="form-field">
+      <label>Property Type</label>
+      <select id="propType">
+        <option value="Residential">Residential</option>
+        <option value="Commercial">Commercial</option>
+        <option value="Rental">Rental</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Inspection Date</label>
+      <input type="date" id="inspDate" />
+    </div>
+    <div class="form-field">
+      <label>Inspector</label>
+      <input type="text" id="inspector" value="Marcus Derbali — PGE 305056" readonly />
+    </div>
+    <div class="form-field">
+      <label>Inspection Tier</label>
+      <input type="text" id="tierDisplay" value="Tier 1 — Elite Safety Audit" readonly />
+    </div>
+  </div>
+</section>
+
+<!-- SWITCHBOARD (Always visible) -->
+<section class="section" id="switchboard">
+  <h2>Switchboard Inspection</h2>
+  
+  <div class="check-item">
+    <div class="check-label">Switchboard overall condition</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sb-condition">Pass</button>
+        <button class="toggle-btn fail" data-item="sb-condition">Fail</button>
+        <button class="toggle-btn na" data-item="sb-condition">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sb-condition">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
       </div>
     </div>
-
-    <div class="summary" id="summary">
-      <h2>Inspection Summary</h2>
-      <div class="summaryGrid">
-        <div class="summaryCard pass">
-          <strong id="passCount">0</strong>
-          <span>Pass</span>
-        </div>
-        <div class="summaryCard fail">
-          <strong id="failCount">0</strong>
-          <span>Fail</span>
-        </div>
-        <div class="summaryCard na">
-          <strong id="naCount">0</strong>
-          <span>N/A</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- SWITCHBOARD -->
-    <div class="section">
-      <h3>⚡ Switchboard & Main Panel</h3>
-      
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Switchboard condition (no damage, corrosion, or overheating)<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 2.5.2 - Electrical equipment enclosures</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">RCD/Safety switches present and operational<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 2.6.2.2 - RCD protection requirements</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Circuit breakers correctly rated and labelled<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 2.5.4 - Identification and labelling</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">No rewirable fuses (ceramic/wire fuses)<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 2.5.6 - Overcurrent protection devices</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-    </div>
-
-    <!-- POWER POINTS -->
-    <div class="section">
-      <h3>🔌 Power Points & Sockets</h3>
-      
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">All power points secure and undamaged<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 4.6.2 - Socket-outlets installation</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">No overloaded circuits (double adaptors/powerboards)<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 2.5.1 - Circuit rating and protection</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Bathroom/outdoor sockets are weatherproof rated<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 6.3.3 - Socket-outlets in wet areas</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-    </div>
-
-    <!-- LIGHTING -->
-    <div class="section">
-      <h3>💡 Lighting & Switches</h3>
-      
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">All light switches functional and secure<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 4.5.1 - Switch installation</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Light fittings properly installed (no exposed wiring)<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 4.8 - Luminaires and lighting installations</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Downlights have adequate clearance/insulation<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 4.8.4 - Recessed luminaires</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-    </div>
-
-    <!-- SAFETY DEVICES -->
-    <div class="section">
-      <h3>🔥 Safety Devices</h3>
-      
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Smoke alarms installed (all bedrooms, hallways, living areas)<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 1.5.6 - Smoke alarms (refer SA legislation)</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Smoke alarms functional (tested)<br><small style="color:var(--muted);font-size:13px">AS 3786:2014 - Smoke alarms operational testing</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Smoke alarms less than 10 years old<br><small style="color:var(--muted);font-size:13px">AS 3786:2014 - Smoke alarm replacement requirements</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-    </div>
-
-    <!-- OUTDOOR -->
-    <div class="section">
-      <h3>🏡 Outdoor Electrical</h3>
-      
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Outdoor lights secure and weatherproof<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 6.3.2 - Outdoor electrical installations</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">Meter box accessible and undamaged<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 2.2 - Service equipment accessibility</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-
-      <div class="checkItem">
-        <div class="checkRow">
-          <span class="checkLabel">No exposed wiring or damaged cables visible<br><small style="color:var(--muted);font-size:13px">AS/NZS 3000:2018 Clause 3.5 - Wiring systems and cable protection</small></span>
-          <div class="toggleButtons">
-            <button class="toggleBtn" onclick="toggleStatus(this, 'pass')">Pass</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'fail')">Fail</button>
-            <button class="toggleBtn" onclick="toggleStatus(this, 'na')">N/A</button>
-          </div>
-        </div>
-        <div class="notes">
-          <textarea placeholder="Notes..."></textarea>
-        </div>
-        <div class="photoUpload">
-          <label class="photoBtn">📷 Add Photo <input type="file" accept="image/*" style="display:none" /></label>
-        </div>
-      </div>
-    </div>
-
-    <div class="recommendations" id="recommendations" style="display:none">
-      <h3>⚠️ Issues Requiring Attention</h3>
-      <ul id="issuesList"></ul>
-    </div>
-
-    <div class="section" style="border:1px solid var(--border);padding:32px;border-radius:12px;background:var(--panel)">
-      <h3>Why Choose Marcus?</h3>
-      <div style="display:flex;gap:32px;align-items:center;margin-top:24px;flex-wrap:wrap">
-        <img src="marcus-headshot.jpg" alt="Marcus Derbali - Amped Up Electrical" style="width:180px;height:180px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
-        <div style="flex:1;min-width:300px">
-          <h4 style="font-size:20px;margin-bottom:12px;color:var(--accent)">Owner-Operated by Marcus</h4>
-          <p style="color:var(--muted);margin-bottom:16px;line-height:1.6">
-            I personally handle every electrical safety inspection from start to finish. No subcontractors, no apprentices unsupervised. Thorough checks, detailed reports, honest recommendations.
-          </p>
-          <p style="color:var(--muted)">
-            <strong>Licensed Electrician PGE 305056</strong> | 25 x 5-Star Google Reviews | Owner-operated since day one
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="btn secondary" onclick="window.print()">🖨️ Print Report</button>
-      <button class="btn secondary" onclick="downloadPDF()">📄 Download PDF</button>
-      <button class="btn primary" onclick="emailReport()">📧 Generate PDF & Email</button>
-    </div>
-
   </div>
 
-  <script>
-    // Set today's date
-    document.getElementById('inspectionDate').valueAsDate = new Date();
+  <div class="check-item">
+    <div class="check-label">MCB ratings appropriate</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sb-mcb">Pass</button>
+        <button class="toggle-btn fail" data-item="sb-mcb">Fail</button>
+        <button class="toggle-btn na" data-item="sb-mcb">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sb-mcb">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
 
-    // Toggle item status
-    function toggleStatus(btn, status) {
-      const buttons = btn.parentElement.querySelectorAll('.toggleBtn');
-      buttons.forEach(b => {
-        b.classList.remove('pass', 'fail', 'na');
-      });
-      btn.classList.add(status);
-      
-      const photoUpload = btn.closest('.checkItem').querySelector('.photoUpload');
-      if (status === 'fail') {
-        photoUpload.classList.add('show');
+  <div class="check-item">
+    <div class="check-label">Circuit labels present &amp; accurate</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sb-labels">Pass</button>
+        <button class="toggle-btn fail" data-item="sb-labels">Fail</button>
+        <button class="toggle-btn na" data-item="sb-labels">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sb-labels">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Fuse type compliant (no rewirable fuses)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sb-fuse">Pass</button>
+        <button class="toggle-btn fail" data-item="sb-fuse">Fail</button>
+        <button class="toggle-btn na" data-item="sb-fuse">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sb-fuse">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">RCD protection present</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sb-rcd">Pass</button>
+        <button class="toggle-btn fail" data-item="sb-rcd">Fail</button>
+        <button class="toggle-btn na" data-item="sb-rcd">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sb-rcd">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-grid" style="margin-top:20px">
+    <div class="form-field">
+      <label>RCD Trip Time (ms)</label>
+      <input type="number" id="rcdTripTime" placeholder="e.g. 28" />
+    </div>
+    <div class="form-field">
+      <label>RCD Last Tested Date</label>
+      <input type="date" id="rcdLastTest" />
+    </div>
+  </div>
+</section>
+
+<!-- SMOKE ALARMS (Always visible) -->
+<section class="section" id="smokeAlarms">
+  <h2>Smoke Alarms (SA Regulations)</h2>
+
+  <div class="check-item">
+    <div class="check-label">Present in all required rooms</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="smoke-present">Pass</button>
+        <button class="toggle-btn fail" data-item="smoke-present">Fail</button>
+        <button class="toggle-btn na" data-item="smoke-present">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="smoke-present">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">All alarms functional (test button)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="smoke-functional">Pass</button>
+        <button class="toggle-btn fail" data-item="smoke-functional">Fail</button>
+        <button class="toggle-btn na" data-item="smoke-functional">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="smoke-functional">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Age less than 10 years</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="smoke-age">Pass</button>
+        <button class="toggle-btn fail" data-item="smoke-age">Fail</button>
+        <button class="toggle-btn na" data-item="smoke-age">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="smoke-age">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Interconnected (where required)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="smoke-interconn">Pass</button>
+        <button class="toggle-btn fail" data-item="smoke-interconn">Fail</button>
+        <button class="toggle-btn na" data-item="smoke-interconn">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="smoke-interconn">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Photoelectric type (not ionisation)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="smoke-photo">Pass</button>
+        <button class="toggle-btn fail" data-item="smoke-photo">Fail</button>
+        <button class="toggle-btn na" data-item="smoke-photo">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="smoke-photo">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENERAL SAFETY (Always visible) -->
+<section class="section" id="generalSafety">
+  <h2>General Safety Checks</h2>
+
+  <div class="check-item">
+    <div class="check-label">All outlets secure (not loose/cracked)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="gen-outlets">Pass</button>
+        <button class="toggle-btn fail" data-item="gen-outlets">Fail</button>
+        <button class="toggle-btn na" data-item="gen-outlets">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="gen-outlets">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No double adaptors / overloading visible</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="gen-double">Pass</button>
+        <button class="toggle-btn fail" data-item="gen-double">Fail</button>
+        <button class="toggle-btn na" data-item="gen-double">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="gen-double">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">All switches functional</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="gen-switches">Pass</button>
+        <button class="toggle-btn fail" data-item="gen-switches">Fail</button>
+        <button class="toggle-btn na" data-item="gen-switches">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="gen-switches">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No exposed wiring visible</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="gen-exposed">Pass</button>
+        <button class="toggle-btn fail" data-item="gen-exposed">Fail</button>
+        <button class="toggle-btn na" data-item="gen-exposed">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="gen-exposed">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTLETS & GPOs (Tier 1 & 2 only) -->
+<section class="section tier12-only" id="outletsGPOs">
+  <h2>Outlets &amp; GPOs by Room (Tier 1 &amp; 2)</h2>
+  
+  <div class="room-checks">
+    <div class="room-item">
+      <div class="room-name">Living Room</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="living">Pass</button>
+        <button class="toggle-btn fail" data-room="living">Fail</button>
+        <button class="toggle-btn na" data-room="living">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="living">
+        <textarea placeholder="Notes for Living Room..."></textarea>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <div class="room-name">Kitchen</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="kitchen">Pass</button>
+        <button class="toggle-btn fail" data-room="kitchen">Fail</button>
+        <button class="toggle-btn na" data-room="kitchen">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="kitchen">
+        <textarea placeholder="Notes for Kitchen..."></textarea>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <div class="room-name">Bedroom 1</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="bed1">Pass</button>
+        <button class="toggle-btn fail" data-room="bed1">Fail</button>
+        <button class="toggle-btn na" data-room="bed1">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="bed1">
+        <textarea placeholder="Notes for Bedroom 1..."></textarea>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <div class="room-name">Bedroom 2</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="bed2">Pass</button>
+        <button class="toggle-btn fail" data-room="bed2">Fail</button>
+        <button class="toggle-btn na" data-room="bed2">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="bed2">
+        <textarea placeholder="Notes for Bedroom 2..."></textarea>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <div class="room-name">Bathroom</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="bathroom">Pass</button>
+        <button class="toggle-btn fail" data-room="bathroom">Fail</button>
+        <button class="toggle-btn na" data-room="bathroom">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="bathroom">
+        <textarea placeholder="Notes for Bathroom..."></textarea>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <div class="room-name">Laundry</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="laundry">Pass</button>
+        <button class="toggle-btn fail" data-room="laundry">Fail</button>
+        <button class="toggle-btn na" data-room="laundry">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="laundry">
+        <textarea placeholder="Notes for Laundry..."></textarea>
+      </div>
+    </div>
+
+    <div class="room-item">
+      <div class="room-name">Outdoor / Garage</div>
+      <div class="room-controls">
+        <button class="toggle-btn pass" data-room="outdoor">Pass</button>
+        <button class="toggle-btn fail" data-room="outdoor">Fail</button>
+        <button class="toggle-btn na" data-room="outdoor">N/A</button>
+      </div>
+      <div class="room-notes" data-room-notes="outdoor">
+        <textarea placeholder="Notes for Outdoor/Garage..."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHT FITTINGS (Tier 1 & 2 only) -->
+<section class="section tier12-only" id="lightFittings">
+  <h2>Light Fittings (Tier 1 &amp; 2)</h2>
+
+  <div class="check-item">
+    <div class="check-label">All light fittings secure</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="light-secure">Pass</button>
+        <button class="toggle-btn fail" data-item="light-secure">Fail</button>
+        <button class="toggle-btn na" data-item="light-secure">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="light-secure">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No exposed wiring at light fittings</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="light-exposed">Pass</button>
+        <button class="toggle-btn fail" data-item="light-exposed">Fail</button>
+        <button class="toggle-btn na" data-item="light-exposed">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="light-exposed">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Downlight clearance adequate (insulation)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="light-clearance">Pass</button>
+        <button class="toggle-btn fail" data-item="light-clearance">Fail</button>
+        <button class="toggle-btn na" data-item="light-clearance">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="light-clearance">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Outdoor fittings weatherproof rated</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="light-outdoor">Pass</button>
+        <button class="toggle-btn fail" data-item="light-outdoor">Fail</button>
+        <button class="toggle-btn na" data-item="light-outdoor">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="light-outdoor">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOF CAVITY (Tier 1 only) -->
+<section class="section tier1-only" id="roofCavity">
+  <h2>Roof Cavity Inspection (Tier 1 Only)</h2>
+
+  <div class="check-item">
+    <div class="check-label">Wiring condition good (no cracking/damage)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-wiring">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-wiring">Fail</button>
+        <button class="toggle-btn na" data-item="roof-wiring">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-wiring">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Cables correctly supported/stapled</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-support">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-support">Fail</button>
+        <button class="toggle-btn na" data-item="roof-support">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-support">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No damaged insulation on cables</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-insulation">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-insulation">Fail</button>
+        <button class="toggle-btn na" data-item="roof-insulation">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-insulation">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">All junction boxes covered</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-junction">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-junction">Fail</button>
+        <button class="toggle-btn na" data-item="roof-junction">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-junction">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No vermin damage to cables</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-vermin">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-vermin">Fail</button>
+        <button class="toggle-btn na" data-item="roof-vermin">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-vermin">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Adequate clearance above downlights</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-downlight">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-downlight">Fail</button>
+        <button class="toggle-btn na" data-item="roof-downlight">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-downlight">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No DIY/non-compliant wiring</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-diy">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-diy">Fail</button>
+        <button class="toggle-btn na" data-item="roof-diy">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-diy">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Cotton/TRS cabling present (non-compliant)</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="roof-trs">Pass</button>
+        <button class="toggle-btn fail" data-item="roof-trs">Fail</button>
+        <button class="toggle-btn na" data-item="roof-trs">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="roof-trs">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-grid" style="margin-top:20px">
+    <div class="form-field">
+      <label>Estimated Date of Wiring</label>
+      <input type="text" id="wiringDate" placeholder="e.g. 1970s, 1995, 2010" />
+    </div>
+  </div>
+</section>
+
+<!-- SUBFLOOR (Tier 1 only) -->
+<section class="section tier1-only" id="subfloor">
+  <h2>Subfloor Inspection (Tier 1 Only — if accessible)</h2>
+
+  <div class="check-item">
+    <div class="check-label">Subfloor wiring condition good</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sub-wiring">Pass</button>
+        <button class="toggle-btn fail" data-item="sub-wiring">Fail</button>
+        <button class="toggle-btn na" data-item="sub-wiring">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sub-wiring">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Cables correctly supported</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sub-support">Pass</button>
+        <button class="toggle-btn fail" data-item="sub-support">Fail</button>
+        <button class="toggle-btn na" data-item="sub-support">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sub-support">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">No moisture damage to cables</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sub-moisture">Pass</button>
+        <button class="toggle-btn fail" data-item="sub-moisture">Fail</button>
+        <button class="toggle-btn na" data-item="sub-moisture">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sub-moisture">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-label">Junction boxes accessible &amp; covered</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="sub-junction">Pass</button>
+        <button class="toggle-btn fail" data-item="sub-junction">Fail</button>
+        <button class="toggle-btn na" data-item="sub-junction">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="sub-junction">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARTH TESTS (Tier 1 only) -->
+<section class="section tier1-only" id="earthTests">
+  <h2>Earth Continuity &amp; Testing (Tier 1 Only)</h2>
+
+  <div class="check-item">
+    <div class="check-label">Earth continuity check passed</div>
+    <div class="check-controls">
+      <div class="toggle-group">
+        <button class="toggle-btn pass" data-item="earth-continuity">Pass</button>
+        <button class="toggle-btn fail" data-item="earth-continuity">Fail</button>
+        <button class="toggle-btn na" data-item="earth-continuity">N/A</button>
+      </div>
+      <div class="check-notes" data-notes="earth-continuity">
+        <textarea placeholder="Notes (required for FAIL)..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-grid" style="margin-top:20px">
+    <div class="form-field">
+      <label>Earth Stake Ohm Test Result (Ω)</label>
+      <input type="number" step="0.01" id="earthOhm" placeholder="e.g. 0.85" />
+    </div>
+    <div class="form-field">
+      <label>Result (Pass &lt; 1Ω)</label>
+      <input type="text" id="earthResult" readonly placeholder="Auto-calculated" />
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section class="section" id="summary">
+  <h2>Inspection Summary</h2>
+
+  <div class="summary-status" id="overallStatus">
+    <h3>Overall Status</h3>
+    <div class="status-value">⏳ Not Yet Assessed</div>
+  </div>
+
+  <div class="fail-list" id="failList">
+    <h3>❌ Items Requiring Attention</h3>
+    <ul id="failItems">
+      <li class="no-fails">No failed items yet — as you mark items as FAIL, they'll appear here automatically.</li>
+    </ul>
+  </div>
+
+  <div class="form-grid">
+    <div class="form-field full">
+      <label>Recommendations</label>
+      <textarea id="recommendations" placeholder="Prioritised actions, timeframes, etc..."></textarea>
+    </div>
+    <div class="form-field full">
+      <label>Overall Comments</label>
+      <textarea id="overallComments" placeholder="General observations, property notes..."></textarea>
+    </div>
+    <div class="form-field">
+      <label>Estimated Remediation Cost (Optional)</label>
+      <input type="text" id="remediationCost" placeholder="e.g. $1,200 - $1,800" />
+    </div>
+  </div>
+</section>
+
+<button class="btn-print" onclick="window.print()">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+  Print / Save PDF
+</button>
+
+<script>
+// ─────────────────────────────────────────────────────
+// TIER SELECTOR
+// ─────────────────────────────────────────────────────
+let currentTier = 1;
+const tierBtns = document.querySelectorAll('.tier-btn');
+const tierDisplay = document.getElementById('tierDisplay');
+
+tierBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tierBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTier = parseInt(btn.dataset.tier);
+    updateTierDisplay();
+    updateVisibleSections();
+  });
+});
+
+function updateTierDisplay() {
+  const names = {
+    1: 'Tier 1 — Elite Safety Audit',
+    2: 'Tier 2 — Standard Safety Inspection',
+    3: 'Tier 3 — Basic Compliance Check'
+  };
+  tierDisplay.value = names[currentTier];
+}
+
+function updateVisibleSections() {
+  const tier12Sections = document.querySelectorAll('.tier12-only');
+  const tier1Sections = document.querySelectorAll('.tier1-only');
+
+  if (currentTier === 3) {
+    tier12Sections.forEach(s => s.classList.add('hidden'));
+    tier1Sections.forEach(s => s.classList.add('hidden'));
+  } else if (currentTier === 2) {
+    tier12Sections.forEach(s => s.classList.remove('hidden'));
+    tier1Sections.forEach(s => s.classList.add('hidden'));
+  } else if (currentTier === 1) {
+    tier12Sections.forEach(s => s.classList.remove('hidden'));
+    tier1Sections.forEach(s => s.classList.remove('hidden'));
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// TOGGLE BUTTONS (PASS / FAIL / N/A)
+// ─────────────────────────────────────────────────────
+const toggleBtns = document.querySelectorAll('.toggle-btn');
+
+toggleBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.dataset.item;
+    const room = btn.dataset.room;
+
+    // Check items (data-item)
+    if (item) {
+      const siblings = document.querySelectorAll(`.toggle-btn[data-item="${item}"]`);
+      siblings.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+
+      const notesEl = document.querySelector(`.check-notes[data-notes="${item}"]`);
+      if (btn.classList.contains('fail') && btn.classList.contains('active')) {
+        notesEl.classList.add('visible');
       } else {
-        photoUpload.classList.remove('show');
+        notesEl.classList.remove('visible');
       }
-      
-      updateSummary();
     }
 
-    // Update summary counts
-    function updateSummary() {
-      const passCount = document.querySelectorAll('.toggleBtn.pass').length;
-      const failCount = document.querySelectorAll('.toggleBtn.fail').length;
-      const naCount = document.querySelectorAll('.toggleBtn.na').length;
-      
-      document.getElementById('passCount').textContent = passCount;
-      document.getElementById('failCount').textContent = failCount;
-      document.getElementById('naCount').textContent = naCount;
-      
-      // Show recommendations if there are failures
-      if (failCount > 0) {
-        updateRecommendations();
-        document.getElementById('recommendations').style.display = 'block';
+    // Room items (data-room)
+    if (room) {
+      const siblings = document.querySelectorAll(`.toggle-btn[data-room="${room}"]`);
+      siblings.forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+
+      const notesEl = document.querySelector(`.room-notes[data-room-notes="${room}"]`);
+      if (btn.classList.contains('fail') && btn.classList.contains('active')) {
+        notesEl.classList.add('visible');
       } else {
-        document.getElementById('recommendations').style.display = 'none';
+        notesEl.classList.remove('visible');
       }
     }
 
-    // Update recommendations list
-    function updateRecommendations() {
-      const issuesList = document.getElementById('issuesList');
-      issuesList.innerHTML = '';
-      
-      const failedItems = document.querySelectorAll('.toggleBtn.fail');
-      failedItems.forEach(btn => {
-        const label = btn.closest('.checkRow').querySelector('.checkLabel').textContent;
-        const notes = btn.closest('.checkItem').querySelector('textarea').value;
-        
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${label}</strong>${notes ? '<br>' + notes : ''}`;
-        issuesList.appendChild(li);
-      });
+    updateSummary();
+  });
+});
+
+// ─────────────────────────────────────────────────────
+// EARTH STAKE AUTO-CALC
+// ─────────────────────────────────────────────────────
+const earthOhmInput = document.getElementById('earthOhm');
+const earthResultInput = document.getElementById('earthResult');
+
+if (earthOhmInput) {
+  earthOhmInput.addEventListener('input', () => {
+    const val = parseFloat(earthOhmInput.value);
+    if (isNaN(val)) {
+      earthResultInput.value = '';
+    } else if (val < 1) {
+      earthResultInput.value = '✓ PASS (<1Ω)';
+      earthResultInput.style.color = '#00cc70';
+      earthResultInput.style.fontWeight = '700';
+    } else {
+      earthResultInput.value = '✗ FAIL (≥1Ω)';
+      earthResultInput.style.color = '#ff3333';
+      earthResultInput.style.fontWeight = '700';
     }
+  });
+}
 
-    // Download PDF function
-    function downloadPDF() {
-      const customerName = document.getElementById('customerName').value;
-      const propertyAddress = document.getElementById('propertyAddress').value;
-      
-      if (!customerName || !propertyAddress) {
-        alert('Please fill in customer name and property address before generating PDF');
-        return;
-      }
-      
-      const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
-      
-      // Enable PDF mode styling
-      document.documentElement.classList.add('pdf-mode');
-      
-      const opt = {
-        margin: 10,
-        filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true, 
-          letterRendering: true,
-          backgroundColor: '#ffffff'
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-      
-      html2pdf().set(opt).from(document.querySelector('.wrap')).save().then(() => {
-        document.documentElement.classList.remove('pdf-mode');
-      });
-    }
+// ─────────────────────────────────────────────────────
+// SUMMARY AUTO-UPDATE
+// ─────────────────────────────────────────────────────
+function updateSummary() {
+  const allFails = [];
 
-    // Email report function (generates PDF then opens email)
-    function emailReport() {
-      const customerName = document.getElementById('customerName').value;
-      const customerEmail = document.getElementById('customerEmail').value;
-      const propertyAddress = document.getElementById('propertyAddress').value;
-      
-      if (!customerName || !customerEmail || !propertyAddress) {
-        alert('Please fill in customer details before sending report');
-        return;
-      }
-      
-      const passCount = document.getElementById('passCount').textContent;
-      const failCount = document.getElementById('failCount').textContent;
-      
-      // Collect failed items
-      const issues = [];
-      document.querySelectorAll('.toggleBtn.fail').forEach(btn => {
-        const label = btn.closest('.checkRow').querySelector('.checkLabel').textContent.split('\n')[0]; // Get only the main label
-        const notes = btn.closest('.checkItem').querySelector('textarea').value;
-        issues.push(label + (notes ? ' - ' + notes : ''));
-      });
-      
-      const subject = `Electrical Safety Inspection Report - ${propertyAddress}`;
-      const body = `Hi ${customerName},
+  // Check items
+  document.querySelectorAll('.toggle-btn.active.fail[data-item]').forEach(btn => {
+    const item = btn.dataset.item;
+    const labelEl = btn.closest('.check-item').querySelector('.check-label');
+    const label = labelEl ? labelEl.textContent.trim() : item;
+    const notesEl = document.querySelector(`.check-notes[data-notes="${item}"] textarea`);
+    const notes = notesEl ? notesEl.value.trim() : '';
+    allFails.push({ label, notes });
+  });
 
-Please find attached your electrical safety inspection report for ${propertyAddress}.
+  // Room items
+  document.querySelectorAll('.toggle-btn.active.fail[data-room]').forEach(btn => {
+    const room = btn.dataset.room;
+    const roomNameEl = btn.closest('.room-item').querySelector('.room-name');
+    const label = roomNameEl ? roomNameEl.textContent.trim() : room;
+    const notesEl = document.querySelector(`.room-notes[data-room-notes="${room}"] textarea`);
+    const notes = notesEl ? notesEl.value.trim() : '';
+    allFails.push({ label, notes });
+  });
 
-INSPECTION SUMMARY:
-✅ Pass: ${passCount}
-❌ Fail: ${failCount}
-
-${issues.length > 0 ? 'ISSUES REQUIRING ATTENTION:\n' + issues.map((i, idx) => `${idx + 1}. ${i}`).join('\n') : 'No issues found - property passed all safety checks.'}
-
-${issues.length > 0 ? '\nI can provide a quote to fix these issues. Call me on 0410 414 969 or reply to this email.\n' : ''}
-Professional service, transparent pricing, quality workmanship guaranteed.
-
-Marcus Derbali
-Amped Up Electrical Adelaide
-Licensed Electrician PGE 305056
-📞 0410 414 969
-🌐 ampedupelectricaladelaide.com.au`;
-      
-      const filename = `Electrical-Safety-Inspection-${propertyAddress.replace(/[^a-z0-9]/gi, '-')}-${new Date().toISOString().split('T')[0]}.pdf`;
-      
-      // Open email first (must happen directly from user action to avoid blocking)
-      const mailtoLink = `mailto:${customerEmail}?subject=${encodeURIComponent(subject)}&bcc=ampedupelectricaladl@gmail.com&body=${encodeURIComponent(body)}`;
-      window.open(mailtoLink, '_blank');
-      
-      alert(`Generating PDF: ${filename}\n\nThe PDF will download shortly. Attach it to the email that just opened.`);
-      
-      // Enable PDF mode styling
-      document.documentElement.classList.add('pdf-mode');
-      
-      const opt = {
-        margin: 10,
-        filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true, 
-          letterRendering: true,
-          backgroundColor: '#ffffff'
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-      
-      html2pdf().set(opt).from(document.querySelector('.wrap')).save().then(() => {
-        document.documentElement.classList.remove('pdf-mode');
-      });
-    }
-  </script>
-
-  <!-- Quote Request Popup -->
-  <div class="quotePopup" id="quotePopup">
-    <div class="quotePopupInner">
-      <button class="quotePopupClose" onclick="closeQuotePopup()" aria-label="Close">×</button>
-      
-      <div id="quoteFormContainer">
-        <h3>Get Your Free Quote</h3>
-        <p>Response within 2 hours • No obligation</p>
-        
-        <form class="quoteForm" id="quoteForm" onsubmit="submitQuoteForm(event)">
-          <input type="text" name="name" placeholder="Your Name *" required />
-          <input type="tel" name="phone" placeholder="Phone Number *" required pattern="[0-9\s\+\-\(\)]+" />
-          <input type="email" name="email" placeholder="Email Address *" required />
-          <input type="text" name="suburb" placeholder="Your Suburb *" required autocomplete="off" list="suburb-suggestions" style="text-transform:capitalize" />
-          <datalist id="suburb-suggestions">
-            <option value="Adelaide CBD"><option value="Aberfoyle Park"><option value="Aldgate"><option value="Angle Park"><option value="Ascot Park">
-            <option value="Athelstone"><option value="Belair"><option value="Beverley"><option value="Black Forest"><option value="Blackwood">
-            <option value="Blair Athol"><option value="Bowden"><option value="Brighton"><option value="Broadview"><option value="Brompton">
-            <option value="Burnside"><option value="Campbelltown"><option value="Clarence Park"><option value="Clearview"><option value="Coromandel Valley">
-            <option value="Colonel Light Gardens"><option value="Croydon"><option value="Daw Park"><option value="Dulwich"><option value="Edwardstown">
-            <option value="Enfield"><option value="Felixstow"><option value="Firle"><option value="Flinders Park"><option value="Forestville">
-            <option value="Fulham"><option value="Fullarton"><option value="Gilles Plains"><option value="Glenelg"><option value="Glenelg North">
-            <option value="Glenelg South"><option value="Glenunga"><option value="Goodwood"><option value="Grange"><option value="Hackham">
-            <option value="Hallett Cove"><option value="Hampstead Gardens"><option value="Hawthorn"><option value="Henley Beach"><option value="Highbury">
-            <option value="Highgate"><option value="Hindmarsh"><option value="Holden Hill"><option value="Hyde Park"><option value="Kensington">
-            <option value="Kensington Gardens"><option value="Kensington Park"><option value="Kent Town"><option value="Kingswood"><option value="Linden Park">
-            <option value="Lockleys"><option value="Magill"><option value="Malvern"><option value="Marden"><option value="Marion">
-            <option value="Marleston"><option value="Modbury"><option value="Mile End"><option value="Millswood"><option value="Mitcham">
-            <option value="Morphett Vale"><option value="Nailsworth"><option value="Newton"><option value="Norwood"><option value="North Adelaide">
-            <option value="Northgate"><option value="O'Halloran Hill"><option value="Paradise"><option value="Parkside"><option value="Pasadena">
-            <option value="Payneham"><option value="Plympton"><option value="Port Adelaide"><option value="Prospect"><option value="Rostrevor">
-            <option value="Rose Park"><option value="Salisbury"><option value="Semaphore"><option value="Seaton"><option value="Skye">
-            <option value="Springfield"><option value="St Peters"><option value="Stonyfell"><option value="Thebarton"><option value="Toorak Gardens">
-            <option value="Torrensville"><option value="Unley"><option value="Vale Park"><option value="Valley View"><option value="Walkerville">
-            <option value="Wayville"><option value="West Lakes"><option value="Westbourne Park"><option value="Windsor Gardens"><option value="Woodville">
-            <option value="Crafers"><option value="Stirling"><option value="Blackwood"><option value="Belair"><option value="Coromandel Valley">
-          </datalist>
-          <textarea name="description" placeholder="Brief description of work needed *" required></textarea>
-          <select name="contact_time">
-            <option value="">Preferred Contact Time (Optional)</option>
-            <option value="Morning (7am-12pm)">Morning (7am-12pm)</option>
-            <option value="Afternoon (12pm-5pm)">Afternoon (12pm-5pm)</option>
-            <option value="Evening (5pm-7pm)">Evening (5pm-7pm)</option>
-            <option value="Anytime">Anytime</option>
-          </select>
-          <button type="submit">Send Quote Request</button>
-        </form>
-      </div>
-      
-      <div class="quoteSuccessMessage" id="quoteSuccessMessage">
-        <h4>✅ Request Received!</h4>
-        <p>Thanks! I'll call you within 2 hours (usually much faster).</p>
-        <p style="margin-top:16px;"><strong>— Marcus, Amped Up Electrical</strong></p>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Quote popup logic
-    let popupShown = false;
-
-    function showQuotePopup() {
-      if (popupShown) return;
-      document.getElementById('quotePopup').classList.add('show');
-      popupShown = true;
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeQuotePopup() {
-      document.getElementById('quotePopup').classList.remove('show');
-      document.body.style.overflow = 'auto';
-    }
-
-    function openQuotePopup() {
-      showQuotePopup();
-    }
-
-    document.getElementById('quotePopup').addEventListener('click', (e) => {
-      if (e.target.id === 'quotePopup') closeQuotePopup();
+  // Update fail list
+  const failListUl = document.getElementById('failItems');
+  failListUl.innerHTML = '';
+  if (allFails.length === 0) {
+    failListUl.innerHTML = '<li class="no-fails">No failed items. All checks passed or marked N/A.</li>';
+  } else {
+    allFails.forEach(f => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${f.label}:</strong> ${f.notes || '(no notes provided)'}`;
+      failListUl.appendChild(li);
     });
+  }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeQuotePopup();
-    });
+  // Update overall status
+  const overallStatusDiv = document.getElementById('overallStatus');
+  const statusValue = overallStatusDiv.querySelector('.status-value');
 
-    async function submitQuoteForm(e) {
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
-      
-      document.getElementById('quoteFormContainer').style.display = 'none';
-      document.getElementById('quoteSuccessMessage').classList.add('show');
-      
-      console.log('Quote request:', data);
-      
-      setTimeout(() => {
-        closeQuotePopup();
-        setTimeout(() => {
-          document.getElementById('quoteFormContainer').style.display = 'block';
-          document.getElementById('quoteSuccessMessage').classList.remove('show');
-          form.reset();
-        }, 500);
-      }, 4000);
-    }
-  </script>
+  const passCount = document.querySelectorAll('.toggle-btn.active.pass').length;
+  const naCount = document.querySelectorAll('.toggle-btn.active.na').length;
+  const failCount = allFails.length;
+  const total = passCount + naCount + failCount;
+
+  overallStatusDiv.classList.remove('pass-status', 'fail-status', 'attention-status');
+
+  if (total === 0) {
+    statusValue.textContent = '⏳ Not Yet Assessed';
+  } else if (failCount === 0) {
+    statusValue.textContent = '✓ PASS';
+    overallStatusDiv.classList.add('pass-status');
+  } else if (failCount > 0 && passCount > 0) {
+    statusValue.textContent = '⚠ Requires Attention';
+    overallStatusDiv.classList.add('attention-status');
+  } else {
+    statusValue.textContent = '✗ FAIL';
+    overallStatusDiv.classList.add('fail-status');
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────
+document.getElementById('inspDate').valueAsDate = new Date();
+updateTierDisplay();
+updateVisibleSections();
+updateSummary();
+
+// Re-calc summary when notes change (for fail items)
+document.querySelectorAll('textarea').forEach(ta => {
+  ta.addEventListener('input', updateSummary);
+});
+</script>
+
 </body>
 </html>
-
-
